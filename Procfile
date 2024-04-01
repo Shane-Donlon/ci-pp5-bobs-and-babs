@@ -1,0 +1,1 @@
+web: sh -c 'cd bobs/ && gunicorn bobs.wsgi:application'
