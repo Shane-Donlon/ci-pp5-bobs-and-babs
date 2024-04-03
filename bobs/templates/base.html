@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="color-scheme" content="dark light" />
+        <!-- Fill these out -->
+        <meta name="description"
+              content="Bobs & Babs Bakery - Offering a wide variety of fresh, homemade breads, pastries, and cakes. Visit us for a delightful and delicious experience.">
+        <meta name="keywords"
+              content="Bobs & Babs Bakery, Irish Bakery, Fresh Bread, Homemade Pastries, Cakes, Ireland">
+        <meta name="author" content="Bob" />
+        <!-- css -->
+        <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+        {% block extra_css_files %}
+        {% endblock extra_css_files %}
+        <title>Bobs & Babs Bakery |
+            {% block extra_title %}
+            {% endblock extra_title %}
+        </title>
+    </head>
+    <body>
+        <header>
+            <!-- screen reader / tab only -->
+            <a href="#main" class="visually-hidden">skip to content</a>
+            <nav>
+            </nav>
+        </header>
+        <main id="main">
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <!-- JS -->
+        <script src="{% static 'javascript/base.js' %}"></script>
+        {% block extra_js_files %}
+        {% endblock extra_js_files %}
+    </body>
+</html>
