@@ -54,3 +54,57 @@ h6 {
   background-color: black;
   color: white;
 }
+
+.dipslay-none {
+  display: none;
+}
+
+@media (width <= 600px) {
+  .nav-ul {
+    margin-block: 0;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    height: 100vh;
+    width: 50vw;
+    padding-block: 3em;
+    background-color: white;
+    display: grid;
+    transform: translateX(-100%);
+    transition: transform 100ms ease-in-out;
+  }
+
+  .nav-open {
+    transform: translateX(0);
+    transition: transform 100ms ease-in-out;
+  }
+
+  body :has(.nav-open) {
+    overflow: hidden;
+  }
+
+  .nav-btn {
+    --nav-size: 50px;
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: var(--nav-size);
+    width: var(--nav-size);
+    padding-block: 1em;
+  }
+
+  .nav-btn > svg {
+    fill: red;
+  }
+}
+
+@media (width > 600px) {
+  .nav-ul {
+    display: flex;
+    gap: 1em;
+  }
+
+  .nav-btn {
+    display: none;
+  }
+}
