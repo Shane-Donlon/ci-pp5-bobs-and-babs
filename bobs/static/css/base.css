@@ -101,6 +101,22 @@
     background-color: var(--primary-clr-400, #000000);
     color: var(--primary-clr-100);
   }
+
+  .branding-link-logo {
+    height: calc(clamp(1.5rem, 1.0932rem + 2.0339vw, 3rem) * 2);
+    aspect-ratio: 1/1;
+  }
+
+  #cart-icon-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  #login-logo-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 }
 
 .nav-wrapper {
@@ -108,23 +124,13 @@
   color: var(--primary-clr-400, #000000);
   font-family: var(--secondary-font);
   font-weight: var(--fw-bold);
+
+  padding-block: 1rem;
 }
 
 .nav-container {
   width: min(100% - 3rem, 1500px);
   margin-inline: auto;
-}
-
-.nav,
-.login-cart-area ul {
-  display: grid;
-  grid-auto-flow: column;
-  align-items: center;
-  gap: 1em;
-}
-
-.nav {
-  padding-block: 3em;
 }
 
 .nav a {
@@ -134,13 +140,11 @@
   color: inherit;
 }
 
-a > svg {
-  fill: currentColor;
-  height: 1em;
-  width: 1em;
+.nav-btn {
+  cursor: pointer;
 }
 
-.dipslay-none {
+.display-none {
   display: none;
 }
 
@@ -151,7 +155,7 @@ a > svg {
     bottom: 0;
     top: 0;
     height: 100vh;
-    width: 50vw;
+    width: 80vw;
     padding-block: 3em;
     background-color: var(--primary-clr-100);
     display: grid;
@@ -171,22 +175,36 @@ a > svg {
 
   .nav-wrapper {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: space-between;
+    grid-template-columns: 1fr 50px;
+    align-items: center;
+  }
+
+  .nav {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    gap: 1em;
+    align-items: center;
+  }
+
+  .login-cart-area {
+    align-self: self-start;
+  }
+
+  .logo-ul {
+    display: grid;
+    grid-auto-flow: column;
   }
 
   .nav-btn {
-    --nav-size: 50px;
+    --nav-size: 30px;
     justify-self: end;
     align-self: self-start;
     height: var(--nav-size);
     width: var(--nav-size);
     margin-right: 2em;
   }
-
-  .nav-btn > svg {
-    fill: var(--primary-clr-400, #000000);
-    margin-top: 1em;
+  .nav-container {
+    align-self: self-start;
   }
 }
 
