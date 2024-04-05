@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* fonts weights and font sizes */
+    /* font weights and font sizes */
     --fs-400: 1rem;
     --fw-regualar: 400;
     --fw-bold: 700;
@@ -12,15 +12,19 @@
     /* font family */
     --primary-font: Verdana, Geneva, Tahoma, sans-serif;
     --secondary-font: "Courier New", Courier, monospace;
+
     /* Colors: */
+    --primary-bg-clr: #c7c8c3;
     --primary-clr-400: #191515;
     --primary-clr-300: #707070;
     --primary-clr-500: #885050;
     --primary-clr-100: #ffffff;
   }
+
   body {
     font-family: var(--primary-font);
     font-size: var(--fs-400);
+    background-color: var(--primary-bg-clr);
   }
 
   h1,
@@ -28,13 +32,46 @@
   h4,
   h5,
   h6 {
-    font-family: "Open Sans", sans-serif;
+    font-family: var(--primary-font);
+    line-height: 1;
   }
 
-  /* reminders */
-  .container {
-    width: min(100% - 3rem, 1500px);
-    margin-inline: auto;
+  .content-grid {
+    --padding-inline: 1rem;
+    --content-max-width: 900px;
+    --breakout-max-width: 1200px;
+
+    --breakout-size: calc(
+      (var(--breakout-max-width) - var(--content-max-width)) / 2
+    );
+
+    display: grid;
+    grid-template-columns:
+      [full-width-start] minmax(var(--padding-inline), 1fr)
+      [breakout-start] minmax(0, var(--breakout-size))
+      [content-start] min(
+        100% - (var(--padding-inline) * 2),
+        var(--content-max-width)
+      )
+      [content-end]
+      minmax(0, var(--breakout-size)) [breakout-end]
+      minmax(var(--padding-inline), 1fr) [full-width-end];
+  }
+
+  .content-grid > :not(.breakout, .full-width),
+  .full-width > :not(.breakout, .full-width) {
+    grid-column: content;
+  }
+
+  .content-grid > .breakout {
+    grid-column: breakout;
+  }
+
+  .content-grid > .full-width {
+    grid-column: full-width;
+
+    display: grid;
+    grid-template-columns: inherit;
   }
 
   p {
@@ -71,6 +108,11 @@
   color: var(--primary-clr-400, #000000);
   font-family: var(--secondary-font);
   font-weight: var(--fw-bold);
+}
+
+.nav-container {
+  width: min(100% - 3rem, 1500px);
+  margin-inline: auto;
 }
 
 .nav,
@@ -114,12 +156,12 @@ a > svg {
     background-color: var(--primary-clr-100);
     display: grid;
     justify-content: center;
-    transform: translateX(-100%);
+    transform: translateX(-200%);
     transition: transform 100ms ease-in-out;
   }
 
   .nav-open {
-    transform: translateX(0);
+    transform: translateX(-3rem);
     transition: transform 100ms ease-in-out;
   }
 
