@@ -111,9 +111,9 @@ select {
   width: 1px;
 }
 
-* + * {
+/* * + * {
   margin-top: 1em;
-}
+} */
 
 h1,
 h2,

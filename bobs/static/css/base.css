@@ -3,56 +3,93 @@
 /* ---------------------- */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-:root {
-  --fs-400: 1rem;
-  --fw-regualar: 400;
+@layer base {
+  :root {
+    --fs-400: 1rem;
+    --fw-regualar: 400;
+
+    /* Colors: */
+    --primary-clr-400: #000000;
+    --primary-clr-300: #707070;
+    --primary-clr-500: #885050;
+    --primary-clr-100: #ffffff;
+  }
+  body {
+    font-family: "Roboto", sans-serif;
+    font-size: var(--fs-400);
+  }
+
+  h1,
+  h2 h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Open Sans", sans-serif;
+  }
+
+  /* reminders */
+  .container {
+    width: min(100% - 3rem, 1500px);
+    margin-inline: auto;
+  }
+
+  p {
+    max-width: 75ch;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem);
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem);
+    font-weight: 600;
+  }
+
+  h3,
+  h4,
+  h4,
+  h5,
+  h6 {
+    font-size: clamp(1.125rem, 0.9063rem + 1.0938vw, 2rem);
+    font-weight: 500;
+  }
+
+  ::selection {
+    background-color: var(--primary-clr-400, #000000);
+    color: var(--primary-clr-100);
+  }
 }
 
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: var(--fs-400);
+.nav-wrapper {
+  background-color: var(--primary-clr-100);
+  color: var(--primary-clr-400, #000000);
 }
 
-h1,
-h2 h3,
-h4,
-h5,
-h6 {
-  font-family: "Open Sans", sans-serif;
+.nav,
+.login-cart-area ul {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 1em;
 }
 
-/* reminders */
-.container {
-  width: min(100% - 3rem, 1500px);
-  margin-inline: auto;
+.nav {
+  padding-block: 2em;
 }
 
-p {
-  max-width: 75ch;
+.nav a {
+  text-decoration: none;
+  font: inherit;
+  font-size: 1.25rem;
+  color: inherit;
 }
 
-h1 {
-  font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem);
-  font-weight: 700;
-}
-
-h2 {
-  font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem);
-  font-weight: 600;
-}
-
-h3,
-h4,
-h4,
-h5,
-h6 {
-  font-size: clamp(1.125rem, 0.9063rem + 1.0938vw, 2rem);
-  font-weight: 500;
-}
-
-::selection {
-  background-color: black;
-  color: white;
+a > svg {
+  fill: currentColor;
+  height: 1em;
+  width: 1em;
 }
 
 .dipslay-none {
@@ -68,8 +105,9 @@ h6 {
     height: 100vh;
     width: 50vw;
     padding-block: 3em;
-    background-color: white;
+    background-color: var(--primary-clr-100);
     display: grid;
+    justify-content: center;
     transform: translateX(-100%);
     transition: transform 100ms ease-in-out;
   }
@@ -83,18 +121,23 @@ h6 {
     overflow: hidden;
   }
 
+  .nav-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+  }
+
   .nav-btn {
     --nav-size: 50px;
-    position: absolute;
-    top: 0;
-    right: 16px;
+    justify-self: end;
+    align-self: self-start;
     height: var(--nav-size);
     width: var(--nav-size);
-    padding-block: 1em;
+    margin-right: 2em;
   }
 
   .nav-btn > svg {
-    fill: red;
+    fill: var(--primary-clr-400, #000000);
   }
 }
 
