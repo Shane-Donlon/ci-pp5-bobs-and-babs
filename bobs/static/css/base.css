@@ -1,21 +1,25 @@
 /* ---------------------- */
 /* Comment Content        */
 /* ---------------------- */
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 @layer base {
   :root {
+    /* fonts weights and font sizes */
     --fs-400: 1rem;
     --fw-regualar: 400;
+    --fw-bold: 700;
 
+    /* font family */
+    --primary-font: Verdana, Geneva, Tahoma, sans-serif;
+    --secondary-font: "Courier New", Courier, monospace;
     /* Colors: */
-    --primary-clr-400: #000000;
+    --primary-clr-400: #191515;
     --primary-clr-300: #707070;
     --primary-clr-500: #885050;
     --primary-clr-100: #ffffff;
   }
   body {
-    font-family: "Roboto", sans-serif;
+    font-family: var(--primary-font);
     font-size: var(--fs-400);
   }
 
@@ -65,6 +69,8 @@
 .nav-wrapper {
   background-color: var(--primary-clr-100);
   color: var(--primary-clr-400, #000000);
+  font-family: var(--secondary-font);
+  font-weight: var(--fw-bold);
 }
 
 .nav,
@@ -76,7 +82,7 @@
 }
 
 .nav {
-  padding-block: 2em;
+  padding-block: 3em;
 }
 
 .nav a {
@@ -138,6 +144,7 @@ a > svg {
 
   .nav-btn > svg {
     fill: var(--primary-clr-400, #000000);
+    margin-top: 1em;
   }
 }
 
