@@ -31,6 +31,7 @@
                         <div class="branding">
                             <a href="{% url 'index' %}" class="branding-link">
                                 <svg class="branding-link-logo">
+                                    <title>Bob's and Bab's Bakery Logo</title>
                                     <use xlink:href="{% static 'svg-files/bobs-logo.svg' %}#bobs-branding-logo"></use>
                                 </svg>
                             </a>
@@ -51,6 +52,7 @@
                             <li>
                                 <a href="" class="logo-link">
                                     <svg class="branding-link-logo icon">
+                                        <title>icon of a silhouette of a person used to go to the login page</title>
                                         <use xlink:href="{% static 'svg-files/login-logo.svg' %}#login-logo-svg"></use>
                                     </svg>
                                 </a>
@@ -59,6 +61,7 @@
                                 <!-- Cart link -->
                                 <a href="" class="logo-link">
                                     <svg class="branding-link-logo icon">
+                                        <title>icon of a silhouette of a cart used to go to the cart page</title>
                                         <use xlink:href="{% static 'svg-files/cart-icon.svg' %}#cart-icon-svg"></use>
                                     </svg>
                                 </a>
@@ -76,7 +79,7 @@
                 </div>
             </div>
         </header>
-        <main id="main content-grid">
+        <main id="main" class="content-grid">
             {% block content %}
             {% endblock content %}
         </main>
