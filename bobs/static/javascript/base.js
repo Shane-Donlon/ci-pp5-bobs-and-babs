@@ -7,7 +7,6 @@ const onTransitionEnd = (e) => {
 
 menuBtn.addEventListener("click", (e) => {
   navUl.classList.toggle("nav-open");
-
   if (navUl.classList.contains("nav-open")) {
     navUl.removeAttribute("aria-hidden");
     // Remove the event listener when the nav is open
@@ -20,12 +19,14 @@ menuBtn.addEventListener("click", (e) => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
+  // if the screen is less than 600px, hide the nav menu from screen readers automatically
   const width = window.innerWidth;
   if (width <= 600) {
     navUl.setAttribute("aria-hidden", "");
   }
 });
 
+// if the user has scrolled more than 50px from the top add class box-shadow-show to the header
 const primaryHeader = document.querySelector("header");
 const scrollWatcher = document.createElement("div");
 
