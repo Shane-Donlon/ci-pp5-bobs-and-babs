@@ -3,7 +3,6 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="color-scheme" content="dark light" />
         <!-- Fill these out -->
@@ -30,7 +29,11 @@
                 <div class="nav-container">
                     <nav class="nav ">
                         <div class="branding">
-                            <a href="{% url 'index' %}">20px</a>
+                            <a href="{% url 'index' %}" class="branding-link">
+                                <svg class="branding-link-logo">
+                                    <use xlink:href="{% static 'svg-files/bobs-logo.svg' %}#bobs-branding-logo"></use>
+                                </svg>
+                            </a>
                         </div>
                         <ul class="nav-ul" role="list">
                             <li>
@@ -43,30 +46,24 @@
                                 <a href="#">Shop</a>
                             </li>
                         </ul>
-                        <div class="login-cart-area">
-                            <ul role="list">
-                                <li>
-                                    <a href="">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             viewBox="0 0 448 512"
-                                             class="menu-icon">
-                                            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                            <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             viewBox="0 0 448 512"
-                                             class="menu-icon">
-                                            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                            <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <!-- Logo list -->
+                        <ul role="list" class="logo-ul">
+                            <li>
+                                <a href="" class="logo-link">
+                                    <svg class="branding-link-logo icon">
+                                        <use xlink:href="{% static 'svg-files/login-logo.svg' %}#login-logo-svg"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <!-- Cart link -->
+                                <a href="" class="logo-link">
+                                    <svg class="branding-link-logo icon">
+                                        <use xlink:href="{% static 'svg-files/cart-icon.svg' %}#cart-icon-svg"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </nav>
                 <div class="nav-btn">
