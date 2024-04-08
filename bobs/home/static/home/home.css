@@ -1,1 +1,32 @@
+.content-grid {
+  container-name: content-grid-container;
+  container-type: inline-size;
+}
 
+.child > img {
+  mix-blend-mode: multiply;
+}
+.grid-of-rows {
+  display: grid;
+  gap: 1.5em;
+}
+.shop-now {
+  margin-right: 6em;
+  background-color: var(--primary-clr-400);
+  padding: 0.5em 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  font-size: 1.313rem;
+  font-weight: 700;
+}
+
+@container content-grid-container (width >= 600px) {
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin-top: 4rem;
+  }
+}

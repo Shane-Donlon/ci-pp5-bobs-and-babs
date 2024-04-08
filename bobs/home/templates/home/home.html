@@ -4,8 +4,19 @@
     <link rel="stylesheet" href="{% static 'home/home.css' %}">
 {% endblock extra_css_files %}
 {% block extra_title %}
+    Home
 {% endblock extra_title %}
 {% block content %}
+    <div class="content-grid">
+        <div class="intro-grid">
+            <div class="child">
+                <h1 class="h1">We love sharing experiences with our loved ones and we make treats especially for those times.</h1>
+            </div>
+            <div class="child">
+                <img src="{% static 'home/images/doughnut-top-min.png' %}" alt="Top view of a doughnut with white glazing and orange glazing drizzled over it">
+            </div>
+        </div>
+    </div>
 {% endblock content %}
 {% block extra_js_files %}
     <script src="{% static 'home/home.js' %}"></script>
