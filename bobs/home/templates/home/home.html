@@ -7,14 +7,17 @@
     Home
 {% endblock extra_title %}
 {% block content %}
-    <div class="content-grid">
-        <div class="intro-grid">
-            <div class="child">
-                <h1 class="h1">We love sharing experiences with our loved ones and we make treats especially for those times.</h1>
-            </div>
-            <div class="child">
-                <img src="{% static 'home/images/doughnut-top-min.png' %}" alt="Top view of a doughnut with white glazing and orange glazing drizzled over it">
-            </div>
+    <div class="intro-grid">
+        <div class="child grid-of-rows">
+            <h1 class="h1">We love sharing experiences with our loved ones and we make treats especially for those times.</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet at quaerat cumque delectus dolorum rerum sequi aut deleniti consequatur cum.
+            </p>
+            <a href="#" class="shop-now">Shop here</a>
+        </div>
+        <div class="child">
+            <img src="{% static 'home/images/doughnut-top-min.png' %}"
+                 alt="Top view of a doughnut with white glazing and orange glazing drizzled over it">
         </div>
     </div>
 {% endblock content %}
