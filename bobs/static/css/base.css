@@ -4,117 +4,116 @@
 
 /* Define root variables for fonts, font sizes, font weights, and colors */
 
-@layer base {
-  :root {
-    /* font weights and font sizes */
-    --fs-400: 1rem;
-    --fw-regualar: 400;
-    --fw-bold: 700;
+:root {
+  /* font weights and font sizes */
+  --fs-400: 1rem;
+  --fw-regualar: 400;
+  --fw-bold: 700;
 
-    /* font family */
-    --primary-font: Verdana, Geneva, Tahoma, sans-serif;
-    --secondary-font: "Courier New", Courier, monospace;
+  /* font family */
+  --primary-font: Verdana, Geneva, Tahoma, sans-serif;
+  --secondary-font: "Courier New", Courier, monospace;
 
-    /* Colors: */
-    --primary-bg-clr: #c7c8c3;
-    --primary-clr-400: #191515;
-    --primary-clr-300: #707070;
-    --primary-clr-500: #885050;
-    --primary-clr-100: #ffffff;
-  }
+  /* Colors: */
+  --primary-bg-clr: #c7c8c3;
+  --primary-clr-400: #191515;
+  --primary-clr-300: #707070;
+  --primary-clr-500: #885050;
+  --primary-clr-100: #ffffff;
+}
 
-  body {
-    font-family: var(--primary-font);
-    font-size: var(--fs-400);
-    background-color: var(--primary-bg-clr);
-  }
-  /* Apply font styles to headings */
+body {
+  font-family: var(--primary-font);
+  font-size: var(--fs-400);
+  background-color: var(--primary-bg-clr);
+  color: var(--primary-clr-400);
+}
+/* Apply font styles to headings */
 
-  h1,
-  h2 h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--primary-font);
-    line-height: 1;
-  }
-  /* Define grid layout for content */
+h1,
+h2 h3,
+h4,
+h5,
+h6 {
+  font-family: var(--primary-font);
+  line-height: 1;
+}
+/* Define grid layout for content */
 
-  .content-grid {
-    --padding-inline: 1rem;
-    --content-max-width: 900px;
-    --breakout-max-width: 1200px;
+.content-grid {
+  --padding-inline: 1rem;
+  --content-max-width: 900px;
+  --breakout-max-width: 1200px;
 
-    --breakout-size: calc(
-      (var(--breakout-max-width) - var(--content-max-width)) / 2
-    );
+  --breakout-size: calc(
+    (var(--breakout-max-width) - var(--content-max-width)) / 2
+  );
 
-    display: grid;
-    grid-template-columns:
-      [full-width-start] minmax(var(--padding-inline), 1fr)
-      [breakout-start] minmax(0, var(--breakout-size))
-      [content-start] min(
-        100% - (var(--padding-inline) * 2),
-        var(--content-max-width)
-      )
-      [content-end]
-      minmax(0, var(--breakout-size)) [breakout-end]
-      minmax(var(--padding-inline), 1fr) [full-width-end];
-  }
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--breakout-size))
+    [content-start] min(
+      100% - (var(--padding-inline) * 2),
+      var(--content-max-width)
+    )
+    [content-end]
+    minmax(0, var(--breakout-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];
+}
 
-  .content-grid > :not(.breakout, .full-width),
-  .full-width > :not(.breakout, .full-width) {
-    grid-column: content;
-  }
+.content-grid > :not(.breakout, .full-width),
+.full-width > :not(.breakout, .full-width) {
+  grid-column: content;
+}
 
-  .content-grid > .breakout {
-    grid-column: breakout;
-  }
+.content-grid > .breakout {
+  grid-column: breakout;
+}
 
-  .content-grid > .full-width {
-    grid-column: full-width;
+.content-grid > .full-width {
+  grid-column: full-width;
 
-    display: grid;
-    grid-template-columns: inherit;
-  }
+  display: grid;
+  grid-template-columns: inherit;
+}
 
-  p {
-    max-width: 75ch;
-  }
+p {
+  max-width: 75ch;
+}
 
-  h1 {
-    font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem);
-    font-weight: 700;
-  }
+h1 {
+  font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem);
+  font-weight: 700;
+}
 
-  h2 {
-    font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem);
-    font-weight: 600;
-  }
+h2 {
+  font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem);
+  font-weight: 600;
+}
 
-  h3,
-  h4,
-  h4,
-  h5,
-  h6 {
-    font-size: clamp(1.125rem, 0.9063rem + 1.0938vw, 2rem);
-    font-weight: 500;
-  }
+h3,
+h4,
+h4,
+h5,
+h6 {
+  font-size: clamp(1.125rem, 0.9063rem + 1.0938vw, 2rem);
+  font-weight: 500;
+}
 
-  ::selection {
-    background-color: var(--primary-clr-400, #000000);
-    color: var(--primary-clr-100);
-  }
+::selection {
+  background-color: var(--primary-clr-400, #000000);
+  color: var(--primary-clr-100);
+}
 
-  .branding-link-logo {
-    height: calc(clamp(1.5rem, 1.0932rem + 2.0339vw, 3rem) * 2);
-    aspect-ratio: 1/1;
-  }
+.branding-link-logo {
+  height: calc(clamp(1.5rem, 1.0932rem + 2.0339vw, 3rem) * 2);
+  aspect-ratio: 1/1;
+}
 
-  .icon {
-    height: 3em;
-    aspect-ratio: 1/1;
-  }
+.icon {
+  height: 3em;
+  aspect-ratio: 1/1;
 }
 
 .nav-wrapper {
