@@ -145,6 +145,10 @@ h6 {
   display: none;
 }
 
+body:has(.nav-open) {
+  overflow: hidden;
+}
+
 @media (width <= 600px) {
   .nav-ul {
     margin-block: 0;
@@ -164,10 +168,6 @@ h6 {
   .nav-open {
     transform: translateX(-3rem);
     transition: transform 300ms linear;
-  }
-
-  body :has(.nav-open) {
-    overflow: hidden;
   }
 
   .nav-wrapper {
@@ -207,6 +207,8 @@ h6 {
   header {
     position: sticky;
     top: 0;
+    isolation: isolate;
+    z-index: 1;
   }
 
   nav {
