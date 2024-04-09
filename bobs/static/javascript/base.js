@@ -1,5 +1,6 @@
 const menuBtn = document.querySelector(".nav-btn");
 const navUl = document.querySelector(".nav-ul");
+const regex = /\S+/im;
 
 const onTransitionEnd = (e) => {
   navUl.setAttribute("aria-hidden", "");
