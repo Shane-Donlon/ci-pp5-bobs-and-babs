@@ -9,11 +9,14 @@ menuBtn.addEventListener("click", (e) => {
   navUl.classList.toggle("nav-open");
   if (navUl.classList.contains("nav-open")) {
     navUl.removeAttribute("aria-hidden");
+    navUl.setAttribute("aria-expanded", "true");
+    navUl.focus();
     // Remove the event listener when the nav is open
     navUl.removeEventListener("transitionend", onTransitionEnd);
   }
   if (!navUl.classList.contains("nav-open")) {
     // Add the event listener when the nav is closed
+    navUl.setAttribute("aria-expanded", "false");
     navUl.addEventListener("transitionend", onTransitionEnd);
   }
 });
@@ -23,6 +26,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const width = window.innerWidth;
   if (width <= 600) {
     navUl.setAttribute("aria-hidden", "");
+    navUl.setAttribute("aria-expanded", "false");
   }
 });
 
