@@ -3,14 +3,10 @@
   container-type: inline-size;
 }
 
-.child > img {
-  mix-blend-mode: multiply;
-}
-.grid-of-rows {
-  display: grid;
-  gap: 1.5em;
-}
 .shop-now {
+  /* turns link into block element to control width and margin-top easier */
+  /* see also .introduction :first-child > *  */
+  display: block;
   margin-right: 6em;
   background-color: var(--primary-clr-400);
   padding: 0.5em 1em;
@@ -22,11 +18,55 @@
   font-weight: 700;
 }
 
+.about-us-section {
+  position: relative;
+  height: 100svh;
+}
+
+.introduction {
+  height: 100svh;
+}
+
+.introduction :first-child > * {
+  margin-block: 1rem;
+}
+
 @container content-grid-container (width >= 600px) {
   .intro-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
     margin-top: 4rem;
+  }
+}
+
+@media (width < 1000px) {
+  .about-us-svg-div {
+    display: none;
+  }
+}
+
+@media (width >= 1000px) {
+  .about-us-svg-div {
+    background-color: var(--primary-bg-clr);
+    position: absolute;
+    inset: -300px 0px -300px -560px;
+    isolation: isolate;
+    z-index: -1;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  .about-us-svg-div > svg {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  .about-us-section {
+    position: relative;
+  }
+
+  .mix-blend-difference {
+    color: white;
   }
 }
