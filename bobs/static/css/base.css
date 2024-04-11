@@ -7,6 +7,7 @@
 :root {
   /* font weights and font sizes */
   --fs-400: 1rem;
+  --fs-500: 1.125rem;
   --fw-regualar: 400;
   --fw-bold: 700;
 
@@ -76,6 +77,10 @@ h6 {
 
   display: grid;
   grid-template-columns: inherit;
+}
+
+.content-grid * + * {
+  margin-top: 1em;
 }
 
 p {
