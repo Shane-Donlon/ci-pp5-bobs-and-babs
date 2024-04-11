@@ -3,6 +3,14 @@
   container-type: inline-size;
 }
 
+.about-us-section h2 {
+  text-align: center;
+}
+
+.about-us-section p {
+  font-size: var(--fs-500);
+}
+
 .shop-now {
   /* turns link into block element to control width and margin-top easier */
   /* see also .introduction :first-child > *  */
@@ -68,5 +76,7 @@
 
   .mix-blend-difference {
     color: white;
+
+    padding-bottom: 3em;
   }
 }
