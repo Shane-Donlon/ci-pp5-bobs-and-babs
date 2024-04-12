@@ -17,15 +17,12 @@ svg {
 }
 
 .shop-now {
-  /* turns link into block element to control width and margin-top easier */
-  /* see also .introduction :first-child > *  */
-  display: block;
-  margin-right: 6em;
+  display: grid;
+  place-items: center;
   background-color: var(--primary-clr-400);
   padding: 0.5em 1em;
   text-transform: uppercase;
   text-decoration: none;
-  text-align: center;
   color: white;
   font-size: 1.313rem;
   font-weight: 700;
@@ -38,10 +35,6 @@ svg {
 
 .introduction {
   height: 100svh;
-}
-
-.introduction :first-child > * {
-  margin-block: 1rem;
 }
 
 .about-us-svg-div {
@@ -69,12 +62,19 @@ svg {
   padding-bottom: 3em;
 }
 
+.intro-grid > .child {
+  /* grid to ensure the "shop now" button is full width */
+  /* 1px min max to  1px is to ensure always set to min-content height*/
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(1px, min-content));
+  align-self: center;
+}
+
 @container content-grid-container (width >= 600px) {
   .intro-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
-    margin-top: 4rem;
   }
 }
 
