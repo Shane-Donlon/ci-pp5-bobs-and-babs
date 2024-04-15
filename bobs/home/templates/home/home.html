@@ -7,7 +7,7 @@
     Home
 {% endblock extra_title %}
 {% block content %}
-    <section class="introduction " aria-label="introduction">
+    <section class="introduction content-grid" aria-label="introduction">
         <div class="intro-grid">
             <div class="child ">
                 <h1 class="h1">We love sharing experiences with our loved ones and we make treats especially for those times.</h1>
@@ -23,9 +23,8 @@
             </div>
         </div>
     </section>
-    <section aria-label="about Bob's and Bab's Bakery"
-             class="about-us-section full-width">
-        <div class="about-us-svg-div full-width" role="presetation">
+    <section aria-label="about Bob's and Bab's Bakery" class="about-us-section  ">
+        <div class="about-us-svg-div  " role="presetation">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2282.664 2090.28">
                 <defs>
                 <filter id="a" width="2282.664" height="2090.28" x="0" y="0" filterUnits="userSpaceOnUse">
@@ -55,12 +54,14 @@
                 </g>
             </svg>
         </div>
-        <div class="full-width child-grid " id="child-grid">
-            <img src="{% static 'home/images/subtraction-image-hero-min.png' %}"
-                 alt=""
-                 srcset=""
-                 class="full-width">
-            <div class=" mix-blend-difference">
+        <div class="child-grid" id="child-grid">
+            <div class="child-img">
+                <img src="{% static 'home/images/subtraction-image-hero-min.png' %}"
+                     alt=""
+                     srcset=""
+                     class="">
+            </div>
+            <div class=" mix-blend-difference child">
                 <h2 class="h2 about-us-h2">About Bob's and Bab's Bakery</h2>
                 <p>
                     Welcome to Bob's and Bab's Bakery, a cherished cornerstone of the Irish community. Nestled in the heart of Ireland, our bakery has been serving up the warmest, freshest, and most delicious baked goods since 1990. Bob and Bab, a dynamic duo with a shared passion for baking, founded our bakery with a simple mission: to bring joy to people's lives through the art of baking. Today, we continue to uphold this mission, using traditional Irish recipes passed down through generations, combined with a touch of modern innovation. Our bakery is more than just a place to grab a quick bite; it's a gathering spot for the community, a place where memories are made, and, above all, a testament to the power of good food to bring people together. Come in for a taste of Ireland, stay for the warmth and hospitality.
@@ -68,7 +69,7 @@
             </div>
         </div>
     </section>
-    <section class="call-to-action-section">
+    <section class="call-to-action-section content-grid ">
         <h2 class="h2">We are getting hungry, what about you?</h2>
         <div class="intro-grid">
             <div class="child">
