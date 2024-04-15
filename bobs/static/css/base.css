@@ -40,6 +40,10 @@ h6 {
   line-height: 1;
 }
 /* Define grid layout for content */
+.content-grid {
+  container-name: content-grid-container;
+  container-type: inline-size;
+}
 
 .content-grid {
   --padding-inline: 1rem;
