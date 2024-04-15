@@ -38,7 +38,6 @@ svg {
 }
 
 .about-us-svg-div {
-  background-color: var(--primary-bg-clr);
   position: absolute;
   inset: -300px 0px -300px -560px;
   isolation: isolate;
@@ -75,6 +74,15 @@ svg {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
+  }
+
+  @layer grid {
+    .child-grid {
+      grid-column: 1/-1;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-auto-flow: column;
+    }
   }
 }
 
