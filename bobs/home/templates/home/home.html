@@ -7,7 +7,7 @@
     Home
 {% endblock extra_title %}
 {% block content %}
-    <section class="introduction content-grid" aria-label="introduction">
+    <section class="introduction " aria-label="introduction">
         <div class="intro-grid">
             <div class="child ">
                 <h1 class="h1">We love sharing experiences with our loved ones and we make treats especially for those times.</h1>
@@ -26,43 +26,46 @@
     <section aria-label="about Bob's and Bab's Bakery"
              class="about-us-section full-width">
         <div class="about-us-svg-div full-width" role="presetation">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 xmlns:xlink="http://www.w3.org/1999/xlink"
-                 viewBox="0 0 2282.664 2090.28"
-                 class="blob-svg">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2282.664 2090.28">
                 <defs>
-                <filter id="Path_195" x="0" y="0" width="2282.664" height="2090.28" filterUnits="userSpaceOnUse">
-                <feOffset dy="20" input="SourceAlpha" />
-                <feGaussianBlur stdDeviation="20" result="blur" />
-                <feFlood flood-opacity="0.31" />
-                <feComposite operator="in" in2="blur" />
+                <filter id="a" width="2282.664" height="2090.28" x="0" y="0" filterUnits="userSpaceOnUse">
+                <feOffset dy="20" />
+                <feGaussianBlur result="blur" stdDeviation="20" />
+                <feFlood flood-opacity=".31" />
+                <feComposite in2="blur" operator="in" />
                 </filter>
-                <filter id="Path_195-2" x="0" y="0" width="2282.664" height="2090.28" filterUnits="userSpaceOnUse">
-                <feOffset dy="20" input="SourceAlpha" />
-                <feGaussianBlur stdDeviation="15" result="blur-2" />
-                <feFlood flood-color="#fff" flood-opacity="0.169" result="color" />
-                <feComposite operator="out" in="SourceGraphic" in2="blur-2" />
-                <feComposite operator="in" in="color" />
-                <feComposite operator="in" in2="SourceGraphic" />
+                <filter id="b" width="2282.664" height="2090.28" x="0" y="0" filterUnits="userSpaceOnUse">
+                <feOffset dy="20" />
+                <feGaussianBlur result="blur-2" stdDeviation="15" />
+                <feFlood flood-color="#fff" flood-opacity=".169" result="color" />
+                <feComposite in="SourceGraphic" in2="blur-2" operator="out" />
+                <feComposite in="color" operator="in" />
+                <feComposite in2="SourceGraphic" operator="in" />
                 </filter>
                 </defs>
                 <g data-type="innerShadowGroup">
-                <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_195)">
-                <path id="Path_195-3" data-name="Path 195" d="M-64.609,2777.666C138.953,2750.614-5.32,2155.952,236.2,2285.213s432.244-400.978,651.408-266.981,558.7,27.254,639.983-52.8S1709.3,2167.7,1790.38,1888.778s127.59-83.229,119.641-4.875,43.558-82.093,34.067-238.469-108.633-247.831,31.389-570.857-289.569,65.863-483.751-91.981-225.978-95.388-406.532-21.576-449.684,118.1-838.047-73.812S-35.609,909.92-50.372,958.75-109.161,1173.407-67,1293.409s-10.841,211.477-10.841,354.182S-268.171,2804.717-64.609,2777.666Z" transform="translate(219.14 -768.42)" fill="#4f4f4f" stroke="#707070" stroke-width="1" />
+                <g filter="url(#a)">
+                <path fill="#4f4f4f" stroke="#707070" d="M154.531 2009.246c203.562-27.052 59.289-621.714 300.809-492.453s432.244-400.978 651.408-266.981 558.7 27.254 639.983-52.8 181.709 202.268 262.789-76.654 127.59-83.229 119.641-4.875 43.558-82.093 34.067-238.469-108.633-247.831 31.389-570.857-289.569 65.863-483.751-91.981-225.978-95.388-406.532-21.576-449.684 118.1-838.047-73.812S183.531 141.5 168.768 190.33s-58.789 214.657-16.628 334.659-10.841 211.477-10.841 354.182-190.33 1157.126 13.232 1130.075Z" data-name="Path 195" />
                 </g>
-                <path id="Path_195-4" data-name="Path 195" d="M-64.609,2777.666C138.953,2750.614-5.32,2155.952,236.2,2285.213s432.244-400.978,651.408-266.981,558.7,27.254,639.983-52.8S1709.3,2167.7,1790.38,1888.778s127.59-83.229,119.641-4.875,43.558-82.093,34.067-238.469-108.633-247.831,31.389-570.857-289.569,65.863-483.751-91.981-225.978-95.388-406.532-21.576-449.684,118.1-838.047-73.812S-35.609,909.92-50.372,958.75-109.161,1173.407-67,1293.409s-10.841,211.477-10.841,354.182S-268.171,2804.717-64.609,2777.666Z" transform="translate(219.14 -768.418)" fill="#4f4f4f" />
-                <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_195-2)">
-                <path id="Path_195-5" data-name="Path 195" d="M-64.609,2777.666C138.953,2750.614-5.32,2155.952,236.2,2285.213s432.244-400.978,651.408-266.981,558.7,27.254,639.983-52.8S1709.3,2167.7,1790.38,1888.778s127.59-83.229,119.641-4.875,43.558-82.093,34.067-238.469-108.633-247.831,31.389-570.857-289.569,65.863-483.751-91.981-225.978-95.388-406.532-21.576-449.684,118.1-838.047-73.812S-35.609,909.92-50.372,958.75-109.161,1173.407-67,1293.409s-10.841,211.477-10.841,354.182S-268.171,2804.717-64.609,2777.666Z" transform="translate(219.14 -768.42)" fill="#fff" />
+                <path fill="#4f4f4f" d="M154.531 2009.248c203.562-27.052 59.289-621.714 300.809-492.453s432.244-400.978 651.408-266.981 558.7 27.254 639.983-52.8 181.709 202.268 262.789-76.654 127.59-83.229 119.641-4.875 43.558-82.093 34.067-238.469-108.633-247.831 31.389-570.857-289.569 65.863-483.751-91.981-225.978-95.388-406.532-21.576-449.684 118.1-838.047-73.812-282.756 22.712-297.519 71.542-58.789 214.657-16.628 334.659-10.841 211.477-10.841 354.182-190.33 1157.126 13.232 1130.075Z" data-name="Path 195" />
+                <g filter="url(#b)">
+                <path fill="#fff" d="M154.531 2009.246c203.562-27.052 59.289-621.714 300.809-492.453s432.244-400.978 651.408-266.981 558.7 27.254 639.983-52.8 181.709 202.268 262.789-76.654 127.59-83.229 119.641-4.875 43.558-82.093 34.067-238.469-108.633-247.831 31.389-570.857-289.569 65.863-483.751-91.981-225.978-95.388-406.532-21.576-449.684 118.1-838.047-73.812S183.531 141.5 168.768 190.33s-58.789 214.657-16.628 334.659-10.841 211.477-10.841 354.182-190.33 1157.126 13.232 1130.075Z" data-name="Path 195" />
                 </g>
-                <path id="Path_195-6" data-name="Path 195" d="M-64.609,2777.666C138.953,2750.614-5.32,2155.952,236.2,2285.213s432.244-400.978,651.408-266.981,558.7,27.254,639.983-52.8S1709.3,2167.7,1790.38,1888.778s127.59-83.229,119.641-4.875,43.558-82.093,34.067-238.469-108.633-247.831,31.389-570.857-289.569,65.863-483.751-91.981-225.978-95.388-406.532-21.576-449.684,118.1-838.047-73.812S-35.609,909.92-50.372,958.75-109.161,1173.407-67,1293.409s-10.841,211.477-10.841,354.182S-268.171,2804.717-64.609,2777.666Z" transform="translate(219.14 -768.418)" fill="none" stroke="#707070" stroke-width="1" />
+                <path fill="none" stroke="#707070" d="M154.531 2009.248c203.562-27.052 59.289-621.714 300.809-492.453s432.244-400.978 651.408-266.981 558.7 27.254 639.983-52.8 181.709 202.268 262.789-76.654 127.59-83.229 119.641-4.875 43.558-82.093 34.067-238.469-108.633-247.831 31.389-570.857-289.569 65.863-483.751-91.981-225.978-95.388-406.532-21.576-449.684 118.1-838.047-73.812-282.756 22.712-297.519 71.542-58.789 214.657-16.628 334.659-10.841 211.477-10.841 354.182-190.33 1157.126 13.232 1130.075Z" data-name="Path 195" />
                 </g>
             </svg>
         </div>
-        <div class=" mix-blend-difference">
-            <h2 class="h2 about-us-h2">About Bob's and Bab's Bakery</h2>
-            <p>
-                Welcome to Bob's and Bab's Bakery, a cherished cornerstone of the Irish community. Nestled in the heart of Ireland, our bakery has been serving up the warmest, freshest, and most delicious baked goods since 1990. Bob and Bab, a dynamic duo with a shared passion for baking, founded our bakery with a simple mission: to bring joy to people's lives through the art of baking. Today, we continue to uphold this mission, using traditional Irish recipes passed down through generations, combined with a touch of modern innovation. Our bakery is more than just a place to grab a quick bite; it's a gathering spot for the community, a place where memories are made, and, above all, a testament to the power of good food to bring people together. Come in for a taste of Ireland, stay for the warmth and hospitality.
-            </p>
+        <div class="full-width child-grid " id="child-grid">
+            <img src="{% static 'home/images/subtraction-image-hero-min.png' %}"
+                 alt=""
+                 srcset=""
+                 class="full-width">
+            <div class=" mix-blend-difference">
+                <h2 class="h2 about-us-h2">About Bob's and Bab's Bakery</h2>
+                <p>
+                    Welcome to Bob's and Bab's Bakery, a cherished cornerstone of the Irish community. Nestled in the heart of Ireland, our bakery has been serving up the warmest, freshest, and most delicious baked goods since 1990. Bob and Bab, a dynamic duo with a shared passion for baking, founded our bakery with a simple mission: to bring joy to people's lives through the art of baking. Today, we continue to uphold this mission, using traditional Irish recipes passed down through generations, combined with a touch of modern innovation. Our bakery is more than just a place to grab a quick bite; it's a gathering spot for the community, a place where memories are made, and, above all, a testament to the power of good food to bring people together. Come in for a taste of Ireland, stay for the warmth and hospitality.
+                </p>
+            </div>
         </div>
     </section>
     <section class="call-to-action-section">
