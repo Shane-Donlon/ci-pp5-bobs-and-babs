@@ -1,0 +1,38 @@
+::placeholder {
+  color: white;
+}
+
+a {
+  color: currentColor;
+}
+
+.content-grid {
+  justify-items: center;
+}
+
+label:not(label[for="id_remember"]) {
+  display: block;
+}
+
+.form-login a {
+  display: block;
+  margin-top: 1em;
+}
+
+.form-login {
+  accent-color: white;
+}
+
+.form-login input::selection {
+  background-color: white;
+  color: black;
+}
+
+button {
+  padding: 0.25em 1em;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-left: 1rem;
+}
