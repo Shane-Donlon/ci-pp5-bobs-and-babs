@@ -113,14 +113,76 @@
 @media (width >= 1000px) {
 } */
 .contact-us-section {
-  display: grid;
-  place-items: center;
+  container-name: contact-us-container;
+  container-type: inline-size;
 }
 
 .contact-us-section ::placeholder {
   color: white;
 }
+.grid-content h2 {
+  margin-block: 1em;
+  text-align: center;
+}
 
 #mc_embed_signup {
   padding: 1em;
+  display: grid;
+}
+
+div[class="mce_inline_error"] {
+  /* error div only if I use the class selector it will select the input too due to class used */
+  /* use of !important is to overwrite the styles from mailchimp */
+  text-align: center;
+  margin-top: 1em !important;
+  width: 50%;
+  margin-inline: auto !important;
+  background-color: darkred !important;
+}
+
+.button[name="subscribe"] {
+  padding: 0.5em 2em;
+  margin-top: 1em;
+  background-color: var(--primary-clr-400);
+  border: none;
+}
+
+input {
+  background-color: var(--primary-clr-400);
+}
+
+.form-inner-grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(250px, min-content));
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+.form-inner-grid label {
+  align-self: center;
+}
+@container contact-us-container (width < 800px) {
+  .grid-content img {
+    display: none;
+  }
+  .grid-content {
+    display: grid;
+    place-items: center;
+  }
+}
+
+@container contact-us-container (width >= 800px) {
+  .grid-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: hidden;
+  }
+
+  .grid-content img {
+    transform: rotate(80deg);
+  }
+  .grid-content img {
+    transform: rotate(80deg);
+  }
 }
