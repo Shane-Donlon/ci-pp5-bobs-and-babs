@@ -147,6 +147,12 @@ div[class="mce_inline_error"] {
   border: none;
 }
 
+fieldset {
+  padding: 1em;
+  border: 2px solid var(--primary-clr-400);
+  border-radius: 2px;
+}
+
 input {
   background-color: var(--primary-clr-400);
 }
