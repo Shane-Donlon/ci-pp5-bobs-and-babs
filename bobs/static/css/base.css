@@ -129,6 +129,10 @@ h6 {
   aspect-ratio: 1/1;
 }
 
+.margin-top-2px {
+  margin-top: 2.1px;
+}
+
 .nav-wrapper {
   background-color: var(--primary-clr-100);
   color: var(--primary-clr-400, #000000);
@@ -241,6 +245,10 @@ body:has(.nav-open) {
     justify-self: end;
     align-self: center;
     display: flex;
+  }
+
+  .logo-ul li {
+    height: 50px;
   }
 
   .box-shadow-show {
