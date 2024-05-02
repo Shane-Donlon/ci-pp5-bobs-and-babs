@@ -8,24 +8,57 @@
 {% endblock extra_title %}
 {% block content %}
         <section class="content-grid">
-                <div class="product-grid grid-container grid-container--fill">
+                <div class="product-grid grid-container--fill ">
+                        <div class="product grid-container card">
+                                <div class="card-inner">
+                                        <div class="product-image card-front">
+                                                <img src="{% static 'products/images/croissant-min.png' %}" alt="">
+                                        </div>
+                                        <div class="product-info card-back">
+                                                <h2>Product 1</h2>
+                                                <p>
+                                                        Price: <data value="10.00">$10.00</data>
+                                                </p>
+                                                <button class="add-to-cart">Add to Cart</button>
+                                        </div>
+                                </div>
+                        </div>
                         <div class="product grid-container">
                                 <div class="product-image">
-                                        <img src="{% static 'products/images/1.jpg' %}" alt="Product 1">
+                                        <img src="{% static 'products/images/croissant-min.png' %}" alt="">
                                 </div>
                                 <div class="product-info">
                                         <h2>Product 1</h2>
-                                        <p>Price: $10.00</p>
+                                        {% comment %} data attribute is for screenreads to read the value of the price as the curency sympbol might cause issues {% endcomment %}
+                                        <p>
+                                                Price: <data value="10.00">$10.00</data>
+                                        </p>
                                         <button class="add-to-cart">Add to Cart</button>
                                 </div>
                         </div>
                         <div class="product grid-container">
                                 <div class="product-image">
-                                        <img src="{% static 'products/images/1.jpg' %}" alt="Product 1">
+                                        <img src="{% static 'products/images/croissant-min.png' %}" alt="">
                                 </div>
                                 <div class="product-info">
                                         <h2>Product 1</h2>
-                                        <p>Price: $10.00</p>
+                                        {% comment %} data attribute is for screenreads to read the value of the price as the curency sympbol might cause issues {% endcomment %}
+                                        <p>
+                                                Price: <data value="10.00">$10.00</data>
+                                        </p>
+                                        <button class="add-to-cart">Add to Cart</button>
+                                </div>
+                        </div>
+                        <div class="product grid-container">
+                                <div class="product-image">
+                                        <img src="{% static 'products/images/croissant-min.png' %}" alt="">
+                                </div>
+                                <div class="product-info">
+                                        <h2>Product 1</h2>
+                                        {% comment %} data attribute is for screenreads to read the value of the price as the curency sympbol might cause issues {% endcomment %}
+                                        <p>
+                                                Price: <data value="10.00">$10.00</data>
+                                        </p>
                                         <button class="add-to-cart">Add to Cart</button>
                                 </div>
                         </div>
