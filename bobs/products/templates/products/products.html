@@ -7,6 +7,30 @@
         Products
 {% endblock extra_title %}
 {% block content %}
+        <section class="content-grid">
+                <div class="product-grid grid-container grid-container--fill">
+                        <div class="product grid-container">
+                                <div class="product-image">
+                                        <img src="{% static 'products/images/1.jpg' %}" alt="Product 1">
+                                </div>
+                                <div class="product-info">
+                                        <h2>Product 1</h2>
+                                        <p>Price: $10.00</p>
+                                        <button class="add-to-cart">Add to Cart</button>
+                                </div>
+                        </div>
+                        <div class="product grid-container">
+                                <div class="product-image">
+                                        <img src="{% static 'products/images/1.jpg' %}" alt="Product 1">
+                                </div>
+                                <div class="product-info">
+                                        <h2>Product 1</h2>
+                                        <p>Price: $10.00</p>
+                                        <button class="add-to-cart">Add to Cart</button>
+                                </div>
+                        </div>
+                </div>
+        </section>
 {% endblock content %}
 {% block extra_js_files %}
         <script src="{% static 'products/javascript/products.js' %}"></script>
