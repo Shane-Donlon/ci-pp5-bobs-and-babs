@@ -1,0 +1,78 @@
+.product-grid {
+  display: grid;
+}
+
+.grid-container--fill {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  justify-items: center;
+  gap: 1em;
+}
+
+.product {
+  display: grid;
+  gap: 1em;
+}
+
+.product-info > * + * {
+  margin-top: 1em;
+}
+
+.product-image {
+  box-shadow: inset 0px 20px 50px #ffffff8c, 0px 20px 30px #00000029;
+}
+
+.product-image > img {
+  height: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.product-info button {
+  padding: 0.5em 1.5em;
+}
+
+.card {
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 500ms;
+
+  transition-timing-function: linear;
+  transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-font,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.card-back {
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-color: #ffffff8c;
+
+  transform: rotateY(180deg);
+}
+
+.box-shadow-none {
+  box-shadow: none;
+}
+
+.product-info p {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
