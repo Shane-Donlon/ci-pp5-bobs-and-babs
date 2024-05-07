@@ -36,13 +36,7 @@
                     <div class="cart-main-col-2">
                         <div class="wrapper">
                             <label for="quanity">Quantity</label>
-                            <select name="quanity" id="quanity" class="quanity">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
+                            <select name="quanity" id="quanity" class="quantity"></select>
                         </div>
                         <div class="col-2">Remove X</div>
                     </div>
@@ -70,4 +64,13 @@
 {% endblock content %}
 {% block extra_js_files %}
     <script src="{% static 'cart/javascript/cart.js' %}"></script>
+    <script>
+    let quantity = document.querySelector(".quantity");
+
+    window.addEventListener("DOMContentLoaded", function (e) {
+   
+      let maxQuantity = {{max_quantity}};
+      updateQuantity(maxQuantity);
+    });
+    </script>
 {% endblock extra_js_files %}

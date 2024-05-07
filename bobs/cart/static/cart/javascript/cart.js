@@ -16,3 +16,12 @@ window.addEventListener("resize", function (e) {
     return;
   }
 });
+
+function updateQuantity(maxQuantity) {
+  for (let i = 1; i <= maxQuantity; i++) {
+    let option = document.createElement("option");
+    option.value = i;
+    option.text = i;
+    quantity.appendChild(option);
+  }
+}
