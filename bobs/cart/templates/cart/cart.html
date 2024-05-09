@@ -9,55 +9,9 @@
 {% block content %}
     <div class="content-grid">
         <h2>My Cart</h2>
-        <div class="cart-area-container breakout">
-            <div class="cart-area ">
-                <div class="cart-header cart-grid">
-                    <div class="col-1">
-                        <h3 class="font-bold">Items</h3>
-                    </div>
-                    <div class="col-2">
-                        <h3 class="font-bold">Quantity</h3>
-                    </div>
-                    <div class="col-3">
-                        <h3 class="font-bold">Total</h3>
-                    </div>
-                </div>
-                <div class="cart-main cart-grid">
-                    {% comment %} for loop starts here {% endcomment %}
-                    {% comment %} might need to enumerate and get the index to update the id attr and for attr in label and select {% endcomment %}
-                    <div class="cart-main-col-1">
-                        <div class="col-1">
-                            <img src="{% static 'cart/images/croissant-min.png' %}" alt="">
-                        </div>
-                        <div class="col-2">
-                            <p>Product Name</p>
-                        </div>
-                    </div>
-                    <div class="cart-main-col-2">
-                        <div class="wrapper">
-                            <label for="quanity">Quantity</label>
-                            <select name="quanity" id="quanity" class="quantity"></select>
-                        </div>
-                        <div class="col-2">Remove X</div>
-                    </div>
-                    <div class="cart-main-col-3 subtotal">
-                        <div class="col-2">
-                            <span><data value="9.50">€9.50</data></span>
-                        </div>
-                    </div>
-                    {% comment %} for loop ends here {% endcomment %}
-                </div>
-                <div class="cart-footer cart-grid">
-                    <footer>
-                        <h4 class="font-bold ">
-                            Total <span><data value="9.50">€9.50</data></span>
-                        </h4>
-                    </footer>
-                </div>
-            </div>
-        </div>
+        <div class="cart-area-container breakout">{% include "includes/cart-area.html" %}</div>
         <div class="grid links-div breakout font-bold">
-            <a href="#" class="btn btn-checkout">Proceed to Checkout</a>
+            <a href="{% url 'checkout' %}" class="btn btn-checkout">Proceed to Checkout</a>
             <a href="{% url 'products' %}" class="btn btn-continue">Continue Shopping</a>
         </div>
     </div>
