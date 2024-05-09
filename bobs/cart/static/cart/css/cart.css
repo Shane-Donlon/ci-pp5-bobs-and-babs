@@ -1,10 +1,11 @@
 :root {
   --car-bg-clr: #dbdbdb;
   --fw-bold: 700;
+  --h2-margin: 2rem;
 }
 
 h2 {
-  margin-block: 2rem;
+  margin-block: var(--h2-margin);
 }
 h3,
 h4 {
@@ -70,11 +71,11 @@ h4 {
   padding-inline: 0.5rem;
 }
 
-footer {
+.cart-footer > footer {
   grid-column: 1/-1;
 }
 
-footer h4 {
+.cart-footer > footer h4 {
   text-align: end;
   margin-inline: auto 7rem;
 }
