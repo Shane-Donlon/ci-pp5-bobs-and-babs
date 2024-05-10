@@ -23,7 +23,8 @@ class Customer(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
-    image = models.ImageField(null=True, blank=False)
+    sku = models.CharField(max_length=200, null=True, blank=False)
+    # image = models.ImageField(null=True, blank=False)
     description = models.TextField(null=True, blank=False)
     allergin_info = models.TextField(null=True, blank=False)
 
@@ -45,7 +46,9 @@ class OrderItems(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
-
+    
+    class Meta:
+        verbose_name_plural = "Order Items"
     def __str__(self):
         return self.product.name
 
@@ -58,6 +61,8 @@ class ShippingInformation(models.Model):
     eircode = models.CharField(max_length=8, null=True, blank=False)
     phone = models.CharField(max_length=60, null=True, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name_plural = "Shipping Information"
 
     def __str__(self):
         return self.address
