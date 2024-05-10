@@ -20,3 +20,8 @@ class ProductAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ["customer", "transaction_id"]
     search_fields = ["customer", "transaction_id", ]
+    
+@admin.register(OrderItems)
+class OrderItemsAdmin(admin.ModelAdmin):
+    list_display = ["product", "quantity"]
+    search_fields = ["product", "quantity"]
