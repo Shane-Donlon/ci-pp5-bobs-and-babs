@@ -25,3 +25,9 @@ class OrderAdmin(admin.ModelAdmin):
 class OrderItemsAdmin(admin.ModelAdmin):
     list_display = ["product", "quantity"]
     search_fields = ["product", "quantity"]
+
+@admin.register(ShippingInformation)
+
+class ShippingInformationAdmin(admin.ModelAdmin):
+    list_display = ["customer", "order", "phone"]
+    search_fields = ["customer", "phone"]
