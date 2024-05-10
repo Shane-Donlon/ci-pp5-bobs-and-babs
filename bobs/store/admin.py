@@ -12,6 +12,11 @@ class CustomerAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 
-class CustomerAdmin(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     list_display = ["name", "price"]
     search_fields = ["name", "sku", ]
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ["customer", "transaction_id"]
+    search_fields = ["customer", "transaction_id", ]
