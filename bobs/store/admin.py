@@ -9,3 +9,9 @@ from .models import Customer, Order, OrderItems, Product, ShippingInformation
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ["first_name", "last_name", "phone", "email", "registration_date"]
     search_fields = ["first_name", "email", "phone"]
+
+@admin.register(Product)
+
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ["name", "price"]
+    search_fields = ["name", "sku", ]
