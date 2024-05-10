@@ -25,6 +25,7 @@ class Product(models.Model):
     price = models.FloatField()
     image = models.ImageField(null=True, blank=False)
     description = models.TextField(null=True, blank=False)
+    allergin_info = models.TextField(null=True, blank=False)
 
     def __str__(self):
         return self.name
