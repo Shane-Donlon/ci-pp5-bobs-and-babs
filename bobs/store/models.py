@@ -48,3 +48,16 @@ class OrderItems(models.Model):
 
     def __str__(self):
         return self.product.name
+
+class ShippingInformation(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=300, null=True, blank=False)
+    town = models.CharField(max_length=60, null=True, blank=False)
+    county = models.CharField(max_length=60, null=True, blank=False)
+    eircode = models.CharField(max_length=8, null=True, blank=False)
+    phone = models.CharField(max_length=60, null=True, blank=False)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.address
