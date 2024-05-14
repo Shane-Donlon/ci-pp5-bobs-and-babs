@@ -35,6 +35,10 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "home",
+    "django_browser_reload",
+    "products",
+    'cart',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +53,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 SITE_ID = 1
 ROOT_URLCONF = 'bobs.urls'
@@ -123,8 +128,10 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
