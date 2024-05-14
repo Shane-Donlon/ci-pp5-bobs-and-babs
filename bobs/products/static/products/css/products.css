@@ -27,8 +27,15 @@
   object-fit: cover;
 }
 
-.product-info button {
+.product-info button,
+.product-info a {
   padding: 0.5em 1.5em;
+}
+
+.product-info a {
+  background-color: var(--primary-clr-400);
+  color: white;
+  text-decoration: none;
 }
 
 .card {
