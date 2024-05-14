@@ -17,3 +17,17 @@ class ProductsPageDefaultView(View):
         return render(request, "products/products.html",context )
 
 
+class ProductDetailView(View,):
+    def get(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        allergens = product.allergin_info.split('\n')
+        contains = allergens[0].split(":")[1].split(",")
+        may_contain = allergens[1].split(":")[1].split(",")
+        print(contains, type(contains))
+        context = {
+            "product": product,
+            "contains": contains,
+            "may_contain": may_contain,
+        }
+
+        return render(request, "products/product.html", context)

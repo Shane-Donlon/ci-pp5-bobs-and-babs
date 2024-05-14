@@ -5,6 +5,7 @@
               href="{% static 'products/css/product/product.css' %}">
 {% endblock extra_css_files %}
 {% block extra_title %}
+        {{ product.name | title }}
 {% endblock extra_title %}
 {% block content %}
         <section class="content-grid">
