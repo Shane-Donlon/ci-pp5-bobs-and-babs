@@ -33,6 +33,7 @@ h4 {
 .cart-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 0.5fr;
+  gap: 1rem;
   align-items: center;
 }
 
