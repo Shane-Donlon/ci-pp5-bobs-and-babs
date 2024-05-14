@@ -123,13 +123,17 @@ h6,
 dt,
 blockquote,
 figcaption {
+  --char: 25ch;
   text-wrap: balance;
-  max-inline-size: 25ch;
+  max-width: var(--char);
+  max-inline-size: var(--char);
 }
 
 p,
 dd,
 li {
+  --char: 50ch;
   text-wrap: pretty;
-  max-inline-size: 60ch;
+  max-width: var(--char);
+  max-inline-size: var(--char);
 }
