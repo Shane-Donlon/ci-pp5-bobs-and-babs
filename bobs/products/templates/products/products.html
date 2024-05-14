@@ -9,62 +9,22 @@
 {% block content %}
         <section class="content-grid">
                 <div class="product-grid grid-container--fill ">
-                        <div class="product grid-container card">
-                                <div class="card-inner">
-                                        <div class="product-image card-front">
-                                                <img src="{% static 'products/images/croissant-min.png' %}" alt="">
-                                        </div>
-                                        <div class="product-info card-back">
-                                                <h2>Product 1</h2>
-                                                <p>
-                                                        Price: <data value="10.00">$10.00</data>
-                                                </p>
-                                                <button class="add-to-cart">Add to Cart</button>
-                                        </div>
-                                </div>
-                        </div>
-                        <div class="product grid-container card">
-                                <div class="card-inner">
-                                        <div class="product-image card-front">
-                                                <img src="{% static 'products/images/croissant-min.png' %}" alt="">
-                                        </div>
-                                        <div class="product-info card-back">
-                                                <h2>Product 1</h2>
-                                                <p>
-                                                        Price: <data value="10.00">$10.00</data>
-                                                </p>
-                                                <button class="add-to-cart">Add to Cart</button>
+                        {% for product in products %}
+                                <div class="product grid-container card">
+                                        <div class="card-inner">
+                                                <div class="product-image card-front">
+                                                        <img src="{% static 'products/images/croissant-min.png' %}" alt="">
+                                                </div>
+                                                <div class="product-info card-back">
+                                                        <h2>{{ product.name }}</h2>
+                                                        <p>
+                                                                Price: <data value="{{ product.price }}">€{{ product.price }}</data>
+                                                        </p>
+                                                        <a href="{% url 'product_detail' product.pk %}" class="more-info">More Information</a>
+                                                </div>
                                         </div>
                                 </div>
-                        </div>
-                        <div class="product grid-container card">
-                                <div class="card-inner">
-                                        <div class="product-image card-front">
-                                                <img src="{% static 'products/images/croissant-min.png' %}" alt="">
-                                        </div>
-                                        <div class="product-info card-back">
-                                                <h2>Product 1</h2>
-                                                <p>
-                                                        Price: <data value="10.00">$10.00</data>
-                                                </p>
-                                                <button class="add-to-cart">Add to Cart</button>
-                                        </div>
-                                </div>
-                        </div>
-                        <div class="product grid-container card">
-                                <div class="card-inner">
-                                        <div class="product-image card-front">
-                                                <img src="{% static 'products/images/croissant-min.png' %}" alt="">
-                                        </div>
-                                        <div class="product-info card-back">
-                                                <h2>Product 1</h2>
-                                                <p>
-                                                        Price: <data value="10.00">$10.00</data>
-                                                </p>
-                                                <button class="add-to-cart">Add to Cart</button>
-                                        </div>
-                                </div>
-                        </div>
+                        {% endfor %}
                 </div>
         </section>
 {% endblock content %}
