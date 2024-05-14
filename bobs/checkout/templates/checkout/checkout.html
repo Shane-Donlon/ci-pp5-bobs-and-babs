@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+    <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}">
+    {% comment %} pulling above css for cart component {% endcomment %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock extra_css_files %}
+{% block extra_title %}
+    Checkout
+{% endblock extra_title %}
+{% block content %}
+    <div class="content-grid">
+        <section class="confirm-order ">
+            <h2 class="counter">Confirm Order</h2>
+            {% include "includes/cart-area.html" %}
+        </section>
+        <section counter>
+            <h2 class="counter">Personal Details</h2>
+            {% comment %} update to post {% endcomment %}
+            <form action="">
+                <div class="test">
+                    <label for="name">Name</label>
+                    <input type="text"
+                           id="name"
+                           name="name"
+                           required
+                           {% if user.is_authenticated %}value="{{ user.first_name }}"{% endif %}>
+                </div>
+            </form>
+        </section>
+        <section>
+            <h2>Delivery</h2>
+            <p>
+                If you wish to have our treats delivered to your door,
+                there will be a delivery charge added to your order:
+            </p>
+            <div class="delivery-wrapper">
+                <div class="charge">
+                    <p>Delivery Charge:</p>
+                    <p>
+                        <data value="4">€4:00</data>
+                    </p>
+                </div>
+                <div class="subtotal-wrapper">
+                    <div class="subtotal-inc-delivery">
+                        <p>Total:</p>
+                        <p>
+                            <data value="13.50">€13:50</data>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="delivery-flex">
+                <div class="delivery-options">
+                    <label for="collection">Store pick-up</label>
+                    <input type="radio" name="delivery" id="collection" value="collection">
+                </div>
+                <div class="delivery-options">
+                    <label for="delivery">Home Delivery</label>
+                    <input type="radio" name="delivery" id="delivery" value="delivery">
+                </div>
+            </section>
+            <section>
+                <h2>Payment</h2>
+            </section>
+        </div>
+    </div>
+{% endblock content %}
+{% block extra_js_files %}
+    <script src="{% static 'checkout/javascript/checkout.js' %}"></script>
+    <script></script>
+{% endblock extra_js_files %}

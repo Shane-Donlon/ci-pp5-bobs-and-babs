@@ -1,0 +1,109 @@
+:root {
+  --width: 5px;
+  --left: -40px;
+  --clr: #dbdbdd;
+  --font-size: 2rem;
+  --height: 50px;
+}
+
+body {
+  font-family: var(--secondary-font);
+}
+section {
+  counter-increment: section;
+  contain: layout inline-size;
+}
+
+section {
+  contain: layout inline-size;
+}
+@container (width > 600px) {
+  section {
+    margin-left: var(--font-size);
+  }
+  section ::after {
+    content: "";
+    position: absolute;
+    left: var(--left);
+    top: 0;
+    bottom: 0;
+    width: var(--width);
+    rotate: 180deg;
+    background-color: black;
+    border: none;
+  }
+
+  section::before {
+    --padding-block: 10px;
+    --padding-inline: 16px;
+    content: counter(section);
+    position: absolute;
+
+    /* h2 margin pulls from cart.css file */
+    left: calc(var(--left));
+    transform: translateX(calc(-50% + 2px));
+    top: var(--h2-margin);
+    z-index: 1;
+    height: var(--height);
+    width: var(--height);
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    background-color: var(--clr);
+
+    font-size: var(--font-size);
+    font-weight: 700;
+    box-shadow: 0px 5px 5px #00000029;
+  }
+}
+
+.charge,
+.subtotal-inc-delivery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+
+  width: 50%;
+  margin-left: auto;
+  justify-content: space-between;
+  padding-right: 1rem;
+}
+
+.subtotal-wrapper {
+  background-color: var(--clr);
+}
+
+.justify-self-start {
+  justify-self: center;
+}
+
+.subtotal-inc-delivery {
+  margin-block: 2rem;
+  font-size: 2rem;
+}
+
+input[type="radio"] {
+  accent-color: white;
+}
+
+.delivery-flex {
+  display: flex;
+
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.delivery-options {
+  display: grid;
+  background-color: var(--clr);
+  padding: 1rem 2rem;
+}
+
+/* order changed for visual html is still in a logical method so should not cause confusion */
+.delivery-options input {
+  order: 1;
+}
+
+.delivery-options label {
+  margin-top: 1rem;
+  order: 2;
+}
