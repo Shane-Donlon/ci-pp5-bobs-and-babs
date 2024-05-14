@@ -23,7 +23,8 @@
   --primary-clr-100: #ffffff;
 }
 
-button {
+button,
+input[type="submit"] {
   cursor: pointer;
 }
 
@@ -85,14 +86,6 @@ h6 {
 
   display: grid;
   grid-template-columns: inherit;
-}
-
-.content-grid * + * {
-  margin-top: 1em;
-}
-
-p {
-  max-width: 75ch;
 }
 
 h1 {
@@ -254,6 +247,10 @@ body:has(.nav-open) {
   .box-shadow-show {
     box-shadow: 0px 30px 20px #00000029;
   }
+}
+
+.grid {
+  display: grid;
 }
 
 @media (width > 600px) {
