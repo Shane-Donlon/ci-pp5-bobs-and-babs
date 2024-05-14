@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views import View
+
+from .models import Product
 
 # Create your views here.
 
@@ -7,4 +9,11 @@ from django.views import View
 class ProductsPageDefaultView(View):
 
     def get(self, request):
-        return render(request, "products/products.html", )
+        products = Product.objects.all()
+        context = {
+            "products": products
+        }
+
+        return render(request, "products/products.html",context )
+
+
