@@ -23,7 +23,7 @@ class Customer(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
-    sku = models.CharField(max_length=200, null=True, blank=False)
+    sku = models.CharField(max_length=200, null=True, blank=False, unique=True)
     # image = models.ImageField(null=True, blank=True)
     description = models.TextField(null=True, blank=False)
     allergin_info = models.TextField(null=True, blank=False)
