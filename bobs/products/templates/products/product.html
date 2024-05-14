@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+        <link rel="stylesheet"
+              href="{% static 'products/css/product/product.css' %}">
+{% endblock extra_css_files %}
+{% block extra_title %}
+{% endblock extra_title %}
+{% block content %}
+        <section class="content-grid">
+                <div class="card">
+                        <div class="product-img">
+                                <h2>{{ product.name }}</h2>
+                                <img src="{% static 'products/images/croissant-min.png' %}" alt="">
+                        </div>
+                        <div class="product-description">
+                                <h3>Product Description</h3>
+                                <p>{{ product.description }}</p>
+                        </div>
+                        <div class="grid product-allergin-grid">
+                                <div class="contains">
+                                        <fieldset>
+                                                <legend>Contains</legend>
+                                                <ul>
+                                                        {% for ingredient in contains %}
+                                                                <li>
+                                                                        <mark>{{ ingredient }}</mark>
+                                                                </li>
+                                                        {% endfor %}
+                                                </ul>
+                                        </fieldset>
+                                </div>
+                                <div class="may-contain">
+                                        <fieldset>
+                                                <legend>May Contain</legend>
+                                                <ul>
+                                                        {% for ingredient in may_contain %}
+                                                                <li>
+                                                                        <mark>{{ ingredient }}</mark>
+                                                                </li>
+                                                        {% endfor %}
+                                                </ul>
+                                        </fieldset>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <div class="order-area">
+                <div class="quantity-div">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" name="quantity" id="quantity" value="1">
+                </div>
+                <div class="btn-div">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <a href="{% url 'products' %}">Continue Shopping</a>
+                </div>
+        </div>
+</div>
+</section>
+{% endblock content %}
+{% block extra_js_files %}
+        <script src="{% static 'products/javascript/product/product.js' %}"></script>
+{% endblock extra_js_files %}

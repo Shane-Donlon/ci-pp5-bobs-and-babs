@@ -1,0 +1,25 @@
+.product-img img {
+  height: 200px;
+  aspect-ratio: 1;
+}
+
+.product-allergin-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  margin-block: 1rem;
+}
+
+fieldset {
+  padding-inline: 2rem;
+  width: max-content;
+  border-radius: 5px;
+  padding-block: 0.5rem;
+}
+
+legend {
+  padding-inline: 1rem;
+
+  font-weight: 700;
+  font-size: 1.5rem;
+}
