@@ -19,6 +19,14 @@
 {% block extra_js_files %}
     <script src="{% static 'cart/javascript/cart.js' %}"></script>
     <script>
+        function updateQuantity(maxQuantity) {
+            for (let i = 1; i <= maxQuantity; i++) {
+              let option = document.createElement("option");
+              option.value = i;
+              option.text = i;
+              quantity.appendChild(option);
+            }
+          }
     let quantity = document.querySelector(".quantity");
 
     window.addEventListener("DOMContentLoaded", function (e) {
