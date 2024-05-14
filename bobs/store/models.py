@@ -16,20 +16,19 @@ class Customer(models.Model):
     registration_date = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=False, auto_now_add=False)
 
-    def __str__(self):
-        return self.user
-    
+    def __str__(self) -> str:
+        return f"{self.user}"
+
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
     sku = models.CharField(max_length=200, null=True, blank=False)
-    # image = models.ImageField(null=True, blank=False)
+    # image = models.ImageField(null=True, blank=True)
     description = models.TextField(null=True, blank=False)
     allergin_info = models.TextField(null=True, blank=False)
-
-    def __str__(self):
-        return self.name
+    def __str__(self) -> str:
+        return f"{self.name}"
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
@@ -46,10 +45,10 @@ class OrderItems(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
         verbose_name_plural = "Order Items"
-    def __str__(self):
+    def __str__(self) -> str:
         return self.product.name
 
 class ShippingInformation(models.Model):
@@ -64,5 +63,5 @@ class ShippingInformation(models.Model):
     class Meta:
         verbose_name_plural = "Shipping Information"
 
-    def __str__(self):
-        return self.address
+    def __str__(self) -> str:
+        return f"{self.address}"
