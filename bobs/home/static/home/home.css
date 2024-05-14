@@ -48,6 +48,8 @@
 }
 
 .about-us-section {
+  /* nav-height is set with JS */
+  scroll-margin: var(--nav-height);
   isolation: isolate;
   position: relative;
   z-index: -1;
@@ -104,14 +106,6 @@
   }
 }
 
-/* @media (width < 1000px) {
-  .about-us-svg-div {
-    display: none;
-  }
-}
-
-@media (width >= 1000px) {
-} */
 .contact-us-section {
   container-name: contact-us-container;
   container-type: inline-size;
@@ -168,6 +162,7 @@ input {
 .form-inner-grid label {
   align-self: center;
 }
+
 @container contact-us-container (width < 800px) {
   .grid-content img {
     display: none;
