@@ -23,7 +23,7 @@ class ProductDetailView(View,):
         allergens = product.allergin_info.split('\n')
         contains = allergens[0].split(":")[1].split(",")
         may_contain = allergens[1].split(":")[1].split(",")
-        print(contains, type(contains))
+
         context = {
             "product": product,
             "contains": contains,
