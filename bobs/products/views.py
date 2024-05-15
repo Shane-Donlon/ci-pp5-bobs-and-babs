@@ -18,8 +18,8 @@ class ProductsPageDefaultView(View):
 
 
 class ProductDetailView(View,):
-    def get(self, request, pk):
-        product = get_object_or_404(Product, pk=pk)
+    def get(self, request, slug):
+        product = get_object_or_404(Product, slug=slug)
         allergens = product.allergin_info.split('\n')
         contains = allergens[0].split(":")[1].split(",")
         may_contain = allergens[1].split(":")[1].split(",")

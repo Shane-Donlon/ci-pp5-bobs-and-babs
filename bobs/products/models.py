@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.template.defaultfilters import slugify
 
 
 # Create your models here.
@@ -28,6 +29,15 @@ class Product(models.Model):
     image_description = models.CharField(max_length=200, null=True, blank=False)
     description = models.TextField(null=True, blank=False)
     allergin_info = models.TextField(null=True, blank=False)
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True, editable=False)
+
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+
     def __str__(self) -> str:
         return f"{self.name}"
 
