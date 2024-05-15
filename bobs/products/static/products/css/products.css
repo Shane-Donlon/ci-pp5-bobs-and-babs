@@ -83,3 +83,14 @@
   font-size: 1.25rem;
   font-weight: 500;
 }
+
+.price-p {
+  background-color: black;
+  color: white;
+  padding: 0.125em;
+}
+
+.price-p::selection {
+  background-color: white;
+  color: black;
+}
