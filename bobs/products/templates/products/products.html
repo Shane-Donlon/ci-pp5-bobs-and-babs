@@ -18,7 +18,7 @@
                                                 <div class="product-info card-back">
                                                         <h2>{{ product.name }}</h2>
                                                         <p>
-                                                                Price: <data value="{{ product.price }}">€{{ product.price }}</data>
+                                                                Price: <data value="{{ product.price | floatformat:2 }}">€{{ product.price | floatformat:2 }}</data>
                                                         </p>
                                                         <a href="{% url 'product_detail' product.pk %}" class="more-info">More Information</a>
                                                 </div>

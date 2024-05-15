@@ -47,6 +47,11 @@
                         <label for="quantity">Quantity</label>
                         <input type="number" name="quantity" id="quantity" value="1">
                 </div>
+                <div class="price-area">
+                        <p>
+                                Price: <data value="{{ product.price | floatformat:2 }}">€{{ product.price | floatformat:2 }}</data>
+                        </p>
+                </div>
                 <div class="btn-div">
                         <button class="add-to-cart">Add to Cart</button>
                         <a href="{% url 'products' %}">Continue Shopping</a>
