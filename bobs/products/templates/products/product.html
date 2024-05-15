@@ -35,11 +35,7 @@
                                         <fieldset>
                                                 <legend>May Contain</legend>
                                                 <ul>
-                                                        {% for ingredient in may_contain %}
-                                                                <li>
-                                                                        <mark>{{ ingredient }}</mark>
-                                                                </li>
-                                                        {% endfor %}
+                                                        {% for ingredient in may_contain %}<li>{{ ingredient }}</li>{% endfor %}
                                                 </ul>
                                         </fieldset>
                                 </div>
