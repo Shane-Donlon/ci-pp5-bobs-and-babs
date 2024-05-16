@@ -25,6 +25,16 @@ h4 {
   container-type: inline-size;
 }
 
+@container (width < 600px) {
+  .cart-grid {
+    gap: 0;
+  }
+
+  #quantity {
+    width: 100px;
+  }
+}
+
 .cart-area {
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -39,7 +49,7 @@ h4 {
 
 .cart-main-col-1 {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   align-items: center;
 }
 
