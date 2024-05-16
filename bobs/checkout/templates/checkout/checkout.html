@@ -16,7 +16,6 @@
         </section>
         <section counter>
             <h2 class="counter">Personal Details</h2>
-            {% comment %} update to post {% endcomment %}
             <form action="">
                 <div class="test">
                     <label for="name">Name</label>
@@ -24,7 +23,7 @@
                            id="name"
                            name="name"
                            required
-                           {% if user.is_authenticated %}value="{{ user.first_name }}"{% endif %}>
+                           {% if user.is_authenticated %}value="{{ customer.first_name }}"{% endif %}>
                 </div>
             </form>
         </section>
@@ -34,39 +33,46 @@
                 If you wish to have our treats delivered to your door,
                 there will be a delivery charge added to your order:
             </p>
+            <div class="delivery-flex">
+                <div class="delivery-options">
+                    <label for="collection">Store pick-up</label>
+                    <input type="radio"
+                           name="delivery"
+                           id="collection"
+                           value="collection"
+                           class="delivery-method-radio">
+                </div>
+                <div class="delivery-options">
+                    <label for="delivery">Home Delivery</label>
+                    <input type="radio"
+                           name="delivery"
+                           id="delivery"
+                           value="delivery"
+                           class="delivery-method-radio">
+                </div>
+            </div>
             <div class="delivery-wrapper">
                 <div class="charge">
                     <p>Delivery Charge:</p>
-                    <p>
-                        <data value="4">€4:00</data>
+                    <p class="delivery-charge-price">
+                        <data value="{{ order.delivery_fee | floatformat:2 }}">€{{ order.delivery_fee | floatformat:2 }}</data>
                     </p>
                 </div>
                 <div class="subtotal-wrapper">
                     <div class="subtotal-inc-delivery">
                         <p>Total:</p>
-                        <p>
-                            <data value="13.50">€13:50</data>
+                        <p class="total-checkout-price">
+                            <data value="{{ order.get_cart_total | floatformat:2 }}">€{{ order.get_cart_total | floatformat:2 }}</data>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="delivery-flex">
-                <div class="delivery-options">
-                    <label for="collection">Store pick-up</label>
-                    <input type="radio" name="delivery" id="collection" value="collection">
-                </div>
-                <div class="delivery-options">
-                    <label for="delivery">Home Delivery</label>
-                    <input type="radio" name="delivery" id="delivery" value="delivery">
-                </div>
-            </section>
-            <section>
-                <h2>Payment</h2>
-            </section>
-        </div>
+        </section>
+        <section>
+            <h2>Payment</h2>
+        </section>
     </div>
 {% endblock content %}
 {% block extra_js_files %}
     <script src="{% static 'checkout/javascript/checkout.js' %}"></script>
-    <script></script>
 {% endblock extra_js_files %}
