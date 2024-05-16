@@ -23,3 +23,8 @@ radioBtns.forEach((btn) => {
     }
   });
 });
+
+let quantityInput = document.querySelectorAll(".cart-main-col-2 input");
+quantityInput.forEach((input) => {
+  input.setAttribute("disabled", "true");
+});
