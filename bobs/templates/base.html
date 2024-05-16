@@ -41,7 +41,7 @@
                         </div>
                         <ul class="nav-ul" role="list">
                             <li>
-                                <a href="#">About</a>
+                                <a href="{% url 'index' %}#about-us" id="about-us-link">About</a>
                             </li>
                             <li>
                                 <a href="#">Contact</a>
@@ -62,7 +62,7 @@
                             </li>
                             <li>
                                 <!-- Cart link -->
-                                <a href="" class="logo-link">
+                                <a href="{% url 'cart' %}" class="logo-link">
                                     <svg class="branding-link-logo icon">
                                         <title>icon of a silhouette of a cart used to go to the cart page</title>
                                         <use xlink:href="{% static 'svg-files/cart-icon.svg' %}#cart-icon-svg"></use>
@@ -82,12 +82,13 @@
                 </div>
             </div>
         </header>
-        <main id="main" class="">
+        <main id="main">
             {% block content %}
             {% endblock content %}
         </main>
         <!-- JS -->
         <footer class="content-grid">
+            <div class="copyright">copyRight</div>
         </footer>
         <script src="{% static 'javascript/base.js' %}"></script>
         {% block extra_js_files %}
