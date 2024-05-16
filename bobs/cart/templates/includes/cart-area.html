@@ -14,35 +14,38 @@
     <div class="cart-main cart-grid">
         {% comment %} for loop starts here {% endcomment %}
         {% comment %} might need to enumerate and get the index to update the id attr and for attr in label and select {% endcomment %}
-        <div class="cart-main-col-1">
-            <div class="col-1">
-                <img src="{% static 'cart/images/croissant-min.png' %}" alt="">
+        {% for item in items %}
+            <div class="cart-main-col-1">
+                <div class="col-1">
+                    <img src="{{ item.product.image.url }}"
+                         alt="{{ item.product.image_description }}">
+                </div>
+                <div class="col-2">
+                    <p>{{ item.product.name }}</p>
+                </div>
             </div>
-            <div class="col-2">
-                <p>Product Name</p>
+            <div class="cart-main-col-2">
+                <div class="wrapper">
+                    <label for="quantity">Quantity</label>
+                    <input type="number"
+                           name="quantity"
+                           id="quantity"
+                           value="{{ item.quantity }}">
+                </div>
+                <div class="col-2">Remove X</div>
             </div>
-        </div>
-        <div class="cart-main-col-2">
-            <div class="wrapper">
-                <label for="quanity">Quantity</label>
-                <select name="quanity"
-                        id="quanity"
-                        class="quantity"
-                        data-quanity='{{ max_quantity }}'></select>
+            <div class="cart-main-col-3 subtotal">
+                <div class="col-2">
+                    <span><data value="{{ item.get_sub_total | floatformat:2 }}">€{{ item.get_sub_total | floatformat:2 }}</data></span>
+                </div>
             </div>
-            <div class="col-2">Remove X</div>
-        </div>
-        <div class="cart-main-col-3 subtotal">
-            <div class="col-2">
-                <span><data value="9.50">€9.50</data></span>
-            </div>
-        </div>
+        {% endfor %}
         {% comment %} for loop ends here {% endcomment %}
     </div>
     <div class="cart-footer cart-grid">
         <footer>
             <h4 class="font-bold ">
-                Total <span><data value="9.50">€9.50</data></span>
+                Total      <span class="total-cart"><data value="{{ order.get_cart_total | floatformat:2 }}">€{{ order.get_cart_total | floatformat:2 }}</data></span>
             </h4>
         </footer>
     </div>
