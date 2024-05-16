@@ -45,7 +45,13 @@
         <div class="order-area">
                 <div class="quantity-div">
                         <label for="quantity">Quantity</label>
-                        <input type="number" name="quantity" id="quantity" value="1">
+                        <input type="number"
+                               name="quantity"
+                               id="quantity"
+                               value="1"
+                               min="1"
+                               max="{{ product.max_quantity }}">
+
                 </div>
                 <div class="price-area">
                         <p>
