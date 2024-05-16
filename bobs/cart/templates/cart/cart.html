@@ -9,6 +9,7 @@
 {% block content %}
     <div class="content-grid">
         <h2>My Cart</h2>
+        <h3>Order Number {{ order.transaction_id }}</h3>
         <div class="cart-area-container breakout">{% include "includes/cart-area.html" %}</div>
         <div class="grid links-div breakout font-bold">
             <a href="{% url 'checkout' %}" class="btn btn-checkout">Proceed to Checkout</a>
@@ -18,21 +19,4 @@
 {% endblock content %}
 {% block extra_js_files %}
     <script src="{% static 'cart/javascript/cart.js' %}"></script>
-    <script>
-        function updateQuantity(maxQuantity) {
-            for (let i = 1; i <= maxQuantity; i++) {
-              let option = document.createElement("option");
-              option.value = i;
-              option.text = i;
-              quantity.appendChild(option);
-            }
-          }
-    let quantity = document.querySelector(".quantity");
-
-    window.addEventListener("DOMContentLoaded", function (e) {
-   
-      let maxQuantity = {{max_quantity}};
-      updateQuantity(maxQuantity);
-    });
-    </script>
 {% endblock extra_js_files %}
