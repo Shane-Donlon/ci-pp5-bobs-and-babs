@@ -49,3 +49,65 @@ const navObserver = new IntersectionObserver(
 );
 
 navObserver.observe(scrollWatcher);
+
+async function makeRequest(url, requestType, body) {
+  // this function is called in cart and product js files
+  let headersObj = {
+    "X-Requested-With": "XMLHttpRequest",
+    "Content-type": "application/json",
+  };
+  if (requestType.toLowerCase() != "get") {
+    // != get covers post and delete requests
+    let csrfValue = document.querySelector("[name=csrfmiddlewaretoken").value;
+    headersObj["X-CSRFToken"] = csrfValue;
+  }
+  let response = await fetch(url, {
+    method: requestType,
+    headers: headersObj,
+    body: body,
+  });
+  let data = await response.json();
+
+  return data;
+}
+
+function generateData(productId, quantity, actionType) {
+  // this function is called in cart and product js files
+  let cartBody = new Object();
+  cartBody[productId] = quantity;
+  cartBody["action"] = actionType;
+  let bodyJson = JSON.stringify({ cart: cartBody });
+  return bodyJson;
+}
+
+function createNotification(message, type) {
+  // this creates a popup notification for the user
+  // called in cart and product js files
+  let notification = document.createElement("span");
+  if (type == "error") {
+    type = "error-notification";
+  }
+  if (type == "success") {
+    type = "success-notification";
+  }
+  notification.classList.add(type, "notification");
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
+}
+
+function debounce(func, wait) {
+  // this will wait until the user stops before executing the function
+  // primarily used for the add to cart button in the product page
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
