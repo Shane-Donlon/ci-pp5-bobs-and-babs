@@ -23,3 +23,22 @@ legend {
   font-weight: 700;
   font-size: 1.5rem;
 }
+
+.notification {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  height: min-content;
+  width: fit-content;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  max-width: 50ch;
+}
+.success-notification {
+  background-color: #198754;
+}
+
+.error-notification {
+  background-color: #dc3545;
+}
