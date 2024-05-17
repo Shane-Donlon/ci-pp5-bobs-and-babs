@@ -2,7 +2,7 @@ let input = document.querySelector("#quantity");
 let minOnLOad = input.min;
 let maxOnLoad = input.max;
 const data = document.currentScript.dataset;
-console.log(data);
+
 input.addEventListener("input", (e) => {
   const validityState = input.validity;
   const min = input.min;
@@ -12,12 +12,12 @@ input.addEventListener("input", (e) => {
     return;
   }
 
-  // let sourceChanged = validateSourceMinMax(min, max);
-  // if (sourceChanged) {
-  //   window.alert("You can't change the min and max values of the input.");
-  //   window.alert("Please refresh the page to reset the input.");
-  //   input.value = 1;
-  // }
+  let sourceChanged = validateSourceMinMax(min, max);
+  if (sourceChanged) {
+    window.alert("You can't change the min and max values of the input.");
+    window.alert("Please refresh the page to reset the input.");
+    input.value = 1;
+  }
 });
 
 function validateSourceMinMax(min, max) {
@@ -40,7 +40,6 @@ addToCartButton.addEventListener(
       let body = generateData(productId, quantity, "add");
       let response = makeRequest(link, "POST", body);
       response.then((data) => {
-        console.log(data);
         if (data.success) {
           message = data.success;
           type = "success";
