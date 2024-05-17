@@ -46,34 +46,31 @@ class addToCart(View):
 
 
     def post(self, request, slug_field):
-        # Extract cart from session or initialize an empty one if it doesn't exist
         cart = request.session.get("cart", {})
         post_data = json.loads(request.body)
-        # Get the product or return a 404 error if it doesn't exist
         product = get_object_or_404(Product, slug=slug_field)
-        # Extract the quantity of the product in the cart from the post data
         quantity_in_cart = int(post_data["cart"].get(slug_field, 0))
-        # Verify the quantity in the cart, pulling the function from the utils.py file
         is_valid_quantity = utils.verify_quantity_in_cart(product, quantity_in_cart)
-
         if not is_valid_quantity:
-            return JsonResponse({"error": "Quantity in Cart is invalid"}, safe=False)
+            return JsonResponse({"error": "Quantity is invalid"}, safe=False)
 
         action = post_data["cart"].get("action", "")
-
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         orderItem, created = OrderItems.objects.get_or_create(order=order, product=product)
-
         if action == "add":
-            orderItem.quantity += quantity_in_cart
             product_name = utils.get_plural_string(quantity_in_cart, product)
+            orderItem.quantity += quantity_in_cart
             verify_quantity = utils.check_order_item(orderItem.quantity, product.max_quantity)
             if not verify_quantity:
-                return JsonResponse({"error": f"Cannot add any more {product_name} to your cart"}, safe=False)
-
+                if product_name[-1] != "s":
+                    product_name = f"{product_name}s"
+                return JsonResponse({"error":
+                                     f"Cannot add any more"
+                                     f" {product_name } to your cart"
+                                     f" {product.max_quantity }"
+                                     f" is the maximum per order"}, safe=False)
             orderItem.save()
-
             return JsonResponse({"success": f"{quantity_in_cart} {product_name}"
                                  f" added to the cart"}, safe=False)
         if action == "remove":
