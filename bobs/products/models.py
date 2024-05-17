@@ -1,3 +1,6 @@
+import uuid
+
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -25,11 +28,12 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
     sku = models.CharField(max_length=200, null=True, blank=False, unique=True)
-    image = models.ImageField(null=True, blank=False, )
+    image = CloudinaryField('image', null=True, blank=False)
     image_description = models.CharField(max_length=200, null=True, blank=False)
     description = models.TextField(null=True, blank=False)
     allergin_info = models.TextField(null=True, blank=False)
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True, editable=False)
+    max_quantity = models.IntegerField(default=10, null=True, blank=False)
 
 
     def save(self, *args, **kwargs):
@@ -45,17 +49,39 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
-    transaction_id = models.CharField(max_length=200, null=True)
+    transaction_id = models.CharField(max_length=200, null=True, blank=True)
     delivery = models.BooleanField(default=False, null=True, blank=False)
+    delivery_fee = models.FloatField(default=4, null=True, blank=False)
+    def save(self, *args, **kwargs):
+        if not self.transaction_id:
+            self.transaction_id = str(uuid.uuid4())
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return str(self.transaction_id)
+
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitems_set.all()
+        total = sum([item.get_sub_total for item in orderitems])
+        return total
+
+
+
+
 
 class OrderItems(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def get_sub_total(self):
+        return self.product.price * self.quantity
+
+
 
     class Meta:
         verbose_name_plural = "Order Items"
