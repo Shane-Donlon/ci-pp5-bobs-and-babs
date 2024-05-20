@@ -46,7 +46,23 @@ class addToCart(View):
 
 
     def post(self, request, slug_field):
-        cart = request.session.get("cart", {})
+        if request.user.is_authenticated:
+            customer =  request.user.id
+            order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        else:
+            customer = None
+        if not request.user.is_authenticated:
+            if not request.session.get("customer"):
+                request.session["customer"] = request.session.session_key
+                order, created = Order.objects.get_or_create(transaction_id=request.session["customer"], complete=False)
+            if request.session.get("customer"):
+                order = Order.objects.get(transaction_id=request.session.get("customer"))
+
+                if order.complete:
+                    print(order,"order")
+                    request.session.cycle_key()
+                    request.session["customer"] = request.session.session_key
+                    order, created = Order.objects.get_or_create(transaction_id=request.session["customer"], complete=False)
         post_data = json.loads(request.body)
         product = get_object_or_404(Product, slug=slug_field)
         quantity_in_cart = int(post_data["cart"].get(slug_field, 0))
@@ -55,8 +71,8 @@ class addToCart(View):
             return JsonResponse({"error": "Quantity is invalid"}, safe=False)
 
         action = post_data["cart"].get("action", "")
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+
         orderItem, created = OrderItems.objects.get_or_create(order=order, product=product)
         if action == "add":
             product_name = utils.get_plural_string(quantity_in_cart, product)
@@ -75,6 +91,6 @@ class addToCart(View):
                                  f" added to the cart"}, safe=False)
         if action == "remove":
             orderItem.delete()
-            return JsonResponse({"success": True}, safe=False)
+            return JsonResponse({"success": "Item successfully removed from Cart"}, safe=False)
 
         return JsonResponse({"success": True}, safe=False)
