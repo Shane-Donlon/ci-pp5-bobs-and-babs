@@ -25,7 +25,7 @@ class CartPageDefaultView(View):
             return render(request, "cart/cart.html", context)
 
         if request.session.get("customer"):
-            print("get request here")
+
             order = Order.objects.get(transaction_id=request.session.get("customer"))
             if order.complete:
                 request.session.cycle_key()
