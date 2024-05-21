@@ -42,8 +42,6 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
 
-    def __str__(self) -> str:
-        return f"{self.name}"
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
@@ -52,28 +50,24 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=200, null=True, blank=True)
     delivery = models.BooleanField(default=False, null=True, blank=False)
     delivery_fee = models.FloatField(default=4, null=True, blank=False)
-    def save(self, *args, **kwargs):
-        if not self.transaction_id:
-            self.transaction_id = str(uuid.uuid4())
-        super().save(*args, **kwargs)
+    cart_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
 
 
     def __str__(self):
         return str(self.transaction_id)
 
-    @property
     def get_cart_total(self):
         orderitems = self.orderitems_set.all()
         total = sum([item.get_sub_total for item in orderitems])
+        if self.delivery:
+            total += self.delivery_fee
+
         return total
-
-
-
-
 
 class OrderItems(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False, blank=False)
     quantity = models.IntegerField(default=0, null=True, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
 
