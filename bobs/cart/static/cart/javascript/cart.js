@@ -1,6 +1,10 @@
 let allBtns = document.querySelectorAll(".del-btn");
 let links = document.querySelectorAll("[data-slug]");
 let total = document.querySelector(".total-cart");
+document.addEventListener("DOMContentLoaded", () => {
+  adjustScrollBar();
+});
+
 allBtns.forEach((btn, index) => {
   btn.addEventListener(
     "click",
@@ -23,6 +27,7 @@ allBtns.forEach((btn, index) => {
           let getRequest = makeRequest("", "GET");
           getRequest.then((data) => {
             let selectedEl = document.querySelectorAll(`.cart-grid > .${slug}`);
+
             selectedEl.forEach((el) => {
               let transitionTime = "250ms";
               transitionAndRemoveElement(el, transitionTime);
@@ -75,4 +80,14 @@ function transitionAndRemoveElement(el, transitionTime) {
     },
     false
   );
+}
+
+function adjustScrollBar() {
+  // if the scroll bar is visible then set the body to scroll
+  // this is to prevent the body from jumping when the scroll bar disappears if an item is removed from the cart
+  let scrollHeight = document.body.scrollHeight;
+  let windowHeight = window.innerHeight;
+  if (scrollHeight > windowHeight) {
+    document.body.style.overflowY = "scroll";
+  }
 }
