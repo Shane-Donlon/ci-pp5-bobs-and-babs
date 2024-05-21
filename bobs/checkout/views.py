@@ -13,11 +13,14 @@ class CheckoutPage(View):
             context = {"items": items, "order": order, "created": created,"customer":customer, }
             return render(request, "checkout/checkout.html", context)
 
-        else:
-            items = []
-            order = {"get_cart_total": 0, "get_cart_items": 0}
-            context = {"max_quantity": 10, }
+
+            # session key is used to identify the order transaction
+            # only created on post request of product detail view
+        if request.session.get("customer"):
+            order = Order.objects.get(transaction_id=request.session["customer"])
+            items = order.orderitems_set.all()
+            context = {"items": items, "order": order, }
             return render(request, "checkout/checkout.html", context)
-
-
+        else:
+            return render(request, "checkout/checkout.html")
 
