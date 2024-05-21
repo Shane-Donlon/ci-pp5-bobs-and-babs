@@ -64,9 +64,7 @@ class addToCart(View):
                 order.save()
 
             if request.session.get("customer"):
-                print("request.session.get")
                 order = Order.objects.get(transaction_id=request.session.get("customer"))
-
                 if order.complete:
                     request.session.cycle_key()
                     request.session["customer"] = request.session.session_key
