@@ -71,7 +71,6 @@ function transitionAndRemoveElement(el, transitionTime) {
     function transitionEnd(event) {
       if (event.propertyName === "height") {
         el.remove();
-        el.removeEventListener("transitionend", transitionEnd, false);
       }
     },
     false
