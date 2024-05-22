@@ -104,7 +104,7 @@ class RemoveFromCart(View):
             order_item = OrderItems.objects.get(order=order, product__slug=slug_field)
 
             product_name = utils.create_plural_string(order_item.product.name)
-            print(product_name)
+
             try:
                 order_item.delete()
                 order.save()
