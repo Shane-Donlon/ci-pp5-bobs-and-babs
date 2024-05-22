@@ -12,19 +12,19 @@
         </div>
     </div>
     <div class="cart-main cart-grid">
-        {% comment %} for loop starts here {% endcomment %}
-        {% comment %} might need to enumerate and get the index to update the id attr and for attr in label and select {% endcomment %}
         {% for item in items %}
-            <div class="cart-main-col-1">
+            <div class="cart-main-col-1 {{ item.product.slug }}">
                 <div class="col-1">
                     <img src="{{ item.product.image.url }}"
                          alt="{{ item.product.image_description }}">
                 </div>
-                <div class="col-2">
+                <div class="col-2"
+                     data-slug="{{ item.product.slug }}"
+                     data-product-id="{{ item.product.pk }}">
                     <p>{{ item.product.name }}</p>
                 </div>
             </div>
-            <div class="cart-main-col-2">
+            <div class="cart-main-col-2 {{ item.product.slug }}">
                 <div class="wrapper">
                     <label for="quantity">Quantity</label>
                     <input type="number"
@@ -32,15 +32,14 @@
                            id="quantity"
                            value="{{ item.quantity }}">
                 </div>
-                <div class="col-2">Remove X</div>
+                <button class="col-2 del-btn">Remove X</button>
             </div>
-            <div class="cart-main-col-3 subtotal">
+            <div class="cart-main-col-3 subtotal  {{ item.product.slug }}">
                 <div class="col-2">
                     <span><data value="{{ item.get_sub_total | floatformat:2 }}">€{{ item.get_sub_total | floatformat:2 }}</data></span>
                 </div>
             </div>
         {% endfor %}
-        {% comment %} for loop ends here {% endcomment %}
     </div>
     <div class="cart-footer cart-grid">
         <footer>
