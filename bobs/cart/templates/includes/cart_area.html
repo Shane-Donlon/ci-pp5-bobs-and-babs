@@ -1,0 +1,52 @@
+{% load static %}
+<div class="cart-area ">
+    <div class="cart-header cart-grid">
+        <div class="col-1">
+            <h3 class="font-bold">Items</h3>
+        </div>
+        <div class="col-2">
+            <h3 class="font-bold">Quantity</h3>
+        </div>
+        <div class="col-3">
+            <h3 class="font-bold">Total</h3>
+        </div>
+    </div>
+    <div class="cart-main cart-grid">
+        {% for item in items %}
+            <div class="cart-main-col-1 {{ item.product.slug }}">
+                <div class="col-1">
+                    <img src="{{ item.product.image.url }}"
+                         alt="{{ item.product.image_description }}">
+                </div>
+                <div class="col-2"
+                     data-slug="{{ item.product.slug }}"
+                     data-product-id="{{ item.product.pk }}">
+                    <p>{{ item.product.name }}</p>
+                </div>
+            </div>
+            <div class="cart-main-col-2 {{ item.product.slug }}">
+                <div class="wrapper">
+                    <label for="quantity">Quantity</label>
+                    <input type="number"
+                           name="quantity"
+                           id="quantity"
+                           value="{{ item.quantity }}">
+                </div>
+                <button class="col-2 del-btn"
+                        data-url-remove="{% url 'remove-from-cart' item.product.slug %}">Remove X</button>
+            </div>
+            <div class="cart-main-col-3 subtotal  {{ item.product.slug }}">
+                <div class="col-2">
+                    <span><data value="{{ item.get_sub_total | floatformat:2 }}">€{{ item.get_sub_total | floatformat:2 }}</data></span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="cart-footer cart-grid">
+        <footer>
+            <h4 class="font-bold ">
+                Total      <span class="total-cart"><data value="{{ order.get_cart_total | floatformat:2 }}">€{{ order.get_cart_total | floatformat:2 }}</data></span>
+            </h4>
+        </footer>
+    </div>
+</div>
