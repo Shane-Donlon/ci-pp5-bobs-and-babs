@@ -11,7 +11,7 @@ allBtns.forEach((btn, index) => {
     debounce((e) => {
       let slug = links[index].getAttribute("data-slug");
       productId = links[index].getAttribute("data-product-id");
-      let url = `update/${slug}/`;
+      let url = `${e.target.getAttribute("data-url-remove")}`;
       let transactionId = document.querySelector(".transaction-id").textContent;
 
       let body = generateOrder(
@@ -35,6 +35,15 @@ allBtns.forEach((btn, index) => {
 
             let cartTotal = JSON.parse(data.order)[0].fields.cart_total;
             total.innerHTML = `<data value="${cartTotal}">€${cartTotal}</data>`;
+
+            if (!+cartTotal) {
+              let checkoutBtn = document.querySelector(".btn-checkout");
+              checkoutBtn.style.transition = "opacity 250ms linear";
+              checkoutBtn.style.opacity = "0";
+              checkoutBtn.addEventListener("transitionend", (e) => {
+                checkoutBtn.remove();
+              });
+            }
           });
 
           return;
