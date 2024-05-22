@@ -9,10 +9,14 @@ from . import utils
 
 
 class CartPageDefaultView(View):
+
     def get(self, request):
         if request.user.is_authenticated:
             customer = request.user.customer
-            order, created = Order.objects.get_or_create(customer=customer, complete=False)
+            try:
+                order = Order.objects.get(customer=customer, complete=False)
+            except Order.DoesNotExist:
+                return render(request, "cart/cart.html", {})
         elif request.session.get("customer"):
             order = Order.objects.get(transaction_id=request.session.get("customer"))
             if order.complete:
