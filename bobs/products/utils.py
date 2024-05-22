@@ -12,6 +12,13 @@ def verify_quantity_in_cart(product: Type[Product], quantity_in_cart: int) -> bo
         return False
     return True
 
+def create_plural_string(product_name: str) -> str:
+
+    last_char = product_name[-1]
+    if last_char != "s":
+        return f"{product_name}s"
+    return f"{product_name}"
+
 def get_plural_string(quantity: int, product: Type[Product]) -> str:
     # return the correct name of the product avoids "Doughnutss" plural
     last_char = product.name[-1]
