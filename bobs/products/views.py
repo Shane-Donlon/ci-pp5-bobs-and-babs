@@ -46,30 +46,22 @@ class addToCart(View):
 
 
     def post(self, request, slug_field):
-        if request.user.is_authenticated:
-            customer =  request.user.id
-            order, created = Order.objects.get_or_create(customer=customer, complete=False)
-            order.save()
-        else:
-            customer = None
 
+        if request.user.is_authenticated:
+            # if user is authenticated get or create an order
+            # if the order is complete create a new order
+            order = utils.authenticated_users(request)
         if not request.user.is_authenticated:
             # if the user is not authenticated set customer to none
             # and create a session key to identify the order transaction
             # if the transaction is complete create a new transaction
             if not request.session.get("customer"):
-                request.session.create()
-                request.session["customer"] = request.session.session_key
-                order, created = Order.objects.get_or_create(transaction_id=request.session["customer"], complete=False)
-                order.save()
+                order = utils.un_authenticated_users_no_session(request)
 
             if request.session.get("customer"):
                 order = Order.objects.get(transaction_id=request.session.get("customer"))
                 if order.complete:
-                    request.session.cycle_key()
-                    request.session["customer"] = request.session.session_key
-                    order, created = Order.objects.get_or_create(transaction_id=request.session["customer"], complete=False)
-                    order.save()
+                    order = utils.un_authenticated_order_complete(request)
 
         post_data = json.loads(request.body)
         product = get_object_or_404(Product, slug=slug_field)
