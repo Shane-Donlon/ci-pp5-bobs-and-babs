@@ -1,6 +1,8 @@
 import json
 
 from django.core import serializers
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
@@ -41,9 +43,7 @@ class CartPageDefaultView(View):
         return {"items": items_json, "order": serializers.serialize('json', [order]) }
 
 
-
 class updateCart(View):
-
     def post(self, request, slug_field):
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             post_data = json.loads(request.body)
@@ -53,11 +53,12 @@ class updateCart(View):
                 product = Product.objects.get(slug=slug_field)
                 order_number = post_data["cart"]["transactionId"]
                 order = Order.objects.get(transaction_id=order_number)
-                order_item = OrderItems.objects.get(order=order, product=product)
                 try:
+                    order_item = OrderItems.objects.get(order=order, product=product)
                     order_item.delete()
                     order.save()
                     return JsonResponse({"success": f"{product.name} has been removed"})
-                except:
-                    return JsonResponse({"error": "An error occurred, item has not been removed"})
-
+                except ObjectDoesNotExist:
+                    return JsonResponse({"error": "Item does not exist"})
+                except IntegrityError:
+                    return JsonResponse({"error": "An error occurred while trying to remove the item"})
