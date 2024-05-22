@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View
 from products.models import Order, OrderItems, Product
 
@@ -12,20 +12,25 @@ class CheckoutPage(View):
                 order = Order.objects.get(customer=customer, complete=False)
 
             except Order.DoesNotExist:
-                return render(request, "checkout/checkout.html", {})
+                return redirect('cart')
 
             items = order.orderitems_set.all()
-            context = {"items": items, "order": order, "created": created,"customer":customer, }
+            if not items:
+                return redirect('cart')
+            context = {"items": items, "order": order, "customer":customer, 'is_checkout_page': True,}
             return render(request, "checkout/checkout.html", context)
 
         if request.session.get("customer"):
             try:
                 order = Order.objects.get(transaction_id=request.session["customer"], complete=False)
             except Order.DoesNotExist:
-                return render(request, "checkout/checkout.html", {})
+                return redirect('cart')
             items = order.orderitems_set.all()
-            context = {"items": items, "order": order, }
+            if not items:
+                return redirect('cart')
+            context = {"items": items, "order": order, 'is_checkout_page': True,}
             return render(request, "checkout/checkout.html", context)
         else:
-            return render(request, "checkout/checkout.html")
+            # ie if the user does not have session data
+            return redirect('cart')
 
