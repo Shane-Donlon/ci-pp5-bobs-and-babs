@@ -7,16 +7,28 @@
     Cart
 {% endblock extra_title %}
 {% block content %}
-    <div class="content-grid">
-        <h2>My Cart</h2>
-        <h3>Order Number {{ order.transaction_id }}</h3>
-        <div class="cart-area-container breakout">{% include "includes/cart-area.html" %}</div>
-        <div class="grid links-div breakout font-bold">
-            <a href="{% url 'checkout' %}" class="btn btn-checkout">Proceed to Checkout</a>
+    {% csrf_token %}
+    {% if items %}
+        <div class="content-grid">
+            <h2>My Cart</h2>
+            <h3>
+                Order Number <span class="transaction-id">{{ order.transaction_id }}</span>
+            </h3>
+            <div class="cart-area-container breakout">{% include "includes/cart_area.html" %}</div>
+            <div class="grid links-div breakout font-bold">
+                <a href="{% url 'checkout' %}" class="btn btn-checkout">Proceed to Checkout</a>
+                <a href="{% url 'products' %}" class="btn btn-continue">Continue Shopping</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="content-grid">
+            <h2>Your cart is empty</h2>
             <a href="{% url 'products' %}" class="btn btn-continue">Continue Shopping</a>
         </div>
-    </div>
+    {% endif %}
 {% endblock content %}
 {% block extra_js_files %}
-    <script src="{% static 'cart/javascript/cart.js' %}"></script>
+    {% if items %}
+        <script src="{% static 'cart/javascript/cart.js' %}"></script>
+    {% endif %}
 {% endblock extra_js_files %}
