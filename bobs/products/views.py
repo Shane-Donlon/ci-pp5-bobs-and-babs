@@ -1,5 +1,6 @@
 import json
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import View
@@ -40,10 +41,7 @@ class ProductDetailView(View,):
         return render(request, "products/product.html", context)
 
 
-class addToCart(View):
-    def get(self, request, slug_field):
-        return JsonResponse({"success": True})
-
+class AddToCart(View):
 
     def post(self, request, slug_field):
 
@@ -54,7 +52,7 @@ class addToCart(View):
         if not request.user.is_authenticated:
             # if the user is not authenticated set customer to none
             # and create a session key to identify the order transaction
-            # if the transaction is complete create a new transaction
+            # if the order is complete create a new order
             if not request.session.get("customer"):
                 order = utils.un_authenticated_users_no_session(request)
 
@@ -64,6 +62,7 @@ class addToCart(View):
                     order = utils.un_authenticated_order_complete(request)
 
         post_data = json.loads(request.body)
+
         product = get_object_or_404(Product, slug=slug_field)
         quantity_in_cart = int(post_data["cart"].get(slug_field, 0))
 
@@ -75,25 +74,23 @@ class addToCart(View):
 
 
         orderItem, created = OrderItems.objects.get_or_create(order=order, product=product)
-        if action == "add":
-            product_name = utils.get_plural_string(quantity_in_cart, product)
-            orderItem.quantity += quantity_in_cart
-            verify_quantity = utils.check_order_item(orderItem.quantity, product.max_quantity)
-            if not verify_quantity:
-                if product_name[-1] != "s":
-                    product_name = f"{product_name}s"
-                return JsonResponse({"error":
-                                     f"Cannot add any more"
-                                     f" {product_name } to your cart"
-                                     f" {product.max_quantity }"
-                                     f" is the maximum per order"}, safe=False)
-            orderItem.save()
-            return JsonResponse({"success": f"{quantity_in_cart} {product_name}"
-                                 f" added to the cart"}, safe=False)
-        if action == "remove":
-            orderItem.delete()
-            return JsonResponse({"success":
-                                "Item successfully removed from Cart"}
-                                , safe=False)
 
-        return JsonResponse({"success": True}, safe=False)
+        product_name = utils.get_plural_string(quantity_in_cart, product)
+        orderItem.quantity += quantity_in_cart
+        verify_quantity = utils.check_order_item(orderItem.quantity, product.max_quantity)
+
+        try:
+            if action == "add":
+                if not verify_quantity:
+                    product_plural_name = utils.create_plural_string(product.name)
+                    return JsonResponse({"error":
+                                        f"Cannot add any more"
+                                        f" {product_plural_name } to your cart"
+                                        f" {product.max_quantity }"
+                                        f" is the maximum per order"}, safe=False)
+                orderItem.save()
+                return JsonResponse({"success": f"{quantity_in_cart} {product_name}"
+                                    f" added to the cart"}, safe=False)
+        except ValueError as e:
+            return JsonResponse({"error": str(e)}, safe=False)
+
