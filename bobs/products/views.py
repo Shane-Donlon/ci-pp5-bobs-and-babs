@@ -94,3 +94,23 @@ class AddToCart(View):
         except ValueError as e:
             return JsonResponse({"error": str(e)}, safe=False)
 
+class RemoveFromCart(View):
+
+    def post(self, request, slug_field):
+        post_data = json.loads(request.body)
+        transaction_id = post_data["cart"]["transactionId"]
+        if transaction_id:
+            order = Order.objects.get(transaction_id=transaction_id)
+            order_item = OrderItems.objects.get(order=order, product__slug=slug_field)
+
+            product_name = utils.create_plural_string(order_item.product.name)
+            print(product_name)
+            try:
+                order_item.delete()
+                order.save()
+                return JsonResponse({"success": f"{product_name} removed from cart"})
+            except ObjectDoesNotExist:
+                return JsonResponse({"error": "Item does not exist"})
+            except Exception as e:
+                return JsonResponse({"error": "An error occurred: " + str(e)})
+        return JsonResponse({"error": "An error occurred"})
