@@ -16,14 +16,20 @@
             </h3>
             <div class="cart-area-container breakout">{% include "includes/cart_area.html" %}</div>
             <div class="grid links-div breakout font-bold">
-                <a href="{% url 'checkout' %}" class="btn btn-checkout">Proceed to Checkout</a>
-                <a href="{% url 'products' %}" class="btn btn-continue">Continue Shopping</a>
+                <a href="{% url 'checkout' %}"
+                   class="btn btn-checkout"
+                   aria-label="Proceed to Checkout">Proceed to Checkout</a>
+                <a href="{% url 'products' %}"
+                   class="btn btn-continue"
+                   aria-label="Continue Shopping">Continue Shopping</a>
             </div>
         </div>
     {% else %}
         <div class="content-grid">
             <h2>Your cart is empty</h2>
-            <a href="{% url 'products' %}" class="btn btn-continue">Continue Shopping</a>
+            <a href="{% url 'products' %}"
+               class="btn btn-continue"
+               aria-label="Continue Shopping">Continue Shopping</a>
         </div>
     {% endif %}
 {% endblock content %}
