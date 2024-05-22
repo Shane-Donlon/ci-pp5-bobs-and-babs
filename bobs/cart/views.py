@@ -1,6 +1,5 @@
 import json
 
-from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 from django.http import JsonResponse
@@ -8,14 +7,14 @@ from django.shortcuts import render
 from django.views import View
 from products.models import Order, OrderItems, Product
 
-# Create your views here.
+from . import utils
 
 
 class CartPageDefaultView(View):
     def get(self, request):
         if request.user.is_authenticated:
             customer = request.user.customer
-            order  = Order.objects.get_or_create(customer=customer, complete=False)
+            order, created = Order.objects.get_or_create(customer=customer, complete=False)
         elif request.session.get("customer"):
             order = Order.objects.get(transaction_id=request.session.get("customer"))
             if order.complete:
@@ -26,21 +25,14 @@ class CartPageDefaultView(View):
             return render(request, "cart/cart.html", {})
 
         items = order.orderitems_set.all()
-        context = self.build_context(items, order, )
+        context = utils.build_context(items, order)
 
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             # if request is from JavaScript
-            context = self.build_json_context(items, order, )
+            context = utils.build_json_context(items, order)
             return JsonResponse(context, safe=False)
 
         return render(request, "cart/cart.html", context)
-
-    def build_context(self, items, order, ):
-        return {"items": items, "order": order,  }
-
-    def build_json_context(self, items, order, ):
-        items_json = serializers.serialize('json', items)
-        return {"items": items_json, "order": serializers.serialize('json', [order]) }
 
 
 class updateCart(View):
