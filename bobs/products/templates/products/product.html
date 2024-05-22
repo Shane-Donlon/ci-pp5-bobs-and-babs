@@ -43,7 +43,7 @@
                         </div>
                 </div>
         </div>
-        <div class="order-area">
+        <div class="order-area" role="form">
                 <div class="quantity-div">
                         <label for="quantity">Quantity</label>
                         <input type="number"
@@ -60,7 +60,7 @@
                 </div>
                 <div class="btn-div">
                         <button class="add-to-cart" data-url="{% url 'add-to-cart' product.slug %}">Add to Cart</button>
-                        <a href="{% url 'products' %}">Continue Shopping</a>
+                        <a href="{% url 'products' %}" aria-label="Continue Shopping">Continue Shopping</a>
                 </div>
         </div>
 </div>
