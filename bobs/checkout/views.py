@@ -8,16 +8,21 @@ class CheckoutPage(View):
     def get(self, request):
         if(request.user.is_authenticated):
             customer = request.user.customer
-            order, created = Order.objects.get_or_create(customer=customer, complete=False)
+            try:
+                order = Order.objects.get(customer=customer, complete=False)
+
+            except Order.DoesNotExist:
+                return render(request, "checkout/checkout.html", {})
+
             items = order.orderitems_set.all()
             context = {"items": items, "order": order, "created": created,"customer":customer, }
             return render(request, "checkout/checkout.html", context)
 
-
-            # session key is used to identify the order transaction
-            # only created on post request of product detail view
         if request.session.get("customer"):
-            order = Order.objects.get(transaction_id=request.session["customer"])
+            try:
+                order = Order.objects.get(transaction_id=request.session["customer"], complete=False)
+            except Order.DoesNotExist:
+                return render(request, "checkout/checkout.html", {})
             items = order.orderitems_set.all()
             context = {"items": items, "order": order, }
             return render(request, "checkout/checkout.html", context)
