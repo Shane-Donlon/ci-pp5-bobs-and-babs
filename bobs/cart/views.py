@@ -11,35 +11,35 @@ from products.models import Order, OrderItems, Product
 
 class CartPageDefaultView(View):
     def get(self, request):
-        if(request.user.is_authenticated):
+        if request.user.is_authenticated:
             customer = request.user.customer
-            order, created = Order.objects.get_or_create(customer=customer, complete=False)
-            items = order.orderitems_set.all()
-            context = {"items": items, "order": order, "created": created,}
-
-            if request.headers.get("X-Requested-With") == "XMLHttpRequest":
-                # if request is from JavaScript
-                items_json = serializers.serialize('json', items)
-                context = {"items": items_json, "order": serializers.serialize('json', [order]), "created": created,}
-                return JsonResponse(context, safe=False)
-            return render(request, "cart/cart.html", context)
-
-        if request.session.get("customer"):
-
+            order  = Order.objects.get_or_create(customer=customer, complete=False)
+        elif request.session.get("customer"):
             order = Order.objects.get(transaction_id=request.session.get("customer"))
             if order.complete:
                 request.session.cycle_key()
                 return render(request, "cart/cart.html", {})
 
-            items = order.orderitems_set.all()
-            context = {"items": items, "order": order }
-            if request.headers.get("X-Requested-With") == "XMLHttpRequest":
-                items_json = serializers.serialize('json', items)
-                context = {"items": items_json, "order": serializers.serialize('json', [order]), }
-                return JsonResponse(context, safe=False)
-            return render(request, "cart/cart.html", context)
         else:
             return render(request, "cart/cart.html", {})
+
+        items = order.orderitems_set.all()
+        context = self.build_context(items, order, )
+
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            # if request is from JavaScript
+            context = self.build_json_context(items, order, )
+            return JsonResponse(context, safe=False)
+
+        return render(request, "cart/cart.html", context)
+
+    def build_context(self, items, order, ):
+        return {"items": items, "order": order,  }
+
+    def build_json_context(self, items, order, ):
+        items_json = serializers.serialize('json', items)
+        return {"items": items_json, "order": serializers.serialize('json', [order]) }
+
 
 
 class updateCart(View):
