@@ -32,8 +32,10 @@
                            id="quantity"
                            value="{{ item.quantity }}">
                 </div>
-                <button class="col-2 del-btn"
-                        data-url-remove="{% url 'remove-from-cart' item.product.slug %}">Remove X</button>
+                {% if not is_checkout_page %}
+                    <button class="col-2 del-btn"
+                            data-url-remove="{% url 'remove-from-cart' item.product.slug %}">Remove X</button>
+                {% endif %}
             </div>
             <div class="cart-main-col-3 subtotal  {{ item.product.slug }}">
                 <div class="col-2">
