@@ -2,15 +2,17 @@ import json
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.http import require_GET, require_POST
 
 from . import utils
 from .models import Order, OrderItems, Product
 
 # Create your views here.
 
-
+@method_decorator(require_GET, name='dispatch')
 class ProductsPageDefaultView(View):
 
     def get(self, request):
@@ -21,7 +23,7 @@ class ProductsPageDefaultView(View):
 
         return render(request, "products/products.html",context )
 
-
+@method_decorator(require_GET, name='dispatch')
 class ProductDetailView(View,):
     def get(self, request, slug_field):
         product = get_object_or_404(Product, slug=slug_field)
@@ -41,6 +43,8 @@ class ProductDetailView(View,):
         return render(request, "products/product.html", context)
 
 
+
+@method_decorator(require_POST, name='dispatch')
 class AddToCart(View):
 
     def post(self, request, slug_field):
@@ -94,6 +98,7 @@ class AddToCart(View):
         except ValueError as e:
             return JsonResponse({"error": str(e)}, safe=False)
 
+@method_decorator(require_POST, name='dispatch')
 class RemoveFromCart(View):
 
     def post(self, request, slug_field):
