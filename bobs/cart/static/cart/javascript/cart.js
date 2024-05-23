@@ -10,8 +10,8 @@ allBtns.forEach((btn, index) => {
     "click",
     debounce((e) => {
       let slug = links[index].getAttribute("data-slug");
-      productId = links[index].getAttribute("data-product-id");
-      let url = `${e.target.getAttribute("data-url-remove")}`;
+      let productId = links[index].getAttribute("data-product-id");
+      let url = `/products/${slug}/cart/remove/`;
       let transactionId = document.querySelector(".transaction-id").textContent;
 
       let body = generateOrder(
