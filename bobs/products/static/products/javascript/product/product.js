@@ -12,12 +12,12 @@ input.addEventListener("input", (e) => {
     return;
   }
 
-  let sourceChanged = validateSourceMinMax(min, max);
-  if (sourceChanged) {
-    window.alert("You can't change the min and max values of the input.");
-    window.alert("Please refresh the page to reset the input.");
-    input.value = 1;
-  }
+  // let sourceChanged = validateSourceMinMax(min, max);
+  // if (sourceChanged) {
+  //   window.alert("You can't change the min and max values of the input.");
+  //   window.alert("Please refresh the page to reset the input.");
+  //   input.value = 1;
+  // }
 });
 
 function validateSourceMinMax(min, max) {
@@ -26,7 +26,8 @@ function validateSourceMinMax(min, max) {
   }
 }
 let addToCartButton = document.querySelector(".add-to-cart");
-const link = addToCartButton.getAttribute("data-url");
+const slug = addToCartButton.getAttribute("data-product-name-as-slug");
+const link = `/products/${slug}/cart/add/`;
 
 addToCartButton.addEventListener(
   "click",
@@ -36,7 +37,7 @@ addToCartButton.addEventListener(
     let message;
     if (validityState) {
       let quantity = input.value;
-      let productId = data.productSlug;
+      let productId = slug;
       let body = generateData(productId, quantity, "add");
       let response = makeRequest(link, "POST", body);
       response.then((data) => {

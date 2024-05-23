@@ -59,7 +59,7 @@
                         </p>
                 </div>
                 <div class="btn-div">
-                        <button class="add-to-cart" data-url="{% url 'add-to-cart' product.slug %}">Add to Cart</button>
+                        <button class="add-to-cart" data-product-name-as-slug="{{ product.slug }}">Add to Cart</button>
                         <a href="{% url 'products' %}" aria-label="Continue Shopping">Continue Shopping</a>
                 </div>
         </div>
@@ -67,9 +67,5 @@
 </section>
 {% endblock content %}
 {% block extra_js_files %}
-        <script src="{% static 'products/javascript/product/product.js' %}"
-                data-product-slug="{{product.slug}}"
-                data-product-price="{{ product.price | floatformat:2 }}"
-                data-user-name="{{request.user}}"
-                data-user-authenticated="{{request.user.is_authenticated}}"></script>
+        <script src="{% static 'products/javascript/product/product.js' %}"></script>
 {% endblock extra_js_files %}
