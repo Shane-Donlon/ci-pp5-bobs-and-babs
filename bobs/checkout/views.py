@@ -10,6 +10,8 @@ from django.views import View
 from django.views.decorators.http import require_GET, require_POST
 from products.models import Order, OrderItems, Product
 
+from . import utils
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -49,7 +51,14 @@ class CheckoutPage(View):
             return redirect('cart')
 
 
-
+@method_decorator(require_POST, name='dispatch')
+class CheckoutComplete(View):
+    def post(self, request):
+        order = Order.objects.get(
+            transaction_id=request.session["customer"], complete=False)
+        order.complete = True
+        order.save()
+        return redirect('order_complete')
 
 
 @method_decorator(require_POST, name='dispatch')
@@ -71,39 +80,16 @@ class Charge(View):
         cost_data = post_data["cost"]
         cost = int(float(cost_data) * 100)
 
-
         if cost == total:
             try:
-                customer_for_stripe = stripe.Customer.create(
-                    name=customer_full_name,
-                    email=email_address,
-                    source=stripe_token,
-                    description=transaction_id
-                )
-
-                charge = stripe.Charge.create(
-                    amount=total,
-                    currency="eur",
-                    description=f"Payment for order{order.transaction_id}",
-                    customer=customer_for_stripe,
-                )
+                customer_for_stripe = utils.create_stripe_customer(customer_full_name, email_address, stripe_token, transaction_id)
+                charge = utils.create_stripe_charge(customer_for_stripe, total, transaction_id)
 
                 if charge.paid:
-
                     order.complete = True
                     order.save()
-                    invoice_item = stripe.InvoiceItem.create(
-                        customer=customer_for_stripe.id,
-                        amount=total,
-                        currency="eur",
-                        description=f"Payment for order{order.transaction_id}",)
 
-                    invoice = stripe.Invoice.create(
-                        customer=customer_for_stripe.id,
-                        auto_advance=True  # Auto-finalize this draft after ~1 hour
-                    )
-                    invoice.finalize_invoice()
-
+                    invoice = utils.create_stripe_invoice(customer_for_stripe, total, transaction_id)
                     request.session["invoice_url"] = invoice.hosted_invoice_url
                     print(request.session["invoice_url"])
                     return JsonResponse({'redirect_url': reverse('order_complete')})
@@ -114,7 +100,7 @@ class Charge(View):
                 JsonResponse({"error": f"{e}"}, safe=False)
         if cost != total:
             return JsonResponse({"error": "An error has occurred <br/> "
-                                 "Please contact us by phone to complete the order"}, safe=False)
+                                "Please contact us by phone to complete the order"}, safe=False)
         return JsonResponse({"error": "Payment failed"}, safe=False)
 
 
