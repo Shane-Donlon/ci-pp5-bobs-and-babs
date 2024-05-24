@@ -14,19 +14,6 @@
             <h2 class="counter">Confirm Order</h2>
             {% include "includes/cart_area.html" %}
         </section>
-        <section counter>
-            <h2 class="counter">Personal Details</h2>
-            <form action="">
-                <div class="test">
-                    <label for="name">Name</label>
-                    <input type="text"
-                           id="name"
-                           name="name"
-                           required
-                           {% if user.is_authenticated %}value="{{ customer.first_name }}"{% endif %}>
-                </div>
-            </form>
-        </section>
         <section>
             <h2>Delivery</h2>
             <p>
@@ -68,11 +55,55 @@
                 </div>
             </div>
         </section>
+        <section counter>
+            <h2 class="counter">Personal Details</h2>
+            <form action="">
+                <div class="test">
+                    <label for="name">Name</label>
+                    <input type="text"
+                           id="name"
+                           name="name"
+                           required
+                           {% if user.is_authenticated %}value="{{ customer.first_name }}"{% endif %}>
+                </div>
+            </form>
+        </section>
         <section>
             <h2>Payment</h2>
+            <form action="{% url 'charge' order.transaction_id %}"
+                  method="post"
+                  id="payment-form">
+                {% csrf_token %}
+                <div class="form-row">
+                    <label for="full-name">
+                        Name on Card:
+                        <input id="full-name"
+                               name="full-name"
+                               type="text"
+                               placeholder="John Doe"
+                               required>
+                    </label>
+                    <label for="email">
+                        Email
+                        <input id="email"
+                               name="email"
+                               type="email"
+                               placeholder="john.doe@example.com"
+                               required>
+                    </label>
+                    <label for="card-element">
+                        Credit or debit card
+                        <div id="card-element">
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
+                    </label>
+                </div>
+                <button>Submit Payment</button>
+            </form>
         </section>
     </div>
 {% endblock content %}
 {% block extra_js_files %}
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="{% static 'checkout/javascript/checkout.js' %}"></script>
 {% endblock extra_js_files %}
