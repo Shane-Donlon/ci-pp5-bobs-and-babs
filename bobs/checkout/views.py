@@ -69,9 +69,12 @@ class Charge(View):
         stripe_token = post_data["stripeToken"]
         order = get_object_or_404(Order, transaction_id=transaction_id)
         delivery_selected = post_data["delivery"]
-        if delivery_selected:
-            order.delivery = True
-            order.save()
+        # this is not behind an if statement
+        # if wrapped in an if statement and the first post request fails
+        # then the order will be out of sync and will never execute correctly
+
+        order.delivery = delivery_selected
+        order.save()
 
         total_data = order.get_cart_total()
         total = int(float(total_data) * 100)
