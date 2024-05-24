@@ -4,7 +4,6 @@ let deliveryPrice = parseFloat(deliverValue);
 let totalCheckoutPrice = document.querySelector(".total-checkout-price");
 let radioBtns = document.querySelectorAll(".delivery-method-radio");
 let deliveryPriceElement = document.querySelector(".delivery-charge-price");
-
 let deliveryWrapper = document.querySelector(".subtotal-inc-delivery");
 let originalPrice = document.querySelector(".total-checkout-price > data");
 let html;
@@ -106,23 +105,6 @@ const style = {
 const card = elements.create("card", { style: style, hidePostalCode: true });
 card.mount("#card-element");
 
-form = document.querySelector("#payment-form");
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  stripe.createToken(card).then(function (result) {
-    if (result.error) {
-      // Inform the user if there was an error
-      const errorElement = document.createElement("div");
-      const newParagraph = document.createElement("p");
-      newParagraph.textContent = result.error.message;
-      form.appendChild(errorElement);
-    } else {
-      // Send the token to your server
-      stripeTokenHandler(result.token);
-    }
-  });
-});
 function stripeTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
   const form = document.getElementById("payment-form");
@@ -147,6 +129,7 @@ function stripeTokenHandler(token) {
 
   makeRequest(form.action, "POST", formInput)
     .then((data) => {
+      console.log(data);
       if (data.redirect_url) {
         window.location.href = data.redirect_url;
       }
@@ -158,3 +141,28 @@ function stripeTokenHandler(token) {
       createNotification(error, "error");
     });
 }
+
+let debouncedHandler = debounce(function () {
+  stripe.createToken(card).then(function (result) {
+    if (result.error) {
+      createNotification(result.error.message, "error");
+    } else {
+      // Send the token to server, and send post request
+      stripeTokenHandler(result.token);
+    }
+  });
+}, 250);
+
+function handleClick(event) {
+  debouncedHandler();
+}
+
+let submitBtn = document.querySelector("#submit-btn");
+submitBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  let name = document.querySelector("#full-name");
+  let email = document.querySelector("#email");
+  if (name.reportValidity() && email.reportValidity()) {
+    handleClick(event);
+  }
+});
