@@ -91,7 +91,7 @@ function createNotification(message, type) {
     type = "success-notification";
   }
   notification.classList.add(type, "notification");
-  notification.textContent = message;
+  notification.innerHTML = `<p>${message}</p>`;
   document.body.appendChild(notification);
   setTimeout(() => {
     notification.remove();
