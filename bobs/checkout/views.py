@@ -103,4 +103,16 @@ class Charge(View):
                                 "Please contact us by phone to complete the order"}, safe=False)
         return JsonResponse({"error": "Payment failed"}, safe=False)
 
+@method_decorator(require_GET, name='dispatch')
+class OrderSuccess(View):
+    def get(self, request):
+        if request.session.get("invoice_url"):
+            invoice_url = request.session["invoice_url"]
+            # pop method removes the key-value pair from the session but does not raise error if not found
+            request.session.pop("customer", None)
+            request.session.pop("invoice_url", None)
 
+            context = {"invoice_url": invoice_url}
+            return render(request, "checkout/order/order_complete.html", context)
+
+        return redirect('index')
