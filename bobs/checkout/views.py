@@ -64,6 +64,7 @@ class CheckoutComplete(View):
 @method_decorator(require_POST, name='dispatch')
 class Charge(View):
     def post(self, request, transaction_id):
+        order = get_object_or_404(Order, transaction_id=transaction_id)
         post_data = json.loads(request.body)
 
         stripe_token = post_data["stripeToken"]
@@ -94,7 +95,7 @@ class Charge(View):
 
                     invoice = utils.create_stripe_invoice(customer_for_stripe, total, transaction_id)
                     request.session["invoice_url"] = invoice.hosted_invoice_url
-                    print(request.session["invoice_url"])
+
                     return JsonResponse({'redirect_url': reverse('order_complete')})
 
             except stripe.error.InvalidRequestError as e:

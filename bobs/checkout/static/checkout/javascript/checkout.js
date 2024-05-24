@@ -129,7 +129,6 @@ function stripeTokenHandler(token) {
 
   makeRequest(form.action, "POST", formInput)
     .then((data) => {
-      console.log(data);
       if (data.redirect_url) {
         window.location.href = data.redirect_url;
       }
