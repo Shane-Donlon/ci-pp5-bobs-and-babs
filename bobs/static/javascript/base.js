@@ -111,3 +111,9 @@ function debounce(func, wait) {
     timeout = setTimeout(later, wait);
   };
 }
+function removeLoader() {
+  if (document.body.contains(document.querySelector(".loader"))) {
+    const loader = document.querySelector(".loader");
+    loader.remove();
+  }
+}
