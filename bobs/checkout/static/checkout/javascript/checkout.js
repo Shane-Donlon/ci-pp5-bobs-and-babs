@@ -12,6 +12,9 @@ radioBtns.forEach((btn) => {
   // updates the delivery price based on the radio button selected
   btn.addEventListener("input", (e) => {
     let btnSelected = e.target.value;
+
+    let deliveryForm = document.querySelector(".delivery-form");
+
     if (btnSelected === "collection") {
       let priceForDelivery = 0;
       delivery.value = priceForDelivery;
@@ -28,7 +31,10 @@ radioBtns.forEach((btn) => {
         </p>`;
         deliveryWrapper.innerHTML = html;
       }
-
+      if (deliveryForm.classList.contains("delivery-form-visible")) {
+        deliveryForm.classList.remove("delivery-form-visible");
+        deliveryForm.removeAttribute("aria-expanded");
+      }
       return;
     }
     if (btnSelected === "delivery") {
@@ -41,7 +47,12 @@ radioBtns.forEach((btn) => {
           <data value="${price}">€${price}</data>
       </p>`;
       deliveryWrapper.innerHTML = html;
-
+      if (!deliveryForm.classList.contains("delivery-form-visible")) {
+        // show delivery form
+        // TODO: work on transitioning from display none
+        deliveryForm.classList.add("delivery-form-visible");
+        deliveryForm.setAttribute("aria-expanded", "true");
+      }
       return;
     }
   });
@@ -143,6 +154,7 @@ function stripeTokenHandler(token) {
 
 let debouncedHandler = debounce(function () {
   stripe.createToken(card).then(function (result) {
+    console.log(result);
     if (result.error) {
       createNotification(result.error.message, "error");
     } else {
@@ -161,7 +173,63 @@ submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
   let name = document.querySelector("#full-name");
   let email = document.querySelector("#email");
+  let a;
+  if (
+    document.body.contains(document.querySelector(".delivery-form-visible"))
+  ) {
+    let valid = formValidation(".delivery-form-visible");
+    if (!valid) {
+      return;
+    }
+  }
+
   if (name.reportValidity() && email.reportValidity()) {
     handleClick(event);
   }
 });
+
+function formValidation(formSelector) {
+  let valid;
+  let invalidInputs = [];
+  let allInputs = document.querySelectorAll(`${formSelector} label + *`);
+  let allLabels = document.querySelectorAll(`${formSelector} label`);
+  let containsEircode;
+  for (let index = 0; index < allInputs.length; index++) {
+    const input = allInputs[index];
+    if (input.id === "id_eircode") {
+      containsEircode = true;
+      if (containsEircode) {
+        let eircode = document.querySelector("#id_eircode");
+        if (!eircode.validity.valid) {
+          let message = eircode.validationMessage;
+          if (message.includes("format")) {
+            message = "Please enter a valid Eircode format e.g. A65 F4E2";
+
+            input.setCustomValidity(message);
+          }
+        }
+      }
+    }
+    if (input.id === "id_phone") {
+      let phone = document.querySelector("#id_phone");
+
+      if (!phone.validity.valid) {
+        let message = phone.validationMessage;
+        console.log(message);
+        if (message.includes("format")) {
+          message = "Please enter a valid phone number eg. 353871234567";
+          input.setCustomValidity(message);
+        }
+      }
+    }
+
+    input.reportValidity();
+    input.setCustomValidity("");
+    if (!input.reportValidity()) {
+      invalidInputs.push(false);
+      break;
+    }
+  }
+  formValid = invalidInputs.length > 0 ? false : true;
+  return formValid;
+}
