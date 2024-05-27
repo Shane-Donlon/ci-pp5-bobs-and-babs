@@ -136,6 +136,17 @@ function stripeTokenHandler(token) {
     object[key] = value;
   });
 
+  if (
+    document.body.contains(document.querySelector(".delivery-form-visible"))
+  ) {
+    let deliveryForm = document.querySelector(".delivery-form-visible");
+    let deliveryData = new FormData(deliveryForm);
+
+    deliveryData.forEach(function (value, key, index) {
+      object[`delivery_data_${key}`] = value;
+    });
+  }
+
   const formInput = JSON.stringify(object);
 
   makeRequest(form.action, "POST", formInput)
