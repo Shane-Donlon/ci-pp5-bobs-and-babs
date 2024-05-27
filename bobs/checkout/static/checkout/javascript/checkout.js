@@ -6,6 +6,7 @@ let radioBtns = document.querySelectorAll(".delivery-method-radio");
 let deliveryPriceElement = document.querySelector(".delivery-charge-price");
 let deliveryWrapper = document.querySelector(".subtotal-inc-delivery");
 let originalPrice = document.querySelector(".total-checkout-price > data");
+let paymentForm = document.querySelector("#payment-form");
 let html;
 
 window.addEventListener("load", (event) => {
@@ -90,7 +91,9 @@ const nameOnCard = document.querySelector("#full-name");
 const WindowStyle = window.getComputedStyle(nameOnCard);
 let inputBgColor = WindowStyle.backgroundColor;
 let inputColor = WindowStyle.color;
+
 let inputPlaceholderColor = WindowStyle.placeholder;
+console.log(WindowStyle);
 let inputFont = WindowStyle.fontFamily;
 let fontSize = WindowStyle.fontSize;
 let fontSmoothing = WindowStyle.fontSmoothing;
@@ -98,18 +101,17 @@ let fontSmoothing = WindowStyle.fontSmoothing;
 if (inputBgColor !== "rgb(255, 255, 255)") {
   // get computed style doesn't seem to work correctly for dark mode input background color
   // returns wrong color value works find in light mode
-  inputBgColor = "#3b3b3b";
+  inputBgColor = "#2b2a33";
 }
 const style = {
   base: {
     backgroundColor: inputBgColor,
     color: inputColor,
-
     fontFamily: inputFont,
     fontSmoothing: fontSmoothing,
     fontSize: fontSize,
     "::placeholder": {
-      color: inputPlaceholderColor,
+      color: "rgb(219, 219, 221)",
     },
   },
   invalid: {
@@ -185,18 +187,24 @@ function handleClick(event) {
 }
 
 card.addEventListener("change", function (event) {
-  let displayError = document.getElementById("card-errors");
+  let displayError = document.createElement("div");
+  displayError.style.color = "red";
   if (event.error) {
     displayError.textContent = event.error.message;
   } else {
     displayError.textContent = "";
   }
+
+  paymentForm.appendChild(displayError);
+  setTimeout(() => {
+    displayError.remove();
+  }, 5000);
 });
 
 let submitBtn = document.querySelector("#submit-btn");
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  let paymentForm = document.querySelector("#payment-form");
+
   let name = document.querySelector("#full-name");
   let email = document.querySelector("#email");
   let a;
@@ -231,12 +239,14 @@ function formValidation(formSelector) {
   let allInputs = document.querySelectorAll(`${formSelector} label + *`);
   let allLabels = document.querySelectorAll(`${formSelector} label`);
   let containsEircode;
+
   for (let index = 0; index < allInputs.length; index++) {
     const input = allInputs[index];
     if (input.id === "id_eircode") {
       containsEircode = true;
       if (containsEircode) {
         let eircode = document.querySelector("#id_eircode");
+        formatEircode(eircode.value, eircode);
         if (!eircode.validity.valid) {
           let message = eircode.validationMessage;
           if (message.includes("format")) {
@@ -269,4 +279,14 @@ function formValidation(formSelector) {
   }
   formValid = invalidInputs.length > 0 ? false : true;
   return formValid;
+}
+
+function formatEircode(eircode, eircodeInput) {
+  if (eircode.at(3) != " ") {
+    eircode = eircode.split("");
+    eircode.splice(3, 0, " ");
+    eircode = eircode.join("").toUpperCase();
+    eircodeInput.value = eircode;
+    eircodeInput.innerText = eircode;
+  }
 }
