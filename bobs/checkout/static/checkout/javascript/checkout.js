@@ -8,6 +8,10 @@ let deliveryWrapper = document.querySelector(".subtotal-inc-delivery");
 let originalPrice = document.querySelector(".total-checkout-price > data");
 let html;
 
+window.addEventListener("load", (event) => {
+  // <input class="InputElement is-empty Input Input--empty" autocomplete="cc-number" autocorrect="off" spellcheck="false" type="text" name="cardnumber" data-elements-stable-field-name="cardNumber" inputmode="numeric" aria-label="Credit or debit card number" placeholder="Card number" aria-invalid="false" tabindex="0" value="">
+});
+
 radioBtns.forEach((btn) => {
   // updates the delivery price based on the radio button selected
   btn.addEventListener("input", (e) => {
@@ -115,7 +119,8 @@ const style = {
 };
 const card = elements.create("card", { style: style, hidePostalCode: true });
 card.mount("#card-element");
-
+if (card.mount) {
+}
 function stripeTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
   const form = document.getElementById("payment-form");
@@ -179,9 +184,19 @@ function handleClick(event) {
   debouncedHandler();
 }
 
+card.addEventListener("change", function (event) {
+  let displayError = document.getElementById("card-errors");
+  if (event.error) {
+    displayError.textContent = event.error.message;
+  } else {
+    displayError.textContent = "";
+  }
+});
+
 let submitBtn = document.querySelector("#submit-btn");
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
+  let paymentForm = document.querySelector("#payment-form");
   let name = document.querySelector("#full-name");
   let email = document.querySelector("#email");
   let a;
@@ -195,6 +210,17 @@ submitBtn.addEventListener("click", (event) => {
   }
 
   if (name.reportValidity() && email.reportValidity()) {
+    if (card._empty) {
+      let cardError = document.createElement("div");
+      cardError.textContent = "Card, Expire Date, and CVC are all required";
+      cardError.style.color = "red";
+      paymentForm.appendChild(cardError);
+      setTimeout(() => {
+        cardError.remove();
+      }, 5000);
+      return;
+    }
+
     handleClick(event);
   }
 });
