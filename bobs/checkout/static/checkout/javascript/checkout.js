@@ -8,7 +8,7 @@ let deliveryWrapper = document.querySelector(".subtotal-inc-delivery");
 let originalPrice = document.querySelector(".total-checkout-price > data");
 let paymentForm = document.querySelector("#payment-form");
 let html;
-
+let emailData;
 window.addEventListener("load", (event) => {
   // <input class="InputElement is-empty Input Input--empty" autocomplete="cc-number" autocorrect="off" spellcheck="false" type="text" name="cardnumber" data-elements-stable-field-name="cardNumber" inputmode="numeric" aria-label="Credit or debit card number" placeholder="Card number" aria-invalid="false" tabindex="0" value="">
 });
@@ -149,13 +149,29 @@ function stripeTokenHandler(token) {
     let deliveryForm = document.querySelector(".delivery-form-visible");
     let deliveryData = new FormData(deliveryForm);
 
+    emailData = {};
     deliveryData.forEach(function (value, key, index) {
-      object[`delivery_data_${key}`] = value;
+      emailData[`${key}`] = value;
     });
   }
 
-  const formInput = JSON.stringify(object);
-
+  let formInput;
+  // const formInput = JSON.stringify(object);
+  if (emailData != undefined) {
+    let combinedData = {
+      order: object,
+      email: emailData,
+    };
+    formInput = JSON.stringify(combinedData);
+  } else {
+    let formObject = {
+      order: object,
+    };
+    formInput = JSON.stringify(formObject);
+  }
+  console.log(formInput);
+  console.log(formInput.email);
+  console.log(formInput.order);
   makeRequest(form.action, "POST", formInput)
     .then((data) => {
       if (data.redirect_url) {
@@ -282,11 +298,12 @@ function formValidation(formSelector) {
 }
 
 function formatEircode(eircode, eircodeInput) {
+  eircode = eircode.trim();
   if (eircode.at(3) != " ") {
     eircode = eircode.split("");
     eircode.splice(3, 0, " ");
     eircode = eircode.join("").toUpperCase();
-    eircodeInput.value = eircode;
-    eircodeInput.innerText = eircode;
+    eircodeInput.value = eircode.trim();
+    eircodeInput.innerText = eircode.trim();
   }
 }
