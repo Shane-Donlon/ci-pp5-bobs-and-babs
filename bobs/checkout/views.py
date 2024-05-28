@@ -11,6 +11,7 @@ from django.views.decorators.http import require_GET, require_POST
 from products.models import Order, OrderItems, Product
 
 from . import utils
+from .forms import ShippingInformationFrom
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -21,6 +22,7 @@ class CheckoutPage(View):
 
         if (request.user.is_authenticated):
             customer = request.user.customer
+            form = ShippingInformationFrom()
             try:
                 order = Order.objects.get(customer=customer, complete=False)
 
@@ -30,8 +32,10 @@ class CheckoutPage(View):
             items = order.orderitems_set.all()
             if not items:
                 return redirect('cart')
+
             context = {"items": items, "order": order,
-                       "customer": customer, 'is_checkout_page': True, }
+                       "customer": customer, 'is_checkout_page': True,
+                                              "form": form}
             return render(request, "checkout/checkout.html", context)
 
         if request.session.get("customer"):
@@ -44,7 +48,8 @@ class CheckoutPage(View):
             if not items:
                 return redirect('cart')
             context = {"items": items, "order": order,
-                       'is_checkout_page': True, }
+                       'is_checkout_page': True,
+                                              "form": form}
             return render(request, "checkout/checkout.html", context)
         else:
             # ie if the user does not have session data
@@ -65,7 +70,8 @@ class CheckoutComplete(View):
 class Charge(View):
     def post(self, request, transaction_id):
         order = get_object_or_404(Order, transaction_id=transaction_id)
-        post_data = json.loads(request.body)
+        data = json.loads(request.body)
+        post_data = data["order"]
 
         stripe_token = post_data["stripeToken"]
         order = get_object_or_404(Order, transaction_id=transaction_id)
@@ -76,6 +82,35 @@ class Charge(View):
 
         order.delivery = delivery_selected
         order.save()
+        delivery_form = None
+        if order.delivery:
+            try:
+                email_data = data["email"]
+                delivery_form = ShippingInformationFrom(email_data)
+                if request.user.is_authenticated:
+                    customer = request.user.customer
+                    if delivery_form.is_valid():
+                        delivery_info = delivery_form.save(commit=False)
+                        delivery_info.customer = customer
+                        delivery_info.order = order
+                        delivery_info.save()
+                    if not delivery_form.is_valid():
+                        return JsonResponse({"error": "An error has occurred Form Invalid <br/> "
+                                             "Please contact us by phone to complete the order"}, safe=False)
+
+                if not request.user.is_authenticated:
+                    if delivery_form.is_valid():
+                        delivery_info = delivery_form.save(commit=False)
+                        delivery_info.customer = None
+                        delivery_info.order = order
+                        delivery_info.save()
+                    if not delivery_form.is_valid():
+                        return JsonResponse({"error": "An error has occurred Form Invalid <br/> "
+                                            "Please contact us by phone to complete the order"}, safe=False)
+
+
+            except ValueError as e:
+                return JsonResponse({"error": f"{e}"}, safe=False)
 
         total_data = order.get_cart_total()
         total = int(float(total_data) * 100)
@@ -92,7 +127,8 @@ class Charge(View):
                 if charge.paid:
                     order.complete = True
                     order.save()
-
+                    if delivery_form:
+                        delivery_form.save()
                     invoice = utils.create_stripe_invoice(customer_for_stripe, total, transaction_id)
                     request.session["invoice_url"] = invoice.hosted_invoice_url
 
@@ -103,7 +139,7 @@ class Charge(View):
             except stripe.error.CardError as e:
                 JsonResponse({"error": f"{e}"}, safe=False)
         if cost != total:
-            return JsonResponse({"error": "An error has occurred <br/> "
+            return JsonResponse({"error": "An error has occurred cost<br/> "
                                 "Please contact us by phone to complete the order"}, safe=False)
         return JsonResponse({"error": "Payment failed"}, safe=False)
 
@@ -120,3 +156,4 @@ class OrderSuccess(View):
             return render(request, "checkout/order/order_complete.html", context)
 
         return redirect('index')
+
