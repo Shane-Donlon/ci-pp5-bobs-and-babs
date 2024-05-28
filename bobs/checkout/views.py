@@ -22,7 +22,6 @@ class CheckoutPage(View):
 
         if (request.user.is_authenticated):
             customer = request.user.customer
-            form = ShippingInformationFrom()
             try:
                 order = Order.objects.get(customer=customer, complete=False)
 
@@ -33,6 +32,16 @@ class CheckoutPage(View):
             if not items:
                 return redirect('cart')
 
+            form = ShippingInformationFrom(initial={
+                "first_name": customer.first_name,
+                "last_name": customer.last_name,
+                "email": customer.email,
+                "phone": customer.phone,
+                "address": customer.address,
+                "town": customer.town,
+                "county": customer.county,
+                "eircode": customer.eircode
+            })
             context = {"items": items, "order": order,
                        "customer": customer, 'is_checkout_page': True,
                                               "form": form}
@@ -47,6 +56,7 @@ class CheckoutPage(View):
             items = order.orderitems_set.all()
             if not items:
                 return redirect('cart')
+            form = ShippingInformationFrom()
             context = {"items": items, "order": order,
                        'is_checkout_page': True,
                                               "form": form}
@@ -69,6 +79,7 @@ class CheckoutComplete(View):
 @method_decorator(require_POST, name='dispatch')
 class Charge(View):
     def post(self, request, transaction_id):
+        # TODO refactor with 2 urls for post if order and if not order
         order = get_object_or_404(Order, transaction_id=transaction_id)
         data = json.loads(request.body)
         post_data = data["order"]
