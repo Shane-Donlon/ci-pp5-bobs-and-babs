@@ -57,16 +57,18 @@
         </section>
         <section counter>
             <h2 class="counter">Personal Details</h2>
-            <form action="">
-                <div class="test">
-                    <label for="name">Name</label>
-                    <input type="text"
-                           id="name"
-                           name="name"
-                           required
-                           {% if user.is_authenticated %}value="{{ customer.first_name }}"{% endif %}>
-                </div>
-            </form>
+            {% if form %}
+                <form class="delivery-form" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                </form>
+            {% else %}
+            {% endif %}
         </section>
         <section>
             <h2>Payment</h2>
@@ -98,7 +100,7 @@
                         </div>
                     </label>
                 </div>
-                <button>Submit Payment</button>
+                <button type="Submit" role="Submit" id="submit-btn">Submit Payment</button>
             </form>
         </section>
     </div>
