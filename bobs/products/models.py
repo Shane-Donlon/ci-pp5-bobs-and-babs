@@ -89,7 +89,7 @@ class ShippingInformation(models.Model):
     town = models.CharField(max_length=60, null=True, blank=False)
     county = models.CharField(max_length=60, null=True, blank=False)
     eircode = models.CharField(max_length=8, null=True, blank=False)
-    phone = models.CharField(max_length=60, null=True, blank=False)
+    phone = models.CharField(max_length=12, null=True, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
     class Meta:
         verbose_name_plural = "Shipping Information"
