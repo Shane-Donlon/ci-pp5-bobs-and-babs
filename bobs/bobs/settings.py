@@ -10,6 +10,8 @@ if os.path.isfile("env.py"):
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_API_KEY")
+
 
 DEBUG = os.environ.get("DEBUG") == "True"
 
@@ -34,13 +36,14 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "home",
-    "django_browser_reload",
     "products",
     'cart',
     'checkout',
-     "django.contrib.staticfiles",
+    "django.contrib.staticfiles",
+    "django_browser_reload",
     "cloudinary_storage",
     "cloudinary",
+
 ]
 
 MIDDLEWARE = [
@@ -55,6 +58,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 
