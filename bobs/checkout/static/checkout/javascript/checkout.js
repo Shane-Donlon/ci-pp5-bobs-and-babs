@@ -93,7 +93,7 @@ let inputBgColor = WindowStyle.backgroundColor;
 let inputColor = WindowStyle.color;
 
 let inputPlaceholderColor = WindowStyle.placeholder;
-console.log(WindowStyle);
+
 let inputFont = WindowStyle.fontFamily;
 let fontSize = WindowStyle.fontSize;
 let fontSmoothing = WindowStyle.fontSmoothing;
@@ -169,9 +169,7 @@ function stripeTokenHandler(token) {
     };
     formInput = JSON.stringify(formObject);
   }
-  console.log(formInput);
-  console.log(formInput.email);
-  console.log(formInput.order);
+
   makeRequest(form.action, "POST", formInput)
     .then((data) => {
       if (data.redirect_url) {
@@ -258,17 +256,24 @@ function formValidation(formSelector) {
 
   for (let index = 0; index < allInputs.length; index++) {
     const input = allInputs[index];
+    input.setCustomValidity("");
+
     if (input.id === "id_eircode") {
       containsEircode = true;
       if (containsEircode) {
         let eircode = document.querySelector("#id_eircode");
         formatEircode(eircode.value, eircode);
-        if (!eircode.validity.valid) {
-          let message = eircode.validationMessage;
-          if (message.includes("format")) {
-            message = "Please enter a valid Eircode format e.g. A65 F4E2";
-
+        if (input.id === "id_eircode") {
+          let eircode = document.querySelector("#id_eircode");
+          formatEircode(eircode.value, eircode);
+          if (eircode.validity.patternMismatch) {
+            let message = "Please enter a valid Eircode format e.g. A65 F4E2";
             input.setCustomValidity(message);
+            input.addEventListener("input", (e) => {
+              if (!e.target.validity.patternMismatch) {
+                input.setCustomValidity("");
+              }
+            });
           }
         }
       }
@@ -278,16 +283,20 @@ function formValidation(formSelector) {
 
       if (!phone.validity.valid) {
         let message = phone.validationMessage;
-        console.log(message);
+
         if (message.includes("format")) {
           message = "Please enter a valid phone number eg. 353871234567";
           input.setCustomValidity(message);
+          input.addEventListener("input", (e) => {
+            if (!e.target.validity.patternMismatch) {
+              input.setCustomValidity("");
+            }
+          });
         }
       }
     }
 
     input.reportValidity();
-    input.setCustomValidity("");
     if (!input.reportValidity()) {
       invalidInputs.push(false);
       break;
@@ -304,6 +313,5 @@ function formatEircode(eircode, eircodeInput) {
     eircode.splice(3, 0, " ");
     eircode = eircode.join("").toUpperCase();
     eircodeInput.value = eircode.trim();
-    eircodeInput.innerText = eircode.trim();
   }
 }
