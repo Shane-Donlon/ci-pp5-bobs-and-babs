@@ -221,7 +221,6 @@ submitBtn.addEventListener("click", (event) => {
 
   let name = document.querySelector("#full-name");
   let email = document.querySelector("#email");
-  let a;
   if (
     document.body.contains(document.querySelector(".delivery-form-visible"))
   ) {
@@ -248,6 +247,7 @@ submitBtn.addEventListener("click", (event) => {
 });
 
 function formValidation(formSelector) {
+  // given the conditional nature of the form, validation only occurs on submit and if the delivery method is delivery
   let valid;
   let invalidInputs = [];
   let allInputs = document.querySelectorAll(`${formSelector} label + *`);
