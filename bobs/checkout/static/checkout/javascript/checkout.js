@@ -186,7 +186,6 @@ function stripeTokenHandler(token) {
 
 let debouncedHandler = debounce(function () {
   stripe.createToken(card).then(function (result) {
-    console.log(result);
     if (result.error) {
       createNotification(result.error.message, "error");
     } else {
