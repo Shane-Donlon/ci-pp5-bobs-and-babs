@@ -281,7 +281,7 @@ function formValidation(formSelector) {
     if (input.id === "id_phone") {
       let phone = document.querySelector("#id_phone");
 
-      if (!phone.validity.valid) {
+      if (phone.validity.patternMismatch) {
         let message = phone.validationMessage;
 
         if (message.includes("format")) {
