@@ -22,35 +22,6 @@ allInputsProfileForm.forEach((input) => {
   });
 });
 
-function validateProfileFormOnChange(input) {
-  if (input.id === "id_eircode") {
-    if (input.validity.patternMismatch) {
-      input.setCustomValidity(
-        "Please enter a valid Eircode format e.g. A65 F4E2"
-      );
-      input.addEventListener("input", (e) => {
-        if (!input.validity.patternMismatch) {
-          input.setCustomValidity("");
-        }
-      });
-    }
-  }
-  if (input.id === "id_phone") {
-    if (input.validity.patternMismatch) {
-      input.setCustomValidity(
-        "Please enter a valid phone number eg. 353871234567"
-      );
-      input.addEventListener("input", (e) => {
-        if (!input.validity.patternMismatch) {
-          input.setCustomValidity("");
-        }
-      });
-    }
-  }
-  //   input.reportValidity();
-  return input.reportValidity();
-}
-
 function validateProfileFormOnSubmit(listOfInputs) {
   let isValid = true;
   listOfInputs.forEach((input) => {
