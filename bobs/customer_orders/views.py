@@ -32,9 +32,9 @@ class GetAllOrdersView(View):
 class GetSingularOrder(View):
     def get(self, request, transaction_id):
         order = get_object_or_404(Order, transaction_id=transaction_id)
-        items = order.orderitems_set.all()
 
         if request.user.customer == order.customer or request.user.is_superuser:
+            items = order.orderitems_set.all()
             for item in items:
                 item.total_price = item.product.price * item.quantity
             context = {
