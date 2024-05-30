@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+    <link rel="stylesheet"
+          href="{% static 'customer_profile/css/customer_profile.css' %}">
+{% endblock extra_css_files %}
+{% block extra_title %}
+{% endblock extra_title %}
+{% block content %}
+    <form action="" method="post" id="profile-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="reset">Reset</button>
+        <button type="submit" class="submit-btn-profile">Submit</button>
+    </form>
+{% endblock content %}
+{% block extra_js_files %}
+    <script src="{% static 'customer_profile/javascript/customer_profile.js' %}"></script>
+{% endblock extra_js_files %}
