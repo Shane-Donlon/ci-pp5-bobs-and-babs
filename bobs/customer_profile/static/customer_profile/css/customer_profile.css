@@ -1,0 +1,35 @@
+form {
+  margin-inline: auto;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+}
+
+fieldset {
+  padding: 0 1rem 1rem 1rem;
+
+  border: 3px solid black;
+  border-radius: 5px;
+}
+
+legend {
+  font-size: 1.5rem;
+  padding-inline: 1rem;
+}
+
+.btn-div {
+  margin-block: 1rem;
+}
+
+.form-group {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-group > * {
+  flex: 1;
+}
