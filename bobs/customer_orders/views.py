@@ -34,17 +34,13 @@ class GetSingularOrder(View):
         order = get_object_or_404(Order, transaction_id=transaction_id)
         items = order.orderitems_set.all()
 
-        if not request.user.customer:
+        if request.user.customer == order.customer or request.user.is_superuser:
+            for item in items:
+                item.total_price = item.product.price * item.quantity
+            context = {
+                    'order': order,
+                    'items': items
+                }
+            return render(request, "customer_orders/order.html", context)
+        else:
             raise PermissionDenied
-
-        if request.user.customer != order.customer:
-            raise PermissionDenied
-
-        for item in items:
-            item.total_price = item.product.price * item.quantity
-
-        context = {
-                'order': order,
-                'items': items
-            }
-        return render(request, "customer_orders/order.html", context)
