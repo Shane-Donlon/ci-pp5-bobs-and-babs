@@ -1,8 +1,30 @@
 {% extends "base.html" %}
+{% load django_tables2 %}
 {% load static %}
-{% block extra_css_files %}<link rel="stylesheet" href="{% static 'customer_orders/css/customer_orders.css' %}"> {% endblock extra_css_files %}
+{% block extra_css_files %}
+    <link rel="stylesheet"
+          href="{% static 'customer_orders/css/customer_orders.css' %}">
+{% endblock extra_css_files %}
+{% load render_table from django_tables2 %}
 {% block extra_title %}
-            {% endblock extra_title %}
+    {% if request.user.customer.first_name %}
+        {{ request.user.customer.first_name }}'s Orders
+    {% else %}
+        Customer Orders
+    {% endif %}
+{% endblock extra_title %}
 {% block content %}
-            {% endblock content %}
-{% block extra_js_files %}<script src="{% static 'customer_orders/javascript/customer_orders.js' %}"></script> {% endblock extra_js_files %}
+    <section class="content-grid">
+        <div class="breakout">
+            {% if request.user.customer.first_name %}
+                <h1>{{ request.user.customer.first_name }}'s Orders</h1>
+            {% else %}
+                <h1>Customer Orders</h1>
+            {% endif %}
+            {% render_table table %}
+        </div>
+    </section>
+{% endblock content %}
+{% block extra_js_files %}
+    <script src="{% static 'customer_orders/javascript/customer_orders.js' %}"></script>
+{% endblock extra_js_files %}
