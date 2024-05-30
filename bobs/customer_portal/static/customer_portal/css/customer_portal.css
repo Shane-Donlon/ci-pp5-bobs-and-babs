@@ -1,0 +1,10 @@
+.customer-nav-wrapper {
+  color: black;
+  margin-inline: auto;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

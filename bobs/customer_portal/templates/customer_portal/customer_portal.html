@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+    <link rel="stylesheet"
+          href="{% static 'customer_portal/css/customer_portal.css' %}">
+{% endblock extra_css_files %}
+{% block extra_title %}
+    Customer Portal
+{% endblock extra_title %}
+{% block content %}
+    <nav>
+        <div class="customer-nav-wrapper flex">
+            <a href="{% url 'profile' %}">My Account</a>
+            <a href="{% url 'orders' %}">My Orders</a>
+        </div>
+    </nav>
+    {{ customer }}
+{% endblock content %}
+{% block extra_js_files %}
+    <script src="{% static 'customer_portal/javascript/customer_portal.js' %}"></script>
+{% endblock extra_js_files %}
