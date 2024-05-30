@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+        <link rel="stylesheet"
+              href="{% static 'customer_orders/css/order/order.css' %}" />
+{% endblock extra_css_files %}
+{% block extra_title %}
+        Your Order
+{% endblock extra_title %}
+{% block content %}
+        <h2>Your Order</h2>
+        <h3>Transaction Number: {{ order.transaction_id }}</h3>
+        <fieldset>
+                <legend>Transaction Details</legend>
+                {% if order.complete %}
+                        {% for item in items %}
+                                <details>
+                                        <summary id="summary-{{ forloop.counter }}"
+                                                 tabindex="0"
+                                                 role="button"
+                                                 aria-expanded="false">{{ item.product.name }}</summary>
+                                        <ul class="order-ul" aria-labelledby="summary-{{ forloop.counter }}">
+                                                <li>
+                                                        <div class="flex">
+                                                                <p id="quantity-{{ forloop.counter }}">Quantity:</p>
+                                                                <data value="{{ item.quantity }}"
+                                                                      aria-labelledby="quantity-{{ forloop.counter }}">{{ item.quantity }}</data>
+                                                        </div>
+                                                </li>
+                                                <li>
+                                                        <div class="flex">
+                                                                <p id="price-{{ forloop.counter }}">Price:</p>
+                                                                <data value="{{ item.total_price | floatformat:2 }}"
+                                                                      aria-labelledby="price-{{ forloop.counter }}">€{{ item.total_price | floatformat:2 }}</data>
+                                                        </div>
+                                                </li>
+                                        </ul>
+                                </details>
+                        {% endfor %}
+                        {% if order.delivery %}<p>Delivery Fee: €{{ order.delivery_fee | floatformat:2 }}</p>{% endif %}
+                        <p>Total: €{{ order.cart_total| floatformat:2 }}</p>
+                {% else %}
+                        <h2>Order is still in progress...</h2>
+                {% endif %}
+        </fieldset>
+{% endblock content %}
+{% block extra_js_files %}
+{% endblock extra_js_files %}
