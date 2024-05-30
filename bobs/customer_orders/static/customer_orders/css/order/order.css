@@ -1,0 +1,31 @@
+fieldset {
+  margin-inline: auto;
+  margin-block: 1rem;
+}
+
+h2,
+h3 {
+  margin-top: 0.5rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+fieldset {
+  padding: 0.5rem 1rem;
+  border: 3px solid currentColor;
+}
+
+legend {
+  font-size: 1.5rem;
+  padding-inline: 1rem;
+}
+
+.order-ul {
+  margin-left: 2rem;
+}
