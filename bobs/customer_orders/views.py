@@ -29,3 +29,20 @@ class GetOrdersView(SingleTableView,View):
         return render(request, "customer_orders/customer_orders.html", context)
 
 
+@method_decorator([require_GET, login_required], name='dispatch')
+class GetOrder(View):
+
+    def get(self, request, transaction_id):
+        order = Order.objects.get(transaction_id=transaction_id)
+        items = order.orderitems_set.all()
+        if not request.user.customer:
+            raise PermissionDenied
+
+        if request.user.customer != order.customer:
+            raise PermissionDenied
+
+        context = {
+                'order': order,
+                'items': items
+            }
+        return render(request, "customer_orders/order.html", context)
