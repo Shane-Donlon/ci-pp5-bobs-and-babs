@@ -137,6 +137,8 @@ class Charge(View):
 
                 if charge.paid:
                     order.complete = True
+                    if not order.delivery:
+                        order.delivery_fee = 0
                     order.save()
                     if delivery_form:
                         delivery_form.save()
