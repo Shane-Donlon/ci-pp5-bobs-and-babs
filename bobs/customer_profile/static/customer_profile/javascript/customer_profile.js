@@ -20,10 +20,9 @@ submitBtnProfile.addEventListener("click", (e) => {
       order: object,
     };
     let formInput = JSON.stringify(formObject);
-    console.log(formInput);
+
     makeRequest(url, "POST", formInput)
       .then((data) => {
-        console.log(data);
         if (data.success) {
           createNotification(data.success, "success");
         }
