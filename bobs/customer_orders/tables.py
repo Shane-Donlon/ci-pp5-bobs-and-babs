@@ -17,4 +17,4 @@ class orderTable(tables.Table):
 
     class Meta:
         model = Order
-        exclude = ('id', 'customer', 'complete')
+        exclude = ('id', 'customer',)
