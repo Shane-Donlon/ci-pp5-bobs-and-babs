@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from products.models import Order, ShippingInformation
+from products.models import ShippingInformation
 
 from .counties import COUNTIES
 
