@@ -11,8 +11,29 @@ submitBtnProfile.addEventListener("click", (e) => {
   if (validateProfileFormOnSubmit(allInputsProfileForm)) {
     let form = document.querySelector("#profile-form");
     let formData = new FormData(form);
-    console.log(formData);
-    // TODO: - send form data to the server
+    const object = {};
+    formData.forEach(function (value, key) {
+      object[key] = value;
+    });
+    let url = "/profile/update/";
+    let formObject = {
+      order: object,
+    };
+    let formInput = JSON.stringify(formObject);
+    console.log(formInput);
+    makeRequest(url, "POST", formInput)
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          createNotification(data.success, "success");
+        }
+        if (data.error) {
+          createNotification(data.error, "error");
+        }
+      })
+      .catch((error) => {
+        createNotification(error, "error");
+      });
   }
 });
 
