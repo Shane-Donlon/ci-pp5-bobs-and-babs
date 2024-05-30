@@ -7,12 +7,24 @@
 {% block extra_title %}
 {% endblock extra_title %}
 {% block content %}
-    <form action="" method="post" id="profile-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="reset">Reset</button>
-        <button type="submit" class="submit-btn-profile">Submit</button>
-    </form>
+    <section class="content-grid">
+        <form action="" method="post" id="profile-form">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Update Profile Form</legend>
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+            <div class="btn-div">
+                <button type="reset">Reset</button>
+                <button type="submit" class="submit-btn-profile">Submit</button>
+            </div>
+        </form>
+    </section>
 {% endblock content %}
 {% block extra_js_files %}
     <script src="{% static 'customer_profile/javascript/customer_profile.js' %}"></script>
