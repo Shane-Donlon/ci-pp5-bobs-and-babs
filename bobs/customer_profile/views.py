@@ -27,8 +27,10 @@ class UpdateProfile(View):
         try:
             customer = Customer.objects.get(id=request.user.customer.id)
             post_data = json.loads(request.body)
-            form_data = post_data
+            form_data = post_data["order"]
+            form_data["user"] = customer.pk
             form = forms.ProfileForm(form_data, instance=customer)
+
             if form.is_valid():
                 form.save()
                 return JsonResponse({"success": "Profile updated successfully"})
