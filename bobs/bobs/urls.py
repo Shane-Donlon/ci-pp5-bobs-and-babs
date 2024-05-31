@@ -9,4 +9,7 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path("cart/", include("cart.urls")),
     path("checkout/", include("checkout.urls")),
+    path("customer-portal/", include("customer_portal.urls")),
+    path("profile/", include("customer_profile.urls")),
+    path("orders/", include("customer_orders.urls")),
 ]
