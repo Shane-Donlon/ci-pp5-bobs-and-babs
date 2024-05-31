@@ -107,3 +107,21 @@ input[type="radio"] {
   margin-top: 1rem;
   order: 2;
 }
+
+label,
+input,
+.StripeElement {
+  display: block;
+  margin-block: 0.5rem;
+}
+
+section:has(.delivery-form) {
+  display: none;
+}
+
+section:has(.delivery-form-visible) {
+  display: block;
+}
+::placeholder {
+  color: currentColor;
+}
