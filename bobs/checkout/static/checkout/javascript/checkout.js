@@ -97,11 +97,14 @@ let inputPlaceholderColor = WindowStyle.placeholder;
 let inputFont = WindowStyle.fontFamily;
 let fontSize = WindowStyle.fontSize;
 let fontSmoothing = WindowStyle.fontSmoothing;
-
+let placeholder;
 if (inputBgColor !== "rgb(255, 255, 255)") {
   // get computed style doesn't seem to work correctly for dark mode input background color
   // returns wrong color value works find in light mode
   inputBgColor = "#2b2a33";
+  placeholder = "#ffffff";
+} else {
+  placeholder = "#000000";
 }
 const style = {
   base: {
@@ -111,7 +114,7 @@ const style = {
     fontSmoothing: fontSmoothing,
     fontSize: fontSize,
     "::placeholder": {
-      color: "rgb(219, 219, 221)",
+      color: placeholder,
     },
   },
   invalid: {
