@@ -18,7 +18,7 @@ class Customer(models.Model):
     eircode = models.CharField(max_length=8, null=True, blank=False,)
     phone = models.CharField(max_length=60, null=True, blank=False)
     registration_date = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(auto_now=False, auto_now_add=False)
+    last_login = models.DateTimeField(auto_now=False, auto_now_add=False, null=True,)
 
     def __str__(self) -> str:
         return f"{self.user}"
