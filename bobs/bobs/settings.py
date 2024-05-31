@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     "django_browser_reload",
     "cloudinary_storage",
     "cloudinary",
-
+    'customer_portal',
+    'customer_profile',
+    'customer_orders',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +67,8 @@ MIDDLEWARE = [
 
 SITE_ID = 1
 ROOT_URLCONF = 'bobs.urls'
+
+
 
 TEMPLATES = [
     {
@@ -140,9 +145,38 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 WHITENOISE_KEEP_ONLY_HASHED_FILES = True
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+EMAIL_HOST_USER = 'apikey'
+# host user has to literally be the word apikey
+
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY')
+
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "Bob's Bakery"
+LOGIN_REDIRECT_URL = "customer-portal"
+ACCOUNT_SIGNUP_REDIRECT_URL = "profile"
+LOGOUT_REDIRECT_URL = "index"
