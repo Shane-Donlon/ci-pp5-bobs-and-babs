@@ -6,7 +6,8 @@
     {% trans "Confirm Email Address" %}
 {% endblock head_title %}
 {% block content %}
-    {% element h1 %}
+    <div class="content-grid">
+        {% element h1 %}
         {% trans "Confirm Email Address" %}
     {% endelement %}
     {% if confirmation %}
@@ -17,22 +18,23 @@
             </p>
             {% url 'account_confirm_email' confirmation.key as action_url %}
             {% element form method="post" action=action_url %}
-                {% slot actions %}
-                    {% csrf_token %}
-                    {% element button type="submit" %}
-                        {% trans 'Confirm' %}
-                    {% endelement %}
-                {% endslot %}
-            {% endelement %}
-        {% else %}
-            <p>
-                {% blocktrans %}Unable to confirm {{ email }} because it is already confirmed by a different account.{% endblocktrans %}
-            </p>
-        {% endif %}
-    {% else %}
-        {% url 'account_email' as email_url %}
-        <p>
-            {% blocktrans %}This email confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new email confirmation request</a>.{% endblocktrans %}
-        </p>
-    {% endif %}
+            {% slot actions %}
+            {% csrf_token %}
+            {% element button type="submit" %}
+            {% trans 'Confirm' %}
+        {% endelement %}
+    {% endslot %}
+{% endelement %}
+{% else %}
+<p>
+    {% blocktrans %}Unable to confirm {{ email }} because it is already confirmed by a different account.{% endblocktrans %}
+</p>
+{% endif %}
+{% else %}
+{% url 'account_email' as email_url %}
+<p>
+    {% blocktrans %}This email confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new email confirmation request</a>.{% endblocktrans %}
+</p>
+{% endif %}
+</div>
 {% endblock content %}

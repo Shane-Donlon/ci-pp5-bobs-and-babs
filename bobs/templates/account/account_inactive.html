@@ -5,8 +5,10 @@
     {% trans "Account Inactive" %}
 {% endblock head_title %}
 {% block content %}
-    {% element h1 %}
+    <div class="content-grid">
+        {% element h1 %}
         {% trans "Account Inactive" %}
     {% endelement %}
     <p>{% trans "This account is inactive." %}</p>
+</div>
 {% endblock content %}
