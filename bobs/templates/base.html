@@ -49,17 +49,38 @@
                             <li>
                                 <a href="{% url 'products' %}">Shop</a>
                             </li>
+                            {% if request.user.is_authenticated %}
+                                <li>
+                                    <a href="{% url 'account_logout' %}">Logout</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{% url 'account_signup' %}">Sign Up</a>
+                                </li>
+                            {% endif %}
                         </ul>
                         <!-- Logo list -->
                         <ul role="list" class="logo-ul">
-                            <li>
-                                <a href="" class="logo-link">
-                                    <svg class="branding-link-logo icon margin-top-2px">
-                                        <title>icon of a silhouette of a person used to go to the login page</title>
-                                        <use xlink:href="{% static 'images/login-logo.svg' %}#login-logo-svg"></use>
-                                    </svg>
-                                </a>
-                            </li>
+                            {% if request.user.is_authenticated %}
+                                <li>
+                                    <a href="{% url 'customer-portal' %}" class="logo-link">
+                                        <svg class="branding-link-logo icon margin-top-2px">
+                                            <title>icon of a silhouette of a person used to go to the login page</title>
+                                            <use xlink:href="{% static 'images/login-logo.svg' %}#login-logo-svg"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{% url 'account_login' %}" class="logo-link">
+                                        <svg class="branding-link-logo icon margin-top-2px">
+                                            <title>icon of a silhouette of a person used to go to the login page</title>
+                                            <use xlink:href="{% static 'images/login-logo.svg' %}#login-logo-svg"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                            {% endif %}
+
                             <li>
                                 <!-- Cart link -->
                                 <a href="{% url 'cart' %}" class="logo-link">
