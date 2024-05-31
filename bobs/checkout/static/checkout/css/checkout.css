@@ -122,6 +122,3 @@ section:has(.delivery-form) {
 section:has(.delivery-form-visible) {
   display: block;
 }
-::placeholder {
-  color: currentColor;
-}
