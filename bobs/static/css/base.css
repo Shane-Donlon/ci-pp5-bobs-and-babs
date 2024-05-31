@@ -282,3 +282,11 @@ body:has(.nav-open) {
 .error-notification {
   background-color: #dc3545;
 }
+
+a {
+  color: currentColor;
+}
+
+::placeholder {
+  color: currentColor;
+}
