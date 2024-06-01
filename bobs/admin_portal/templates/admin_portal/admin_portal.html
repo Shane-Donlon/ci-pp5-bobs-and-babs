@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+    <link rel="stylesheet"
+          href="{% static 'admin_portal/css/admin_portal.css' %}">
+{% endblock extra_css_files %}
+{% block extra_title %}
+{% endblock extra_title %}
+{% block content %}
+    <div class="content-grid">
+        <h2>Admin Navigation Page</h2>
+        <fieldset>
+            <legend>Staff</legend>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="">Add Staff</a>
+                    </li>
+                    <li>
+                        <a href="">Update Staff</a>
+                    </li>
+                </ul>
+            </nav>
+        </fieldset>
+        <fieldset>
+            <legend>Products</legend>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'admin_portal_add' category='product' %}">Add Products</a>
+                    </li>
+                    <li>
+                        <a href="">Update Products</a>
+                    </li>
+                    <li>
+                        <a href="">Remove Products</a>
+                    </li>
+                </ul>
+            </nav>
+        </fieldset>
+    </div>
+{% endblock content %}
+{% block extra_js_files %}
+    <script src="{% static 'admin_portal/javascript/admin_portal.js' %}"></script>
+{% endblock extra_js_files %}
