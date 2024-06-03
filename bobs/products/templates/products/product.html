@@ -20,51 +20,49 @@
                                 <p>{{ product.description }}</p>
                         </div>
                         <div class="grid product-allergin-grid">
-                                <div class="contains">
-                                        <fieldset>
-                                                <legend>Contains</legend>
-                                                <ul>
-                                                        {% for ingredient in contains %}
-                                                                <li>
-                                                                        <mark>{{ ingredient | title }}</mark>
-                                                                </li>
-                                                        {% endfor %}
-                                                </ul>
-                                        </fieldset>
-                                </div>
-                                <div class="may-contain">
-                                        <fieldset>
-                                                <legend>May Contain</legend>
-                                                <ul>
-                                                        {% for ingredient in may_contain %}<li>{{ ingredient | title }}</li>{% endfor %}
-                                                </ul>
-                                        </fieldset>
-                                </div>
+                                {% if product.contains_allergin.all %}
+                                        <div class="contains">
+                                                <fieldset>
+                                                        <legend>Contains</legend>
+                                                        <ul>
+                                                                {% for allergen in product.contains_allergin.all %}<li>{{ allergen.name }}</li>{% endfor %}
+                                                        </ul>
+                                                </fieldset>
+                                        </div>
+                                {% endif %}
+                                {% if product.may_contain_allergin.all %}
+                                        <div class="may-contain">
+                                                <fieldset>
+                                                        <legend>May Contain</legend>
+                                                        <ul>
+                                                                {% for allergen in product.may_contain_allergin.all %}<li>{{ allergen.name }}</li>{% endfor %}
+                                                        </ul>
+                                                </fieldset>
+                                        </div>
+                                {% endif %}
                         </div>
                 </div>
-        </div>
-        <div class="order-area" role="form">
-                <div class="quantity-div">
-                        <label for="quantity">Quantity</label>
-                        <input type="number"
-                               name="quantity"
-                               id="quantity"
-                               value="1"
-                               min="1"
-                               max="{{ product.max_quantity }}">
+                <div class="order-area" role="form">
+                        <div class="quantity-div">
+                                <label for="quantity">Quantity</label>
+                                <input type="number"
+                                       name="quantity"
+                                       id="quantity"
+                                       value="1"
+                                       min="1"
+                                       max="{{ product.max_quantity }}">
+                        </div>
+                        <div class="price-area">
+                                <p>
+                                        Price: <data value="{{ product.price | floatformat:2 }}">€{{ product.price | floatformat:2 }}</data>
+                                </p>
+                        </div>
+                        <div class="btn-div">
+                                <button class="add-to-cart" data-product-name-as-slug="{{ product.slug }}">Add to Cart</button>
+                                <a href="{% url 'products' %}" aria-label="Continue Shopping">Continue Shopping</a>
+                        </div>
                 </div>
-                <div class="price-area">
-                        <p>
-                                Price: <data value="{{ product.price | floatformat:2 }}">€{{ product.price | floatformat:2 }}</data>
-                        </p>
-                </div>
-                <div class="btn-div">
-                        <button class="add-to-cart" data-product-name-as-slug="{{ product.slug }}">Add to Cart</button>
-                        <a href="{% url 'products' %}" aria-label="Continue Shopping">Continue Shopping</a>
-                </div>
-        </div>
-</div>
-</section>
+        </section>
 {% endblock content %}
 {% block extra_js_files %}
         <script src="{% static 'products/javascript/product/product.js' %}"></script>
