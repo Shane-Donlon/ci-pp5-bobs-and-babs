@@ -25,10 +25,9 @@ class ProfilePageView(View):
 class UpdateProfile(View):
     def post(self, request):
         try:
-            customer = Customer.objects.get(id=request.user.customer.id)
+            customer = Customer.objects.get(user=request.user)
             post_data = json.loads(request.body)
             form_data = post_data["order"]
-            form_data["user"] = customer.pk
             form = forms.ProfileForm(form_data, instance=customer)
 
             if form.is_valid():
@@ -36,7 +35,7 @@ class UpdateProfile(View):
                 return JsonResponse({"success": "Profile updated successfully"})
             else:
                 return JsonResponse({"error": form.errors.as_text()}, status=400)
-        except ObjectDoesNotExist:
+        except Customer.DoesNotExist:
             return JsonResponse({"error": "Customer not found"}, status=404)
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
