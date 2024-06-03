@@ -26,14 +26,12 @@
                 <div class="btn-div">
                     {% if order.complete and not order.fulfilled %}
                         <button type="submit" class="submit">Fulfill Order</button>
-
-
                     {% else %}
-                    {% if order.fulfilled %}
-                    <p>Order has been fulfilled</p>
-                    {% else %}
-                        <p>Order has not been paid for</p>
-                    {% endif %}
+                        {% if order.fulfilled %}
+                            <p>Order has been fulfilled</p>
+                        {% else %}
+                            <p>Order has not been paid for</p>
+                        {% endif %}
                     {% endif %}
                 </div>
             </form>
