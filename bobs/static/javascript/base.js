@@ -117,3 +117,46 @@ function removeLoader() {
     loader.remove();
   }
 }
+
+function addAstriksToRequiredFields() {
+  // this function adds an asterisk to the required fields in the form
+  const requiredFields = document.querySelectorAll("[required]");
+  if (requiredFields) {
+    requiredFields.forEach((field) => {
+      if (field.id) {
+        const label = document.querySelector(`label[for=${field.id}]`);
+        if (label) {
+          label.classList.add("labelRequiredAsterisk");
+        }
+      }
+    });
+  }
+  return;
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  addAstriksToRequiredFields();
+});
+
+function validateProfileFormOnChangeObject(input, object) {
+  // object = {html_id_of_input:"error message"}
+  if (input.validity.patternMismatch) {
+    let errorMessage = object[input.id];
+
+    if (errorMessage != undefined) {
+      input.setCustomValidity(errorMessage);
+
+      input.addEventListener("input", (e) => {
+        if (!input.validity.valid) {
+          input.setCustomValidity(errorMessage);
+        }
+
+        if (!input.validity.patternMismatch) {
+          input.setCustomValidity("");
+        }
+      });
+    }
+  }
+
+  return input.reportValidity();
+}
