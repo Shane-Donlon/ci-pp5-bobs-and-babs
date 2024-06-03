@@ -30,11 +30,10 @@
                     <input type="number"
                            name="quantity"
                            id="quantity"
-                           value="{{ item.quantity }}">
+                           value="{{ item.quantity }}"
+                           disabled>
                 </div>
-                {% if not is_checkout_page %}
-                    <button class="col-2 del-btn">Remove X</button>
-                {% endif %}
+                {% if not is_checkout_page %}<button class="col-2 del-btn">Remove X</button>{% endif %}
             </div>
             <div class="cart-main-col-3 subtotal  {{ item.product.slug }}">
                 <div class="col-2">
