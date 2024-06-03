@@ -40,23 +40,34 @@
                             </a>
                         </div>
                         <ul class="nav-ul" role="list">
-                            <li>
-                                <a href="{% url 'index' %}#about-us" id="about-us-link">About</a>
-                            </li>
-                            <li>
-                                <a href="#">Contact</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'products' %}">Shop</a>
-                            </li>
-                            {% if request.user.is_authenticated %}
+                            {% if not request.user.is_superuser %}
                                 <li>
-                                    <a href="{% url 'account_logout' %}">Logout</a>
+                                    <a href="{% url 'index' %}#about-us" id="about-us-link">About</a>
                                 </li>
+                                <li>
+                                    <a href="#">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'products' %}">Shop</a>
+                                </li>
+                                {% if request.user.is_authenticated %}
+                                    <li>
+                                        <a href="{% url 'account_logout' %}">Logout</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="{% url 'account_signup' %}">Sign Up</a>
+                                    </li>
+                                {% endif %}
                             {% else %}
-                                <li>
-                                    <a href="{% url 'account_signup' %}">Sign Up</a>
-                                </li>
+                                {% if request.user.is_superuser %}
+                                    <li>
+                                        <a href="{% url 'admin_portal' %}">Admin Sutff</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'account_logout' %}">Logout</a>
+                                    </li>
+                                {% endif %}
                             {% endif %}
                         </ul>
                         <!-- Logo list -->
@@ -80,7 +91,6 @@
                                     </a>
                                 </li>
                             {% endif %}
-
                             <li>
                                 <!-- Cart link -->
                                 <a href="{% url 'cart' %}" class="logo-link">
