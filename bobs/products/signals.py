@@ -1,6 +1,8 @@
 import uuid
 
 from allauth.account.signals import user_signed_up
+from django.contrib.auth.signals import user_logged_in
+from django.db.models import F
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -27,3 +29,42 @@ def create_customer_profile(request, user, **kwargs):
     user.save()
     customer = Customer.objects.create(user=user, email=user.email)
     customer.save()
+
+@receiver(user_logged_in)
+def user_signed_in(sender, user, request, **kwargs):
+    if request.session.get("customer"):
+        # if the user started as unauthenticated then logged in migrate the order
+        customer = user.customer
+        order_exists = Order.objects.filter(
+            transaction_id=request.session["customer"], complete=False).exists()
+        order = None
+        if order_exists:
+            order = Order.objects.get(
+                            transaction_id=request.session["customer"], complete=False)
+
+        customer_order_exists = Order.objects.filter(customer=customer, complete=False).exists()
+        if customer_order_exists and order_exists:
+            customer_order = Order.objects.get(customer=customer, complete=False)
+            for item in order.orderitems_set.all():
+                existing_item = customer_order.orderitems_set.filter(product=item.product)
+                if existing_item.exists():
+                    # If the item exists, increment the quantity
+                    existing_item.update(quantity=F('quantity') + item.quantity)
+                    updated_item = existing_item.first()
+
+                    if updated_item.quantity > updated_item.product.max_quantity:
+                        updated_item.quantity = updated_item.product.max_quantity
+                        updated_item.save()
+                else:
+                    item.order = customer_order
+                    item.save()
+            order.delete()
+            request.session.pop("customer", None)
+            return
+
+        if not customer_order_exists and order_exists:
+            order.customer = customer
+            order.save()
+
+        if order is None:
+            return
