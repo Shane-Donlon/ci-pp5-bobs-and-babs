@@ -27,13 +27,15 @@ class Customer(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
-    sku = models.CharField(max_length=200, null=True, blank=False, unique=True)
+    sku = models.CharField(max_length=200, default=uuid.uuid4, unique=True, editable=False)
     image = CloudinaryField('image', null=True, blank=False)
     image_description = models.CharField(max_length=200, null=True, blank=False)
     description = models.TextField(null=True, blank=False)
-    allergin_info = models.TextField(null=True, blank=False)
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True, editable=False)
     max_quantity = models.IntegerField(default=10, null=True, blank=False)
+    contains_allergin = models.ManyToManyField("Allergin", blank=True,  related_name="contains")
+    may_contain_allergin = models.ManyToManyField("Allergin", blank=True, related_name="may_contain")
+    showing_in_shop = models.BooleanField(default=True, null=True, blank=False)
 
 
     def save(self, *args, **kwargs):
@@ -43,6 +45,16 @@ class Product(models.Model):
 
 
 
+
+class Allergin(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=False, unique=True)
+    def __str__(self) -> str:
+        return self.name
+
+
+    class Meta:
+        verbose_name_plural = "Allergins"
+
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
@@ -51,7 +63,7 @@ class Order(models.Model):
     delivery = models.BooleanField(default=False, null=True, blank=False)
     delivery_fee = models.FloatField(default=4, null=True, blank=False)
     cart_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-
+    fulfilled = models.BooleanField(default=False, null=True, blank=False)
 
 
     def __str__(self):
@@ -83,8 +95,11 @@ class OrderItems(models.Model):
         return self.product.name
 
 class ShippingInformation(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    first_name = models.CharField(max_length=200, null=True, blank=False)
+    last_name = models.CharField(max_length=200, null=True, blank=False)
+    email = models.EmailField(max_length=200, null=True, blank=False)
     address = models.CharField(max_length=300, null=True, blank=False)
     town = models.CharField(max_length=60, null=True, blank=False)
     county = models.CharField(max_length=60, null=True, blank=False)
