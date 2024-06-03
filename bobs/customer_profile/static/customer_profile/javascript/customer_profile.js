@@ -44,6 +44,7 @@ allInputsProfileForm.forEach((input) => {
 
 function validateProfileFormOnSubmit(listOfInputs) {
   let isValid = true;
+
   listOfInputs.forEach((input) => {
     if (!validateProfileFormOnChangeObject(input, errorMessageObject)) {
       isValid = false;
@@ -56,10 +57,15 @@ function validateProfileFormOnChangeObject(input, object) {
   // object = {html_id_of_input:"error message"}
   if (input.validity.patternMismatch) {
     let errorMessage = object[input.id];
+
     if (errorMessage != undefined) {
       input.setCustomValidity(errorMessage);
 
       input.addEventListener("input", (e) => {
+        if (!input.validity.valid) {
+          input.setCustomValidity(errorMessage);
+        }
+
         if (!input.validity.patternMismatch) {
           input.setCustomValidity("");
         }
@@ -69,3 +75,7 @@ function validateProfileFormOnChangeObject(input, object) {
 
   return input.reportValidity();
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  addAstriksToRequiredFields();
+});
