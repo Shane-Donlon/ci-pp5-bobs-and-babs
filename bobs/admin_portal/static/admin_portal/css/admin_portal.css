@@ -1,0 +1,18 @@
+fieldset {
+  margin-top: 2rem;
+  display: grid;
+  border: 2px solid;
+  border-radius: 3px;
+  padding-inline: 2rem;
+  padding-bottom: 1rem;
+}
+
+legend {
+  padding-inline: 1rem;
+  margin-inline: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+label {
+  display: block;
+}
