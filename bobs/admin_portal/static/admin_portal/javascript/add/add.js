@@ -49,7 +49,6 @@ submitButton.addEventListener("click", (e) => {
   let formData = new FormData(form);
 
   if (valid) {
-    console.log(formData);
     sendFormWithFile(url, "POST", formData).then((data) => {
       if (data.redirect) {
         window.location.href = `${data.redirect}`;

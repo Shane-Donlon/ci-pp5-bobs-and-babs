@@ -8,9 +8,7 @@ deleteForm.addEventListener("submit", (event) => {
       .then((data) => {
         window.location.href = `${data.redirect}`;
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   } else {
     return;
   }
