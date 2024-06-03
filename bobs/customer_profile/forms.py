@@ -6,7 +6,6 @@ from products.models import Customer
 COUNTY_CHOICES = [(county, county) for county in COUNTIES]
 
 class ProfileForm(ModelForm):
-    user = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={'autocomplete': 'given-name',
                                                                'placeholder': 'John'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'autocomplete': 'family-name',
@@ -35,3 +34,4 @@ class ProfileForm(ModelForm):
         model = Customer
         fields = ['user' ,'first_name', 'last_name', 'email', 'address', 'town', 'county', 'eircode', 'phone',]
         attrs = {'autocomplete': 'shipping', 'class': 'form-control'}
+        exclude = ["user"]
