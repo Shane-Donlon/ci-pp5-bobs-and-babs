@@ -1,0 +1,13 @@
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group > * {
+  flex: 1;
+}
+
+img {
+  max-height: 200px;
+  aspect-ratio: 1;
+}
