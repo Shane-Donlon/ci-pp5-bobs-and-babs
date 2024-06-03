@@ -1,25 +1,8 @@
+// sendFormWithFile(url, requestType, body)
+let submitButton = document.querySelector("button[type=submit]");
+
 let errorObject = {};
 
-function validateProfileFormOnChangeObject(input, object) {
-  // object = {html_id_of_input:"error message"}
-
-  if (input.validity.patternMismatch) {
-    let errorMessage = object[input.id];
-    if (errorMessage != undefined) {
-      input.setCustomValidity(errorMessage);
-
-      input.addEventListener("input", (e) => {
-        if (!input.validity.patternMismatch) {
-          input.setCustomValidity("");
-        }
-      });
-    }
-  }
-
-  return input.reportValidity();
-}
-
-let submitButton = document.querySelector("button[type=submit]");
 let allInputs = document.querySelectorAll("label + *");
 allInputs.forEach((input) => {
   input.addEventListener("change", (e) => {
@@ -49,7 +32,6 @@ submitButton.addEventListener("click", (e) => {
   let formData = new FormData(form);
 
   if (valid) {
-    console.log(formData);
     sendFormWithFile(url, "POST", formData).then((data) => {
       if (data.redirect) {
         window.location.href = `${data.redirect}`;
@@ -61,6 +43,27 @@ submitButton.addEventListener("click", (e) => {
     });
   }
 });
+
+function validateProfileFormOnChangeObject(input, object) {
+  // object = {html_id_of_input:"error message"}
+  if (input.hasAttribute("href") || input.type === "file") {
+    return true;
+  }
+
+  if (input.validity.patternMismatch) {
+    let errorMessage = object[input.id];
+    if (errorMessage != undefined) {
+      input.setCustomValidity(errorMessage);
+
+      input.addEventListener("input", (e) => {
+        if (!input.validity.patternMismatch) {
+          input.setCustomValidity("");
+        }
+      });
+    }
+  }
+  return input.reportValidity();
+}
 
 async function sendFormWithFile(url, requestType, body) {
   // this function is called in cart and product js files
