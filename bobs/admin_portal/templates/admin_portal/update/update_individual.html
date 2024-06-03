@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+    <link rel="stylesheet"
+          href="{% static 'customer_orders/css/customer_orders.css' %}">
+{% endblock extra_css_files %}
+{% block extra_title %}
+    {{ product_form.instance.name }}
+{% endblock extra_title %}
+{% block content %}
+    <section class="content-grid">
+        <div class="breakout">
+            {% if product_form %}
+                <h2>Update {{ product_form.instance.name }}</h2>
+                <form action="{% url 'products_update_pk' product_form.instance.id %}"
+                      method="post">
+                    {% csrf_token %}
+                    {% for field in product_form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <div class="btn-div">
+                        <button type="reset">Reset</button>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </section>
+{% endblock content %}
+{% block extra_js_files %}
+    <script src="{% static 'admin_portal/javascript/update/update_individual.js' %}"
+            data-success=""></script>
+{% endblock extra_js_files %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+{% endblock extra_css_files %}
+{% block extra_title %}
+{% endblock extra_title %}
+{% block content %}
+        <section class="content-grid">
+                <div class="breakout">
+                        <h2>Delete Product</h2>
+                        <form action="{% url 'products_delete_pk' product_form.instance.id %}"
+                              method="">
+                                {% csrf_token %}
+                                {% for field in product_form %}
+                                        <div class="form-group">
+                                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                                {{ field }}
+                                        </div>
+                                {% endfor %}
+                                <div class="btn-div">
+                                        <button type="reset">Reset</button>
+                                        <button type="submit">Delete Product</button>
+                                </div>
+                        </form>
+                </div>
+        </section>
+{% endblock content %}
+{% block extra_js_files %}
+        <script src="{% static 'admin_portal/javascript/delete/delete.js' %}"></script>
+{% endblock extra_js_files %}

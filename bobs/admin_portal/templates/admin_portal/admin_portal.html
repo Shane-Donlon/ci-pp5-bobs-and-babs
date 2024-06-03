@@ -5,19 +5,17 @@
           href="{% static 'admin_portal/css/admin_portal.css' %}">
 {% endblock extra_css_files %}
 {% block extra_title %}
+    Admin
 {% endblock extra_title %}
 {% block content %}
     <div class="content-grid">
         <h2>Admin Navigation Page</h2>
         <fieldset>
-            <legend>Staff</legend>
+            <legend>Orders</legend>
             <nav>
                 <ul>
                     <li>
-                        <a href="">Add Staff</a>
-                    </li>
-                    <li>
-                        <a href="">Update Staff</a>
+                        <a href="{% url 'admin_orders_view_all' %}">Update Orders</a>
                     </li>
                 </ul>
             </nav>
@@ -30,10 +28,10 @@
                         <a href="{% url 'admin_portal_add' category='product' %}">Add Products</a>
                     </li>
                     <li>
-                        <a href="">Update Products</a>
+                        <a href="{% url 'admin_portal_update' category='product' %}">Update Products</a>
                     </li>
                     <li>
-                        <a href="">Remove Products</a>
+                        <a href="{% url 'admin_portal_delete_products' %}">Delete Products</a>
                     </li>
                 </ul>
             </nav>
@@ -41,5 +39,6 @@
     </div>
 {% endblock content %}
 {% block extra_js_files %}
-    <script src="{% static 'admin_portal/javascript/admin_portal.js' %}"></script>
+    <script src="{% static 'admin_portal/javascript/admin_portal.js' %}"
+            data-success="{% if success %}{{success}}{% endif %}"></script>
 {% endblock extra_js_files %}

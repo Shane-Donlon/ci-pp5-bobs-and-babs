@@ -4,10 +4,14 @@
         <link rel="stylesheet" href="{% static 'admin_portal/css/add/add.css' %}">
 {% endblock extra_css_files %}
 {% block extra_title %}
+{% if product_form %}
+Add Products
+{% endif %}
 {% endblock extra_title %}
 {% block content %}
         <div class="content-grid">
                 {% if product_form %}
+                        <h2>Add Products</h2>
                         <form action="{% url 'admin_portal_add_admin_post' category='product' %}"
                               method="post">
                                 {% csrf_token %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load django_tables2 %}
+{% load static %}
+{% block extra_css_files %}
+    <link rel="stylesheet"
+          href="{% static 'customer_orders/css/customer_orders.css' %}">
+    {% comment %} customer orders holds the table styling {% endcomment %}
+{% endblock extra_css_files %}
+{% block extra_title %}
+    Update Products
+{% endblock extra_title %}
+{% block content %}
+    <section class="content-grid">
+        <div class="breakout">
+            <h2>Update Products</h2>
+            {% render_table product_table %}
+        </div>
+    </section>
+{% endblock content %}
+{% block extra_js_files %}
+    <script src="{% static 'admin_portal/javascript/update/update.js' %}"
+            data-success="{% if success %}{{ success }}{% endif %}"></script>
+{% endblock extra_js_files %}

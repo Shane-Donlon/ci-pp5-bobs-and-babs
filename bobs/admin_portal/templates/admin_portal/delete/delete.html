@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load django_tables2 %}
+{% load static %}
+{% block extra_css_files %}
+        <link rel="stylesheet"
+              href="{% static 'customer_orders/css/customer_orders.css' %}">
+{% endblock extra_css_files %}
+{% block extra_title %}
+{% endblock extra_title %}
+{% block content %}
+        <div class="content-grid">
+                <h2>Delete Products</h2>
+                {% render_table product_table %}
+        </div>
+{% endblock content %}
+{% block extra_js_files %}
+{% endblock extra_js_files %}
