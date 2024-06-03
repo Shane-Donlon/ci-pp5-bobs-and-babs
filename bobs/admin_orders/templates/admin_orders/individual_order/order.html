@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+    <link rel="stylesheet"
+          href="{% static 'admin_orders/css//order/order.css' %}">
+{% endblock extra_css_files %}
+{% block extra_title %}
+{% endblock extra_title %}
+{% block content %}
+    <section class="content-grid">
+        <div class="breakout">
+            <h1>Order #{{ order.id }}</h1>
+            <form action="{% url 'admin_orders_view_individual' order.id %}"
+                  method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        <input type="{{ field.field.widget.input_type }}"
+                               name="{{ field.html_name }}"
+                               id="{{ field.auto_id }}"
+                               value="{{ field.value|stringformat:'s' }}"
+                               disabled>
+                    </div>
+                {% endfor %}
+                <div class="btn-div">
+                    {% if order.complete and not order.fulfilled %}
+                        <button type="submit" class="submit">Fulfill Order</button>
+
+
+                    {% else %}
+                    {% if order.fulfilled %}
+                    <p>Order has been fulfilled</p>
+                    {% else %}
+                        <p>Order has not been paid for</p>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </form>
+            {% for item in items %}
+                <h2>Product</h2>
+                <span>{{ item }}</span>
+                <h2>Quantity</h2>
+                <span>{{ item.quantity }}</span>
+                <h2>Product Image</h2>
+                <span>
+                    <img src="{{ item.product.image.url }}"
+                         alt="{{ item.product.image.description }}"
+                         srcset="">
+                </span>
+            {% endfor %}
+            {% if order.delivery %}
+                <p>Delivery Frist Name:</p>
+                <span>{{ shipping_information.first_name }}</span>
+                <p>Delivery Contact Last Name:</p>
+                <span>{{ shipping_information.last_name }}</span>
+                <p>Delivery Contact Email:</p>
+                <span>{{ shipping_information.email }}</span>
+                <p>Delivery Contact Phone:</p>
+                <span>{{ shipping_information.phone }}</span>
+                <p>Delivery Address:</p>
+                <span>{{ shipping_information.address }}</span>
+                <p>Delivery Town:</p>
+                <span>{{ shipping_information.town }}</span>
+                <p>Delivery County:</p>
+                <span>{{ shipping_information.county }}</span>
+                <p>Delivery Eircode:</p>
+                <span>{{ shipping_information.eircode }}</span>
+            {% endif %}
+        </div>
+    </section>
+{% endblock content %}
+{% block extra_js_files %}
+{% endblock extra_js_files %}
