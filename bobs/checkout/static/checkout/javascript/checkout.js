@@ -9,6 +9,7 @@ let originalPrice = document.querySelector(".total-checkout-price > data");
 let paymentForm = document.querySelector("#payment-form");
 let html;
 let emailData;
+
 window.addEventListener("load", (event) => {
   // <input class="InputElement is-empty Input Input--empty" autocomplete="cc-number" autocorrect="off" spellcheck="false" type="text" name="cardnumber" data-elements-stable-field-name="cardNumber" inputmode="numeric" aria-label="Credit or debit card number" placeholder="Card number" aria-invalid="false" tabindex="0" value="">
 });
@@ -134,7 +135,7 @@ function stripeTokenHandler(token) {
   hiddenInput.setAttribute("name", "stripeToken");
   hiddenInput.setAttribute("value", token.id);
   form.appendChild(hiddenInput);
-
+  let emailData;
   const formData = new FormData(form);
   let cost = document.querySelector(".total-checkout-price").textContent;
   cost = cost.replace("€", "").trim();
@@ -142,13 +143,12 @@ function stripeTokenHandler(token) {
   let deliveryBtn = document.querySelector("#delivery");
 
   const object = { cost: cost, delivery: deliveryBtn.checked };
+
   formData.forEach(function (value, key) {
     object[key] = value;
   });
 
-  if (
-    document.body.contains(document.querySelector(".delivery-form-visible"))
-  ) {
+  if (deliveryBtn.checked) {
     let deliveryForm = document.querySelector(".delivery-form-visible");
     let deliveryData = new FormData(deliveryForm);
 
@@ -160,6 +160,7 @@ function stripeTokenHandler(token) {
 
   let formInput;
   // const formInput = JSON.stringify(object);
+
   if (emailData != undefined) {
     let combinedData = {
       order: object,
@@ -272,7 +273,11 @@ function formValidation(formSelector) {
             let message = "Please enter a valid Eircode format e.g. A65 F4E2";
             input.setCustomValidity(message);
             input.addEventListener("input", (e) => {
-              if (!e.target.validity.patternMismatch) {
+              if (!input.validity.valid) {
+                input.setCustomValidity(errorMessage);
+              }
+
+              if (!input.validity.patternMismatch) {
                 input.setCustomValidity("");
               }
             });
@@ -290,7 +295,11 @@ function formValidation(formSelector) {
           message = "Please enter a valid phone number eg. 353871234567";
           input.setCustomValidity(message);
           input.addEventListener("input", (e) => {
-            if (!e.target.validity.patternMismatch) {
+            if (!input.validity.valid) {
+              input.setCustomValidity(errorMessage);
+            }
+
+            if (!input.validity.patternMismatch) {
               input.setCustomValidity("");
             }
           });
@@ -317,3 +326,20 @@ function formatEircode(eircode, eircodeInput) {
     eircodeInput.value = eircode.trim();
   }
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  addAstriksToRequiredFields();
+  let labelForCard = document.querySelector("label[for=card-element]");
+  labelForCard.classList.add("labelRequiredAsterisk");
+});
+
+let allinputs = document.querySelectorAll("label + *");
+let errorMessageObject = {
+  id_phone: "Please enter a valid phone number eg. 353871234567",
+  id_eircode: "Please enter a valid Eircode format e.g. A65 F4E2",
+};
+allinputs.forEach((input) => {
+  input.addEventListener("change", (e) => {
+    validateProfileFormOnChangeObject(input, errorMessageObject);
+  });
+});
