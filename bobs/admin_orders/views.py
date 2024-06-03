@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django_tables2 import RequestConfig
-from products.models import Order, OrderItems, ShippingInformation
+from products.models import Order, ShippingInformation
 
 from .forms import AdminOrderUpdateForm
 from .tables import OrderTableAdmin
