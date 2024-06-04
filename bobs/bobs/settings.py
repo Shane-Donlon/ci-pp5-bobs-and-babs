@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'customer_profile',
     'customer_orders',
     'django_tables2',
+    'admin_portal',
+    'admin_orders',
 ]
 
 MIDDLEWARE = [
@@ -178,4 +180,6 @@ DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "Bob's Bakery"
 LOGIN_REDIRECT_URL = "customer-portal"
 ACCOUNT_SIGNUP_REDIRECT_URL = "profile"
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = 'profile'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = "index"
