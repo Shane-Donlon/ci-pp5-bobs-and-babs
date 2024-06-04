@@ -2,7 +2,7 @@ import json
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.http import require_GET, require_POST
@@ -16,7 +16,7 @@ from .models import Order, OrderItems, Product
 class ProductsPageDefaultView(View):
 
     def get(self, request):
-        products = Product.objects.all()
+        products = Product.objects.filter(showing_in_shop=True)
         context = {
             "products": products
         }
@@ -27,17 +27,10 @@ class ProductsPageDefaultView(View):
 class ProductDetailView(View,):
     def get(self, request, slug_field):
         product = get_object_or_404(Product, slug=slug_field)
-        allergens = product.allergin_info.split('\n')
-        contains = allergens[0].split(":")[1].split(",")
-        may_contain = allergens[1].split(":")[1].split(",")
-
-
-
 
         context = {
             "product": product,
-            "contains": contains,
-            "may_contain": may_contain,
+
 
         }
         return render(request, "products/product.html", context)
