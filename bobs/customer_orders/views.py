@@ -14,7 +14,8 @@ from .tables import orderTable
 class GetAllOrdersView(View):
     def get(self, request):
         customer = request.user.customer
-        orders = Order.objects.filter(customer=customer).order_by('-date_ordered')
+        orders = Order.objects.filter(customer=customer)\
+                      .order_by('-date_ordered')
         table = orderTable(
                 orders,
                 template_name="django_tables2/bootstrap5-responsive.html")
@@ -32,8 +33,8 @@ class GetAllOrdersView(View):
 class GetSingularOrder(View):
     def get(self, request, transaction_id):
         order = get_object_or_404(Order, transaction_id=transaction_id)
-
-        if request.user.customer == order.customer or request.user.is_superuser:
+        is_super_user = request.user.is_superuser
+        if request.user.customer == order.customer or is_super_user:
             items = order.orderitems_set.all()
             for item in items:
                 item.total_price = item.product.price * item.quantity
