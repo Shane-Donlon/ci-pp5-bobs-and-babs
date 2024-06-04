@@ -93,7 +93,7 @@ class AddToCart(View):
                                          f" is the maximum per order"},
                                         safe=False)
                 orderItem.save()
-                return JsonResponse({"success": f"{quantity_in_cart}"
+                return JsonResponse({"success": f"{quantity_in_cart} "
                                      f"{product_name}"
                                     f" added to the cart"}, safe=False)
         except ValueError as e:
@@ -116,7 +116,7 @@ class RemoveFromCart(View):
             try:
                 order_item.delete()
                 order.save()
-                return JsonResponse({"success": f"{product_name}"
+                return JsonResponse({"success": f"{product_name} "
                                     "removed from cart"})
             except ObjectDoesNotExist:
                 return JsonResponse({"error": "Item does not exist"})
