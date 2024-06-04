@@ -24,7 +24,6 @@ class CheckoutPage(View):
             customer = request.user.customer
             try:
                 order = Order.objects.get(customer=customer, complete=False)
-
             except Order.DoesNotExist:
                 return redirect('cart')
 
@@ -92,11 +91,13 @@ class Charge(View):
         # then the order will be out of sync and will never execute correctly
 
         order.delivery = delivery_selected
-        order.save()
+
         delivery_form = None
-        if order.delivery:
+
+        if post_data["delivery"]:
             try:
                 email_data = data["email"]
+
                 delivery_form = ShippingInformationFrom(email_data)
                 if request.user.is_authenticated:
                     customer = request.user.customer
