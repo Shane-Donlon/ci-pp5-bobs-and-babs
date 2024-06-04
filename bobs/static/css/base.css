@@ -285,7 +285,7 @@ body:has(.nav-open) {
 
 a {
   color: currentColor;
-  text-decoration: none;
+  /* text-decoration: none; */
 }
 
 .labelRequiredAsterisk {
