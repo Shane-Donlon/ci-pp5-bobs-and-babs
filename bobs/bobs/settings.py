@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_tables2',
     'admin_portal',
     'admin_orders',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
@@ -94,8 +95,6 @@ WSGI_APPLICATION = 'bobs.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-
 
 DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
