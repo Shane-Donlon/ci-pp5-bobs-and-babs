@@ -14,6 +14,7 @@ from .tables import OrderTableAdmin
 def is_superuser(user):
     return user.is_superuser
 
+
 @method_decorator(user_passes_test(is_superuser), name='dispatch')
 class AdminOrdersAllOrders(View):
 
@@ -36,10 +37,10 @@ class AdminOrdersAllOrders(View):
             context["success"] = request.session['order_fulfilled']
             del request.session['order_fulfilled']
 
-        return render(request, "admin_orders/admin_orders.html",context)
+        return render(request, "admin_orders/admin_orders.html", context)
+
 
 @method_decorator(user_passes_test(is_superuser), name='dispatch')
-
 class AdminOrdersIndividualOrder(View):
     def get(self, request, pk):
 
@@ -52,11 +53,12 @@ class AdminOrdersIndividualOrder(View):
             'form': form
         }
         if order.delivery:
-            shipping_information = ShippingInformation.objects.get(order=order.id)
+            shipping_information = ShippingInformation.objects.get(
+                order=order.id)
             context["shipping_information"] = shipping_information
 
-        return render(request, "admin_orders/individual_order/order.html", context)
-
+        return render(request, "admin_orders/individual_order/order.html",
+                      context)
 
     def post(self, request, pk):
         order = get_object_or_404(Order, id=pk)
@@ -65,4 +67,3 @@ class AdminOrdersIndividualOrder(View):
         request.session["order_fulfilled"] = "Order Fulfilled successfully"
         redirect_url = reverse('admin_orders_view_all')
         return HttpResponsePermanentRedirect(redirect_url)
-

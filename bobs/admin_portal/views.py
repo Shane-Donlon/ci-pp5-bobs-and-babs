@@ -25,13 +25,13 @@ class AdminPageDefault(View):
             # see AdminPageDeleteIndividualProduct view
             del request.session['deleted_product']
             context = {"success": "Product deleted successfully"}
-            return render(request, "admin_portal/admin_portal.html",context)
+            return render(request, "admin_portal/admin_portal.html", context)
         if 'added_product' in request.session:
             # if redirected from add request on products add
             # see AdminAddPostRequest view
             context = {"success": request.session['added_product']}
             del request.session['added_product']
-            return render(request, "admin_portal/admin_portal.html",context)
+            return render(request, "admin_portal/admin_portal.html", context)
         return render(request, "admin_portal/admin_portal.html")
 
 
@@ -54,12 +54,14 @@ class AdminAddPostRequest(View):
             product_form = AddProductForm(request.POST, request.FILES)
 
             if Product.objects.filter(name=request.POST['name']).exists():
-                return JsonResponse({"error": "A product with this name already exists"})
+                return JsonResponse({"error":
+                                    "A product with this name already exists"})
 
             if product_form.is_valid():
                 product_form.save()
                 name = product_form.cleaned_data['name']
-                request.session['added_product'] = f'Product {name} Added successfully'
+                request.session['added_product'] =
+                f'Product {name} Added successfully'
                 redirect_url = reverse('admin_portal')
                 return JsonResponse({'redirect': redirect_url})
             else:
@@ -82,7 +84,8 @@ class AdminPageEdit(View):
             if request.session.get('updated_product'):
                 # if redirected from update request on products update
                 # see AdminPageEditIndividual view
-                context = {"success":request.session['updated_product'],"product_table": table}
+                context = {"success": request.session['updated_product'],
+                           "product_table": table}
                 del request.session['updated_product']
             return render(request, "admin_portal/update/update.html", context)
         return render(request, "admin_portal/admin_portal.html")
@@ -97,7 +100,8 @@ class AdminPageEditIndividual(View):
         context = {
             "product_form": product_form
         }
-        return render(request, "admin_portal/update/update_individual.html", context)
+        return render(request, "admin_portal/update/update_individual.html",
+                      context)
 
     def post(self, request, pk):
 
@@ -107,14 +111,17 @@ class AdminPageEditIndividual(View):
 
         if product_form.is_valid():
             if Product.objects.filter(name=request.POST['name']).exists():
-                return JsonResponse({"error": "A product with this name already exists"})
+                return JsonResponse({"error": "A product with this name"
+                                    "already exists"})
             product_form.save()
             name = product.name
-            request.session['updated_product'] = f'Product {name} Updated successfully'
+            request.session['updated_product'] =
+            f'Product {name} Updated successfully'
             redirect_url = reverse('admin_portal_update', args=["product"])
             return JsonResponse({'redirect': redirect_url})
         else:
             return JsonResponse({"error": product_form.errors})
+
 
 @method_decorator(user_passes_test(is_superuser), name='dispatch')
 class AdminPageDeleteProducts(View):
@@ -142,8 +149,8 @@ class AdminPageDeleteProducts(View):
         else:
             return JsonResponse({"error": product_form.errors})
 
-@method_decorator(user_passes_test(is_superuser), name='dispatch')
 
+@method_decorator(user_passes_test(is_superuser), name='dispatch')
 class AdminPageDeleteIndividualProduct(View):
 
     def get(self, request, pk):
@@ -151,7 +158,8 @@ class AdminPageDeleteIndividualProduct(View):
         product_form = AddProductForm(instance=product)
         context = {"product_form": product_form}
 
-        return render(request, "admin_portal/delete/delete_individual.html",context)
+        return render(request, "admin_portal/delete/delete_individual.html",
+                      context)
 
     def delete(self, request, pk):
 

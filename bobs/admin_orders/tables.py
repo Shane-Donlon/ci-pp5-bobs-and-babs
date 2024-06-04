@@ -17,14 +17,16 @@ class SelectColumn(Column):
             not record.fulfilled, "No" if display_value == "Yes" else "Yes"
         )
 
+
 class OrderTableAdmin(tables.Table):
     id = LinkColumn('admin_orders_view_individual',
-                           text=lambda record: record.id,
-                           args=[A('id')], attrs={
+                    text=lambda record: record.id,
+                    args=[A('id')], attrs={
                                "a": {"style": "color: #0055f2;",
                                      "aria-label": "open product"}})
     fulfilled = SelectColumn()
+
     class Meta:
         model = Order
-        fields = ["id", "customer", "complete", "date_ordered", "transaction_id", "fulfilled",]
-        # exclude = [ "customer", "complete", "date_ordered", "transaction_id", "status"]
+        fields = ["id", "customer", "complete", "date_ordered",
+                  "transaction_id", "fulfilled"]
