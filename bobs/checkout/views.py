@@ -43,7 +43,7 @@ class CheckoutPage(View):
             })
             context = {"items": items, "order": order,
                        "customer": customer, 'is_checkout_page': True,
-                                              "form": form}
+                                             "form": form}
             return render(request, "checkout/checkout.html", context)
 
         if request.session.get("customer"):
@@ -58,7 +58,7 @@ class CheckoutPage(View):
             form = ShippingInformationFrom()
             context = {"items": items, "order": order,
                        'is_checkout_page': True,
-                                              "form": form}
+                       "form": form}
             return render(request, "checkout/checkout.html", context)
         else:
             # ie if the user does not have session data
@@ -105,8 +105,10 @@ class Charge(View):
                         delivery_info.order = order
                         delivery_info.save()
                     if not delivery_form.is_valid():
-                        return JsonResponse({"error": "An error has occurred Form Invalid <br/> "
-                                             "Please contact us by phone to complete the order"}, safe=False)
+                        return JsonResponse({"error": "An error has occurred"
+                                            "Form Invalid <br/> "
+                                             "Please contact us by phone to"
+                                             "complete the order"}, safe=False)
 
                 if not request.user.is_authenticated:
                     if delivery_form.is_valid():
@@ -115,9 +117,9 @@ class Charge(View):
                         delivery_info.order = order
                         delivery_info.save()
                     if not delivery_form.is_valid():
-                        return JsonResponse({"error": "An error has occurred Form Invalid <br/> "
-                                            "Please contact us by phone to complete the order"}, safe=False)
-
+                        return JsonResponse({"error": "An error has "
+                                             "Please contact us by phone to"
+                                             "complete the order"}, safe=False)
 
             except ValueError as e:
                 return JsonResponse({"error": f"{e}"}, safe=False)
@@ -131,8 +133,11 @@ class Charge(View):
 
         if cost == total:
             try:
-                customer_for_stripe = utils.create_stripe_customer(customer_full_name, email_address, stripe_token, transaction_id)
-                charge = utils.create_stripe_charge(customer_for_stripe, total, transaction_id)
+                customer_for_stripe = utils.create_stripe_customer(
+                        customer_full_name, email_address, stripe_token,
+                        transaction_id)
+                charge = utils.create_stripe_charge(
+                    customer_for_stripe, total, transaction_id)
 
                 if charge.paid:
                     order.complete = True
@@ -141,10 +146,11 @@ class Charge(View):
                     order.save()
                     if delivery_form:
                         delivery_form.save()
-                    invoice = utils.create_stripe_invoice(customer_for_stripe, total, transaction_id)
+                    invoice = utils.create_stripe_invoice(
+                            customer_for_stripe, total, transaction_id)
                     request.session["invoice_url"] = invoice.hosted_invoice_url
-
-                    return JsonResponse({'redirect_url': reverse('order_complete')})
+                    return JsonResponse({'redirect_url': reverse(
+                        'order_complete')})
 
             except stripe.error.InvalidRequestError as e:
                 return JsonResponse({"error": f"{e}"}, safe=False)
@@ -152,20 +158,22 @@ class Charge(View):
                 JsonResponse({"error": f"{e}"}, safe=False)
         if cost != total:
             return JsonResponse({"error": "An error has occurred cost<br/> "
-                                "Please contact us by phone to complete the order"}, safe=False)
+                                "Please contact us by phone "
+                                 "to complete the order"}, safe=False)
         return JsonResponse({"error": "Payment failed"}, safe=False)
+
 
 @method_decorator(require_GET, name='dispatch')
 class OrderSuccess(View):
     def get(self, request):
         if request.session.get("invoice_url"):
             invoice_url = request.session["invoice_url"]
-            # pop method removes the key-value pair from the session but does not raise error if not found
+            # pop method removes the key-value pair from the session
+            # but does not raise error if not found
             request.session.pop("customer", None)
             request.session.pop("invoice_url", None)
 
             context = {"invoice_url": invoice_url}
-            return render(request, "checkout/order/order_complete.html", context)
-
+            return render(request, "checkout/order/order_complete.html",
+                          context)
         return redirect('index')
-

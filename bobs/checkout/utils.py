@@ -9,6 +9,7 @@ def create_stripe_customer(full_name, email, stripe_token, transaction_id):
         description=transaction_id
     )
 
+
 def create_stripe_charge(customer, total, transaction_id):
     return stripe.Charge.create(
         amount=total,
@@ -16,6 +17,7 @@ def create_stripe_charge(customer, total, transaction_id):
         description=f"Payment for order{transaction_id}",
         customer=customer,
     )
+
 
 def create_stripe_invoice(customer, total, transaction_id):
     invoice_item = stripe.InvoiceItem.create(
