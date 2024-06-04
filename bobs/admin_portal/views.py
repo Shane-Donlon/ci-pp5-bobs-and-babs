@@ -60,8 +60,9 @@ class AdminAddPostRequest(View):
             if product_form.is_valid():
                 product_form.save()
                 name = product_form.cleaned_data['name']
-                request.session['added_product'] =
-                f'Product {name} Added successfully'
+                message = f'Product {name} Added successfully'
+                request.session['added_product'] = message
+
                 redirect_url = reverse('admin_portal')
                 return JsonResponse({'redirect': redirect_url})
             else:
@@ -115,8 +116,8 @@ class AdminPageEditIndividual(View):
                                     "already exists"})
             product_form.save()
             name = product.name
-            request.session['updated_product'] =
-            f'Product {name} Updated successfully'
+            message = f'Product {name} Updated successfully'
+            request.session['updated_product'] = message
             redirect_url = reverse('admin_portal_update', args=["product"])
             return JsonResponse({'redirect': redirect_url})
         else:
