@@ -12,6 +12,7 @@ from .models import Order, OrderItems, Product
 
 # Create your views here.
 
+
 @method_decorator(require_GET, name='dispatch')
 class ProductsPageDefaultView(View):
 
@@ -21,7 +22,8 @@ class ProductsPageDefaultView(View):
             "products": products
         }
 
-        return render(request, "products/products.html",context )
+        return render(request, "products/products.html", context)
+
 
 @method_decorator(require_GET, name='dispatch')
 class ProductDetailView(View,):
@@ -34,7 +36,6 @@ class ProductDetailView(View,):
 
         }
         return render(request, "products/product.html", context)
-
 
 
 @method_decorator(require_POST, name='dispatch')
@@ -54,7 +55,8 @@ class AddToCart(View):
                 order = utils.un_authenticated_users_no_session(request)
 
             if request.session.get("customer"):
-                order = Order.objects.get(transaction_id=request.session.get("customer"))
+                order = Order.objects.get(
+                    transaction_id=request.session.get("customer"))
                 if order.complete:
                     order = utils.un_authenticated_order_complete(request)
 
@@ -63,33 +65,40 @@ class AddToCart(View):
         product = get_object_or_404(Product, slug=slug_field)
         quantity_in_cart = int(post_data["cart"].get(slug_field, 0))
 
-        is_valid_quantity = utils.verify_quantity_in_cart(product, quantity_in_cart)
+        is_valid_quantity = utils.verify_quantity_in_cart(
+            product, quantity_in_cart)
         if not is_valid_quantity:
             return JsonResponse({"error": "Quantity is invalid"}, safe=False)
 
         action = post_data["cart"].get("action", "")
 
-
-        orderItem, created = OrderItems.objects.get_or_create(order=order, product=product)
+        orderItem, created = OrderItems.objects.get_or_create(
+                order=order, product=product)
 
         product_name = utils.get_plural_string(quantity_in_cart, product)
         orderItem.quantity += quantity_in_cart
-        verify_quantity = utils.check_order_item(orderItem.quantity, product.max_quantity)
+        verify_quantity = utils.check_order_item(
+                                        orderItem.quantity,
+                                        product.max_quantity)
 
         try:
             if action == "add":
                 if not verify_quantity:
-                    product_plural_name = utils.create_plural_string(product.name)
+                    product_plural_name = utils.create_plural_string(
+                        product.name)
                     return JsonResponse({"error":
                                         f"Cannot add any more"
-                                        f" {product_plural_name } to your cart"
-                                        f" {product.max_quantity }"
-                                        f" is the maximum per order"}, safe=False)
+                                         f" {product_plural_name} to your cart"
+                                         f" {product.max_quantity }"
+                                         f" is the maximum per order"},
+                                        safe=False)
                 orderItem.save()
-                return JsonResponse({"success": f"{quantity_in_cart} {product_name}"
+                return JsonResponse({"success": f"{quantity_in_cart}"
+                                     f"{product_name}"
                                     f" added to the cart"}, safe=False)
         except ValueError as e:
             return JsonResponse({"error": str(e)}, safe=False)
+
 
 @method_decorator(require_POST, name='dispatch')
 class RemoveFromCart(View):
@@ -99,14 +108,16 @@ class RemoveFromCart(View):
         transaction_id = post_data["cart"]["transactionId"]
         if transaction_id:
             order = Order.objects.get(transaction_id=transaction_id)
-            order_item = OrderItems.objects.get(order=order, product__slug=slug_field)
+            order_item = OrderItems.objects.get(order=order,
+                                                product__slug=slug_field)
 
             product_name = utils.create_plural_string(order_item.product.name)
 
             try:
                 order_item.delete()
                 order.save()
-                return JsonResponse({"success": f"{product_name} removed from cart"})
+                return JsonResponse({"success": f"{product_name}"
+                                    "removed from cart"})
             except ObjectDoesNotExist:
                 return JsonResponse({"error": "Item does not exist"})
             except Exception as e:
