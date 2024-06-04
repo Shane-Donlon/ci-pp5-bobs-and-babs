@@ -17,7 +17,8 @@ class CartPageDefaultView(View):
             except Order.DoesNotExist:
                 return render(request, "cart/cart.html", {})
         elif request.session.get("customer"):
-            order = Order.objects.get(transaction_id=request.session.get("customer"))
+            order = Order.objects.get(
+                transaction_id=request.session.get("customer"))
             if order.complete:
                 request.session.cycle_key()
                 return render(request, "cart/cart.html", {})
@@ -34,5 +35,3 @@ class CartPageDefaultView(View):
             return JsonResponse(context, safe=False)
 
         return render(request, "cart/cart.html", context)
-
-
