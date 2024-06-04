@@ -1,8 +1,15 @@
-from django.contrib import admin
-from django.urls import include, path
-from django.views.static import serve
 
-from .views import handler403, handler404, handler500, robots_txt_file
+from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
+from django.urls import include, path
+
+from .views import (ShopSiteMap, handler403, handler404, handler500,
+                    robots_txt_file)
+
+sitemaps = {
+    'shop': ShopSiteMap,
+}
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,6 +25,12 @@ urlpatterns = [
     path("admin-portal/", include("admin_portal.urls")),
     path("admin-orders/", include("admin_orders.urls")),
     path("robots.txt", robots_txt_file),
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    )
 ]
 
 handler404 = 'bobs.views.handler404'
