@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.http import require_GET
 from django_tables2 import RequestConfig
-from products.models import Order, OrderItems
+from products.models import Order
 
 from .tables import orderTable
 
