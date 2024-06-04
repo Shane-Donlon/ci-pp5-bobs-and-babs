@@ -12,13 +12,19 @@ from products.models import Customer
 from . import forms
 
 
-@method_decorator([login_required,require_GET], name='dispatch')
+@method_decorator([login_required, require_GET], name='dispatch')
 class ProfilePageView(View):
     def get(self, request):
-        customer = get_object_or_404(Customer, user=request.user.customer.user_id)
-        form = forms.ProfileForm(instance=customer, initial={"user": request.user.customer})
+        customer = get_object_or_404(
+            Customer, user=request.user.customer.user_id)
+        user = request.user.customer
+        form = forms.ProfileForm(instance=customer, initial={"user": user})
         context = {"form": form}
-        return render(request, "customer_profile/customer_profile.html",context)
+        return render(
+                request,
+                "customer_profile/customer_profile.html",
+                context
+            )
 
 
 @method_decorator([login_required, require_POST], name='dispatch')
@@ -32,9 +38,12 @@ class UpdateProfile(View):
 
             if form.is_valid():
                 form.save()
-                return JsonResponse({"success": "Profile updated successfully"})
+                return JsonResponse(
+                    {"success": "Profile updated successfully"}
+                )
             else:
-                return JsonResponse({"error": form.errors.as_text()}, status=400)
+                return JsonResponse(
+                    {"error": form.errors.as_text()}, status=400)
         except Customer.DoesNotExist:
             return JsonResponse({"error": "Customer not found"}, status=404)
         except json.JSONDecodeError:
