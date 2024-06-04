@@ -12,4 +12,6 @@ urlpatterns = [
     path("customer-portal/", include("customer_portal.urls")),
     path("profile/", include("customer_profile.urls")),
     path("orders/", include("customer_orders.urls")),
+    path("admin-portal/", include("admin_portal.urls")),
+    path("admin-orders/", include("admin_orders.urls")),
 ]
