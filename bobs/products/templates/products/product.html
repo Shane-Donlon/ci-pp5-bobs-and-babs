@@ -58,8 +58,12 @@
                                 </p>
                         </div>
                         <div class="btn-div">
-                                <button class="add-to-cart" data-product-name-as-slug="{{ product.slug }}">Add to Cart</button>
-                                <a href="{% url 'products' %}" aria-label="Continue Shopping">Continue Shopping</a>
+                                <button class="add-to-cart"
+                                        data-product-name-as-slug="{{ product.slug }}"
+                                        type="submit">Add to Cart</button>
+                                <a href="{% url 'products' %}"
+                                   aria-label="Continue Shopping"
+                                   class="btn btn-continue">Continue Shopping</a>
                         </div>
                 </div>
         </section>

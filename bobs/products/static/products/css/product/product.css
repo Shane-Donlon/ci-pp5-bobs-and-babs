@@ -23,3 +23,15 @@ legend {
   font-weight: 700;
   font-size: 1.5rem;
 }
+
+.btn {
+  padding: 0.5em 1em;
+  display: inline-flex;
+  place-content: center;
+  color: white;
+  text-decoration: none;
+}
+.btn-continue {
+  background-color: #4f4f4f;
+  color: white;
+}
