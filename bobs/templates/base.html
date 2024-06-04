@@ -98,29 +98,43 @@
                                 </a>
                             </li>
                         </ul>
-
-                </nav>
-            </div>
-                    <div class="nav-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 448 512"
-                             class="menu-icon">
-                            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                            <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-                        </svg>
-                    </div>
+                    </nav>
                 </div>
-            </header>
-            <main id="main">
-                {% block content %}
-                {% endblock content %}
-            </main>
-            <!-- JS -->
-            <footer class="content-grid">
-                <div class="copyright">copyRight</div>
-            </footer>
-            <script src="{% static 'javascript/base.js' %}"></script>
-            {% block extra_js_files %}
-            {% endblock extra_js_files %}
-        </body>
-    </html>
+                <div class="nav-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 448 512"
+                         class="menu-icon">
+                        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                        <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                    </svg>
+                </div>
+            </div>
+        </header>
+        <main id="main">
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <!-- JS -->
+        <footer class="content-grid">
+            <div class="copyright">
+                <p>© {% now "Y" %} Bob & Babs</p>
+            </div>
+            <nav class="footer-nav">
+                <ul role="list">
+                    <li>
+                        <a href="https://www.termsfeed.com/live/e264c370-ca14-4ccd-998a-11bee84c9474"
+                           aria-label="Link to our Privacy Policy Opens in a new tab"
+                           title="Read our Privacy Policy"
+                           target="_blank"
+                           rel="noopener noreferrer">Privacy Policy</a>
+                    </li>
+                    <li><a href="https://www.facebook.com/profile.php?id=61560417247249"  aria-label="Link to our Facebook Page Opens in a new tab"title="Visit our Facebook Page"         target="_blank"
+                        rel="noopener noreferrer">Visit out Facebook Page</a></li>
+                </ul>
+            </nav>
+        </footer>
+        <script src="{% static 'javascript/base.js' %}"></script>
+        {% block extra_js_files %}
+        {% endblock extra_js_files %}
+    </body>
+</html>
