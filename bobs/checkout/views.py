@@ -91,9 +91,7 @@ class Charge(View):
         # then the order will be out of sync and will never execute correctly
 
         order.delivery = delivery_selected
-
         delivery_form = None
-
         if post_data["delivery"]:
             try:
                 email_data = data["email"]
