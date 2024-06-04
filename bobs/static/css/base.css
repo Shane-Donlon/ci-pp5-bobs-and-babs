@@ -346,3 +346,27 @@ label {
 ::placeholder {
   color: currentColor !important;
 }
+
+body {
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header-short-page"
+    "main-short-page"
+    "footer-short-page";
+}
+
+header {
+  grid-area: header-short-page;
+}
+
+main {
+  grid-area: main-short-page;
+  align-self: start;
+}
+
+footer {
+  grid-area: footer-short-page;
+}
