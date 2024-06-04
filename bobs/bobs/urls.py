@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import include, path
 
+from .views import handler403, handler404, handler500
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("home.urls")),
@@ -15,3 +17,7 @@ urlpatterns = [
     path("admin-portal/", include("admin_portal.urls")),
     path("admin-orders/", include("admin_orders.urls")),
 ]
+
+handler404 = 'bobs.views.handler404'
+handler500 = 'bobs.views.handler500'
+handler403 = 'bobs.views.handler403'

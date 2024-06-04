@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+{% endblock extra_css_files %}
+{% block extra_title %}
+500
+{% endblock extra_title %}
+{% block content %}
+{% endblock content %}
+<h1 class="forbidden-h1">Internal Server Error occurred</h1>
+<a href="{% url 'index' %}">Back to home</a>
+{% block extra_js_files %}
+{% endblock extra_js_files %}

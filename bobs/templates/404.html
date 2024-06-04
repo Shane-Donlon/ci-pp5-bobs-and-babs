@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css_files %}
+{% endblock extra_css_files %}
+{% block extra_title %}
+    404
+{% endblock extra_title %}
+{% block content %}
+    <div class="content-grid">
+        <h1>The page you are looking for cannot be found</h1>
+        <p>It may have been removed, had its name changed, or is temporarily unavailable.</p>
+        <a href="{% url 'index' %}">Back to home page</a>
+    </div>
+{% endblock content %}
+{% block extra_js_files %}
+{% endblock extra_js_files %}
