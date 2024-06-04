@@ -1,7 +1,9 @@
 """Views to handle errors"""
+from django.contrib.sitemaps import Sitemap
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_GET
+from products.models import Product
 
 robots_txt_file_content = """\
 User-agent: *
@@ -34,3 +36,14 @@ def handler500(request):
 def handler403(request, exception):
     """ Error Handler 403 - Access denied """
     return render(request, "403.html", status=403)
+
+
+class ShopSiteMap(Sitemap):
+    changefreq = "never"
+    priority = 0.5
+
+    def items(self):
+        return Product.objects.filter(showing_in_shop=True)
+
+    def lastmod(self, obj):
+        return obj.last_modified
