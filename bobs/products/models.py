@@ -4,6 +4,7 @@ from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 
 # Create your models here.
@@ -36,12 +37,15 @@ class Product(models.Model):
     contains_allergin = models.ManyToManyField("Allergin", blank=True,  related_name="contains")
     may_contain_allergin = models.ManyToManyField("Allergin", blank=True, related_name="may_contain")
     showing_in_shop = models.BooleanField(default=True, null=True, blank=False)
-
+    last_modified = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('product_detail', args=[str(self.id)])
 
 
 
