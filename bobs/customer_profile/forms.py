@@ -25,7 +25,8 @@ class ProfileForm(ModelForm):
     widget=forms.TextInput(attrs={
         'autocomplete': 'tel',
         'pattern':'[353]{3}[0-9]{9}',
-        'placeholder':'353881234567'
+        'placeholder':'353881234567',
+        'type':'tel'
     })
 )
 
