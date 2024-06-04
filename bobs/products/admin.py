@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Customer, Order, OrderItems, Product, ShippingInformation
+from .models import (Allergin, Customer, Order, OrderItems, Product,
+                     ShippingInformation)
 
 # Register your models here.
 
@@ -33,3 +34,10 @@ class OrderItemsAdmin(admin.ModelAdmin):
 class ShippingInformationAdmin(admin.ModelAdmin):
     list_display = ["customer", "order", "phone"]
     search_fields = ["customer", "phone"]
+
+
+@admin.register(Allergin)
+
+class AllerginAdmin(admin.ModelAdmin):
+    list_display = ["name"]
+    search_fields = ["name"]
