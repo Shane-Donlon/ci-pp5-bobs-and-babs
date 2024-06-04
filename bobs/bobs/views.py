@@ -8,6 +8,13 @@ User-agent: *
 Disallow: /admin*
 Disallow: /customer*
 Disallow: /admin/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /profile/
+Disallow: /orders/
+Disallow: /admin-portal/
+Disallow: /admin-orders/
+Disallow: /customer-portal/
 """
 
 @require_GET
