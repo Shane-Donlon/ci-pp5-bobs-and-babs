@@ -17,7 +17,6 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_API_KEY")
 DEBUG = os.environ.get("DEBUG") == "True"
 
 
-
 ALLOWED_HOSTS = [
     "sd-ci-pp5-bobs-and-babs-5fa3ca5e7225.herokuapp.com", "127.0.0.1"]
 
