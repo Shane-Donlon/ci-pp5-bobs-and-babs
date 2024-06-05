@@ -164,7 +164,7 @@ It was important to route to this page as part of the add to cart option to ensu
 
 <details >
 
-  <summary>Signup</summary>
+  <summary>Sign up</summary>
 
 ![Sign-up page](documentation/assets/sign-up-page.jpg)
 
