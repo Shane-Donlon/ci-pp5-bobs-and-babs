@@ -44,7 +44,7 @@ class AdminOrdersAllOrders(View):
 class AdminOrdersIndividualOrder(View):
     def get(self, request, pk):
 
-        order = Order.objects.get(id=pk)
+        order = get_object_or_404(Order, id=pk)
         items = order.orderitems_set.all()
         form = AdminOrderUpdateForm(instance=order)
         context = {
