@@ -199,6 +199,22 @@ Where "Prefilled" is the email address used to sign up (hidden for screenshots)
 
   <summary>Logout Page</summary>
 
+![Sign-out page](documentation/assets/logout-page.jpg)
+
+</details>
+
+<details >
+
+  <summary>Customer Orders</summary>
+
+![Customer Orders Page](documentation/assets/customer-orders.jpg)
+
+![Order in progress page](documentation/assets/order-wip.jpg)
+
+![Order Complete Delivery page](documentation/assets/order-complete-delivery.jpg)
+
+![Order Complete Collection page](documentation/assets/order-complete-collection.jpg)
+
 </details>
 
 ### Wireframes & Styling
