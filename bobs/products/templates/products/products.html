@@ -15,6 +15,7 @@
                                                 <div class="product-image card-front">
                                                         {% if product.image_description %}<img src="{{ product.image.url }}" alt="{{ product.image_description }}">{% endif %}
                                                 </div>
+                                                <!--product-image card-front-->
                                                 <div class="product-info card-back">
                                                         <h2 class="product-name">{{ product.name }}</h2>
                                                         <p class="price-p">
@@ -24,11 +25,16 @@
                                                            class="more-info"
                                                            aria-label="Product Information">Product Information</a>
                                                 </div>
+                                                <!--product-info card-back-->
                                         </div>
+                                        <!--card-inner-->
                                 </div>
+                                <!--product grid-container card-->
                         {% endfor %}
                 </div>
+                <!--product-grid grid-container--fill -->
         </section>
+        <!--content-grid-->
 {% endblock content %}
 {% block extra_js_files %}
         <script src="{% static 'products/javascript/products.js' %}"></script>

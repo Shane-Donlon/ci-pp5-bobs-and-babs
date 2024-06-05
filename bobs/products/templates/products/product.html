@@ -15,10 +15,12 @@
                                 <h2>{{ product.name }}</h2>
                                 {% if product.image_description %}<img src="{{ product.image.url }}" alt="{{ product.image_description }}">{% endif %}
                         </div>
+                        <!--product-img-->
                         <div class="product-description">
                                 <h3>Product Description</h3>
                                 <p>{{ product.description }}</p>
                         </div>
+                        <!--product-description-->
                         <div class="grid product-allergin-grid">
                                 {% if product.contains_allergin.all %}
                                         <div class="contains">
@@ -29,6 +31,7 @@
                                                         </ul>
                                                 </fieldset>
                                         </div>
+                                        <!--contains-->
                                 {% endif %}
                                 {% if product.may_contain_allergin.all %}
                                         <div class="may-contain">
@@ -39,9 +42,12 @@
                                                         </ul>
                                                 </fieldset>
                                         </div>
+                                        <!--may-contain-->
                                 {% endif %}
                         </div>
+                        <!--grid product-allergin-grid-->
                 </div>
+                <!--card-->
                 <div class="order-area" role="form">
                         <div class="quantity-div">
                                 <label for="quantity">Quantity</label>
@@ -52,11 +58,13 @@
                                        min="1"
                                        max="{{ product.max_quantity }}">
                         </div>
+                        <!--quantity-div-->
                         <div class="price-area">
                                 <p>
                                         Price: <data value="{{ product.price | floatformat:2 }}">€{{ product.price | floatformat:2 }}</data>
                                 </p>
                         </div>
+                        <!--price-area-->
                         <div class="btn-div">
                                 <button class="add-to-cart"
                                         data-product-name-as-slug="{{ product.slug }}"
@@ -65,8 +73,11 @@
                                    aria-label="Continue Shopping"
                                    class="btn btn-continue">Continue Shopping</a>
                         </div>
+                        <!--btn-div-->
                 </div>
+                <!--order-area-->
         </section>
+        <!--content-grid-->
 {% endblock content %}
 {% block extra_js_files %}
         <script src="{% static 'products/javascript/product/product.js' %}"></script>
