@@ -20,7 +20,7 @@ Disallow: /orders/
 Disallow: /admin-portal/
 Disallow: /admin-orders/
 Disallow: /customer-portal/
-Sitemap: sd-ci-pp5-bobs-and-babs-5fa3ca5e7225.herokuapp.com/sitemap.xml
+Sitemap: https://sd-ci-pp5-bobs-and-babs-5fa3ca5e7225.herokuapp.com/sitemap.xml
 """
 
 
