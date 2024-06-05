@@ -80,3 +80,13 @@ Powershell was used to create the hooks, and the hooks were stored in the hooks 
 ### Hosting:
 
 Heroku
+
+### Features:
+
+<details open>
+
+  <summary>Homepage</summary>
+
+![Homepage of website](documentation/assets/home-page-bobs-and-babs.jpg)
+
+</details>
