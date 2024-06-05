@@ -242,3 +242,14 @@ This error is due to the fact that I'm using this to render a pattern in HTML us
 While this is invalid for python the code is valid HTML REGEX Pattern
 
 ![Python validation error](documentation/assets/line-40-invalid-invalid-msg.jpg)
+
+Offending Code:
+This code is for Client Side Validation of Eircodes
+Not strictly needed, but this client-side validation was a struggle with Project 4 and wanted to implement again for Project 5.
+As I have more experience and wanted to re-visit some implementations from the past.
+
+The regex is to allow 1231234 and 123 1234 to be accepted as eircode.
+
+```python
+'pattern': '[A-Za-z0-9]{3}\s*[A-Za-z0-9]{4}'
+```
