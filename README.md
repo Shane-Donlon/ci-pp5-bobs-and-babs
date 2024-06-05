@@ -3,8 +3,8 @@
 # Bob & Bab's e-commerce website
 
 Bob & Babs website is a store that sells freshly baked goods in the Dublin Area.
-This has been built using Django, HTML, CSS and JavaScript, stripe and is hosted on Heroku.
-AdobeXD was also used for the low-fidelity wireframes, and Photoshop for the assets.
+This lovely couple own a small bakery and are happy to keep it like that, with regular customers that always pop in for the "chat".
+They are looking to setup their first website to be an e-commerce store and if going well a Progressive Web App (to be implemented in the future)
 
 ## Site goals:
 
@@ -406,3 +406,20 @@ But when I manually check it in web aim everything passes.
 Wave accessibility is also incorrectly reporting that labels are missing from the newsletter form.
 
 [Deployment markdown](DEPLOYMENT.md)
+[Testing markdown](TESTING.md)
+
+### Business Page:
+
+![Facebook page for the store ](documentation/assets/bobs-and-babs-fb-page.jpg)
+
+### Privacy Policy:
+
+![Privacy Policy for the site ](documentation/assets/privacy-policy.jpg)
+
+## Credits
+
+- [Andy Bell CSS Reset](https://piccalil.li/blog/a-more-modern-css-reset/)
+- [Kevin Powell A new approach to container and wrapper classes](https://www.youtube.com/watch?v=c13gpBrnGEw&ab_channel=KevinPowell)
+- [Dennis Ivy](https://www.youtube.com/watch?v=_ELCMngbM0E&list=PL-51WBLyFTg0omnamUjL1TCVov7yDTRng&ab_channel=DennisIvy)
+- [CSS Loaders](https://cssloaders.github.io/)
+-
