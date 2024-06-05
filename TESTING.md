@@ -989,6 +989,14 @@ CVC: any 3 digits 123
     <td>Yes</td>
     <td></td>
    </tr>
+              <tr>
+       <td>Unauthenticated user adds to card</td>
+       <td>Customer un-authenticated</td>
+ <td>Add to cart working</td>
+ <td>Close browser, reopen and order remains</td>
+    <td>Yes</td>
+    <td></td>
+   </tr>
 </tbody>
 </table>
 
