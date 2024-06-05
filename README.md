@@ -367,9 +367,3 @@ empty option is coming from Django loop
 street address autocomplete is valid for this context of using "Town"
 
 ![HTML validation error](documentation/assets/html-error-5.jpg)
-
-#### admin view order page
-
-These are all disabled from users are read-only, but is down to the forms.py automated rendering in Django.
-
-![HTML validation error](documentation/assets/html-error-6.jpg)
