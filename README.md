@@ -410,7 +410,10 @@ Wave accessibility is also incorrectly reporting that labels are missing from th
 
 ### Business Page:
 
+I would like to add more to this, but within hours the account was suspended
+
 ![Facebook page for the store ](documentation/assets/bobs-and-babs-fb-page.jpg)
+![Facebook page suspended ](documentation/assets/fb-account-suspended.jpg)
 
 ### Privacy Policy:
 
