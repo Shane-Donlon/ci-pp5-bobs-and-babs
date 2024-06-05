@@ -2,7 +2,7 @@
 {% load static %}
 {% block extra_css_files %}
     <link rel="stylesheet"
-          href="{% static 'admin_orders/css//order/order.css' %}">
+          href="{% static 'admin_orders/css/order/order.css' %}">
 {% endblock extra_css_files %}
 {% block extra_title %}
 {% endblock extra_title %}
@@ -49,7 +49,7 @@
                          srcset="">
                 </span>
             {% endfor %}
-            {% if order.delivery %}
+            {% if order.delivery and shipping_information %}
                 <p>Delivery Frist Name:</p>
                 <span>{{ shipping_information.first_name }}</span>
                 <p>Delivery Contact Last Name:</p>
