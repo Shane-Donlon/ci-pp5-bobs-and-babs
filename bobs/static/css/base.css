@@ -285,7 +285,6 @@ body:has(.nav-open) {
 
 a {
   color: currentColor;
-  /* text-decoration: none; */
 }
 
 .labelRequiredAsterisk {
@@ -369,4 +368,50 @@ main {
 
 footer {
   grid-area: footer-short-page;
+}
+
+body:has(.loader-parent) {
+  overflow: hidden;
+}
+
+.loader-parent {
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  display: grid;
+}
+
+.loader {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+.loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #ff3d00;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
