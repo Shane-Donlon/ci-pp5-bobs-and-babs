@@ -14,10 +14,9 @@
         <div class="breakout">
             <h2>Update Products</h2>
             {% render_table product_table %}
-        </div>
-    </section>
+        </div><!--breakout-->
+    </section><!--content-grid-->
 {% endblock content %}
 {% block extra_js_files %}
-    <script src="{% static 'admin_portal/javascript/update/update.js' %}"
-            data-success="{% if success %}{{ success }}{% endif %}"></script>
+    <script src="{% static 'admin_portal/javascript/update/update.js' %}" data-success="{% if success %}{{ success }}{% endif %}"></script>
 {% endblock extra_js_files %}

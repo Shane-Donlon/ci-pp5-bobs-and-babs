@@ -20,15 +20,19 @@
                             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                             {{ field }}
                         </div>
+                        <!--form-group-->
                     {% endfor %}
                     <div class="btn-div">
                         <button type="reset">Reset</button>
                         <button type="submit">Submit</button>
                     </div>
+                    <!--btn-div-->
                 </form>
             </div>
+            <!--breakout-->
         {% endif %}
     </section>
+    <!--content-grid-->
 {% endblock content %}
 {% block extra_js_files %}
     <script src="{% static 'admin_portal/javascript/update/update_individual.js' %}"

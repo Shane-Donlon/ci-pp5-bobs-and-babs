@@ -4,9 +4,7 @@
         <link rel="stylesheet" href="{% static 'admin_portal/css/add/add.css' %}">
 {% endblock extra_css_files %}
 {% block extra_title %}
-{% if product_form %}
-Add Products
-{% endif %}
+        {% if product_form %}Add Products{% endif %}
 {% endblock extra_title %}
 {% block content %}
         <div class="content-grid">
@@ -20,14 +18,17 @@ Add Products
                                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                                 {{ field }}
                                         </div>
+                                        <!--form-group-->
                                 {% endfor %}
                         {% endif %}
                         <div class="btn-div">
                                 <button type="reset">Reset</button>
                                 <button type="submit">Submit</button>
                         </div>
+                        <!--btn-div-->
                 </form>
         </div>
+        <!--content-grid-->
 {% endblock content %}
 {% block extra_js_files %}
         <script>
