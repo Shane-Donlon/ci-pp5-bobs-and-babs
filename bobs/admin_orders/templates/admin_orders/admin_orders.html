@@ -11,7 +11,10 @@
     Orders
 {% endblock extra_title %}
 {% block content %}
-    <div class="content-grid">{% render_table table %}</div>
+    <h2>Update Orders</h2>
+    <div class="content-grid">
+        <div class="breakout">{% render_table table %}</div>
+    </div>
     <!--content-grid-->
 {% endblock content %}
 {% block extra_js_files %}
