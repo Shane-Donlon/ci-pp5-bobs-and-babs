@@ -206,3 +206,24 @@ Where "Prefilled" is the email address used to sign up (hidden for screenshots)
 ![Adobe XD Wireframes](documentation/assets/adobe-xd-wireframes.jpg)
 
 ![Adobe XD Styles](documentation/assets/adobe-xd-styles.jpg)
+
+### Entity Relationship Diagram (ERD)
+
+![ERD Diagram](documentation/assets/erd.jpg)
+
+- Order Items holds the indiviaul products per order
+- Shipping information holds all shipping information (which may or may not include a customer)
+  The reason for this is to support unauthenticated users
+
+### Unauthenticated Users
+
+This site supports purchases from un-authenticated users.
+
+This is supported by creating and storing a session key
+This session key is stored in the 'users session', and is used to store the cart items for the user
+If the user starts un-authenticated then logs in or creates an account the order is transferred over to the customer order
+if a current order exists the items are added to the current order and the un-authenticated order is removed
+
+The use of session keys also works along with closing browser or navigating away from the page
+
+Please note this feature will not work in incognito mode as this clears the session key on exit
