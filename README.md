@@ -367,3 +367,20 @@ empty option is coming from Django loop
 street address autocomplete is valid for this context of using "Town"
 
 ![HTML validation error](documentation/assets/html-error-5.jpg)
+
+### Page Speed Insights
+
+[Page Speed Insights](https://pagespeed.web.dev/analysis/https-sd-ci-pp5-bobs-and-babs-5fa3ca5e7225-herokuapp-com/5ljh4zq6c3?form_factor=desktop)
+
+![Page speed insights mobile](documentation/assets/psi-mobile.jpg)
+![Page speed insights desktop](documentation/assets/psi-desktop.jpg)
+
+### Home page accessibility issues
+
+When running Wave accessibility checker the contrast ratio appears to be incorrect,
+But when I manually check it in web aim everything passes.
+
+![Contrast Ratio Wave](documentation/assets/contrast-ratio-home.jpg)
+![Contrast Ratio Web Aim ](documentation/assets/webaim-a11y-pass.jpg)
+
+Wave accessibility is also incorrectly reporting that labels are missing from the newsletter form.
