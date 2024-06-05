@@ -46,8 +46,7 @@
                 <h2>Product Image</h2>
                 <span>
                     <img src="{{ item.product.image.url }}"
-                         alt="{{ item.product.image.description }}"
-                         srcset="">
+                         alt="{{ item.product.image.description }}">
                 </span>
             {% endfor %}
             {% if order.delivery and shipping_information %}
