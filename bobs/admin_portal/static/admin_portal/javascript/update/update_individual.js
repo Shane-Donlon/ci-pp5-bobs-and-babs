@@ -67,6 +67,13 @@ function validateProfileFormOnChangeObject(input, object) {
 
 async function sendFormWithFile(url, requestType, body) {
   // this function is called in cart and product js files
+  let div = document.createElement("div");
+  let parent = document.createElement("div");
+  document.body.appendChild(parent);
+  parent.classList.add("loader-parent");
+  parent.appendChild(div);
+  div.classList.add("loader");
+  scrollTo(0, 0);
   let headersObj = {
     "X-Requested-With": "XMLHttpRequest",
   };
@@ -80,7 +87,7 @@ async function sendFormWithFile(url, requestType, body) {
     headers: headersObj,
     body: body,
   });
-  let data = await response.json();
+  let data = await response.json().then(parent.remove());
 
   return data;
 }
