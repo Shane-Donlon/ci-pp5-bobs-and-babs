@@ -83,7 +83,7 @@ Heroku
 
 ### Features:
 
-<details open>
+<details>
 
   <summary>Homepage</summary>
 
@@ -91,7 +91,7 @@ Heroku
 
 </details>
 
-<details open>
+<details >
 
   <summary>Shop</summary>
 
@@ -99,11 +99,10 @@ Heroku
 
 </details>
 
-It was important to route to this page as part of the add to cart option to ensure the allergin information is seen
-
 <details>
 
   <summary>Product</summary>
+It was important to route to this page as part of the add to cart option to ensure the allergin information is seen
 
 ![Shop page of website](documentation/assets/product-page.jpg)
 ![Loading Spinner of website](documentation/assets/loading-spinner.jpg)
