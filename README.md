@@ -184,6 +184,7 @@ It was important to route to this page as part of the add to cart option to ensu
 
   <summary>Profile Page</summary>
 Where "Prefilled" is the email address used to sign up (hidden for screenshots)
+
 ![Profile Page](documentation/assets/update-profile-page.jpg)
 ![Profile Page success](documentation/assets/profile-updated.jpg)
 
