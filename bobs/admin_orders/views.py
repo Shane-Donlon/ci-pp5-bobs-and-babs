@@ -49,7 +49,7 @@ class AdminOrdersIndividualOrder(View):
         items = order.orderitems_set.all()
 
         form = AdminOrderUpdateForm(instance=order)
-        print(form)
+
         context = {
             'order': order,
             'items': items,
