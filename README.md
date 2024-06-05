@@ -217,6 +217,47 @@ Where "Prefilled" is the email address used to sign up (hidden for screenshots)
 
 </details>
 
+<details >
+
+  <summary>Admin Add Products</summary>
+
+![Admin Add products form](documentation/assets/admin-add-products.jpg)
+Note product name was "test"
+
+![Admin Add products named test](documentation/assets/product-named-test.jpg)
+
+![Admin Add products added sucecss](documentation/assets/product-add-success.jpg)
+
+</details>
+
+<details >
+
+  <summary>Admin Update Products</summary>
+
+![Admin update products form](documentation/assets/admin-update-products.jpg)
+![Admin update products success](documentation/assets/product-update-success.jpg)
+
+</details>
+<details >
+
+  <summary>Admin Remove Products</summary>
+
+![Admin Delete products table](documentation/assets/admin-del-products.jpg)
+![Admin Delete products form](documentation/assets/admin-delete-products-page.jpg)
+![Admin Delete products confirmation](documentation/assets/delete-confirm-request.jpg)
+![Admin Delete products success](documentation/assets/product-delete-success.jpg)
+
+</details>
+
+<details>
+  <summary>Admin Order Fulfillment</summary>
+
+![Admin Orders table](documentation/assets/admin-orders-table.jpg)
+![Admin Orders form page](documentation/assets/admin-order-fulfillment.jpg)
+![Admin Orders fulfilled success](documentation/assets/order-fulfiled.jpg)
+
+</details>
+
 ### Wireframes & Styling
 
 ![Adobe XD Wireframes](documentation/assets/adobe-xd-wireframes.jpg)
