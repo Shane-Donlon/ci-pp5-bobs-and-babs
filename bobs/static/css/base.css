@@ -415,3 +415,35 @@ body:has(.loader-parent) {
     transform: rotate(360deg);
   }
 }
+
+/* overriding mailchimp styling */
+
+@media (prefers-color-scheme: light) {
+  #mce-EMAIL,
+  #mce-FNAME,
+  #mce-LNAME {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  #mce-EMAIL::placeholder,
+  #mce-FNAME::placeholder,
+  #mce-LNAME::placeholder {
+    color: black !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #mce-EMAIL,
+  #mce-FNAME,
+  #mce-LNAME {
+    background-color: black !important;
+    color: white !important;
+  }
+
+  #mce-EMAIL::placeholder,
+  #mce-FNAME::placeholder,
+  #mce-LNAME::placeholder {
+    color: white !important;
+  }
+}
