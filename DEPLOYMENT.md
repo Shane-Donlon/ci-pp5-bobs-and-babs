@@ -165,3 +165,11 @@ The deployment process will start.
 
 - Set debug to False locally + delete DISABLE_COLLECTSTATIC from config vars in Heroku dashboard.
 - Commit and push the changes to GitHub.
+
+### Stripe setup
+
+- Log in to Stripe
+- Navigate to "developers" in the top right
+- Go to API keys tab and copy the values of SECRET_KEY and add them to your env.py file
+- The public key (publishable key) is to be placed into the Checkout.js file
+- When the application is deployed, run a test transaction to ensure that the payment system is working correctly.
