@@ -54,6 +54,8 @@ The purpose of these hooks were to ensure that the commit message was in the cor
 
 Powershell was used to create the hooks, and the hooks were stored in the hooks folder in the root directory of the project.
 
+![error message for print statement used](documentation/assets/vs-code-extension-error-print-statement.jpg)
+
 ![Hooks Folder with sample hooks and commit-msg and pre-push hooks being used](documentation/assets/hooks.jpg)
 
 ![commit-msg error](documentation/assets/commit-msg-hook.jpg)
