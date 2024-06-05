@@ -233,3 +233,12 @@ Please note this feature will not work in incognito mode as this clears the sess
 I would like to add the GDPR Banner for cookies,
 While all cookies are purely functional it is still a requirement to add this,
 also the fact that the site uses authentication is another reason to include this banner as Django uses session keys to track authenticated users
+
+### Python validation:
+
+While the Python code has been validated an error persists on the validation tool
+This error is due to the fact that I'm using this to render a pattern in HTML using Django and Regex.
+
+While this is invalid for python the code is valid HTML REGEX Pattern
+
+![Python validation error](documentation/assets/line-40-invalid-invalid-msg.jpg)
