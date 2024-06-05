@@ -17,14 +17,17 @@
                         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                         {{ field }}
                     </div>
+                    <!--form-group-->
                 {% endfor %}
             </fieldset>
             <div class="btn-div">
                 <button type="reset">Reset</button>
                 <button type="submit" class="submit-btn-profile">Submit</button>
             </div>
+            <!--btn-div-->
         </form>
     </section>
+    <!--content-grid-->
 {% endblock content %}
 {% block extra_js_files %}
     <script src="{% static 'customer_profile/javascript/customer_profile.js' %}"></script>
