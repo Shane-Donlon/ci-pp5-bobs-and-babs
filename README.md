@@ -90,3 +90,25 @@ Heroku
 ![Homepage of website](documentation/assets/home-page-bobs-and-babs.jpg)
 
 </details>
+
+<details open>
+
+  <summary>Shop</summary>
+
+![Shop page of website](documentation/assets/shop-page.jpg)
+
+</details>
+
+It was important to route to this page as part of the add to cart option to ensure the allergin information is seen
+
+<details open>
+
+  <summary>Product</summary>
+
+![Shop page of website](documentation/assets/product-page.jpg)
+![Loading Spinner of website](documentation/assets/loading-spinner.jpg)
+![Add to cart success message](documentation/assets/loading-spinner.jpg)
+![Add to cart success message](documentation/assets/added-to-cart.jpg)
+![Add to cart failure message](documentation/assets/added-to-cart-failure.jpg)
+
+</details>
