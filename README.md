@@ -101,7 +101,7 @@ Heroku
 
 It was important to route to this page as part of the add to cart option to ensure the allergin information is seen
 
-<details open>
+<details>
 
   <summary>Product</summary>
 
@@ -110,5 +110,90 @@ It was important to route to this page as part of the add to cart option to ensu
 ![Add to cart success message](documentation/assets/loading-spinner.jpg)
 ![Add to cart success message](documentation/assets/added-to-cart.jpg)
 ![Add to cart failure message](documentation/assets/added-to-cart-failure.jpg)
+
+</details>
+
+<details >
+
+  <summary>Cart</summary>
+
+![Cart page of website](documentation/assets/cart-page.jpg)
+
+</details>
+
+<details >
+
+  <summary>Checkout Page Delivery</summary>
+
+![checkout page of website delivery status](documentation/assets/checkout-page-delivery.jpg)
+
+</details>
+
+<details >
+
+  <summary>Checkout Page Collection</summary>
+
+![checkout page of website collection status](documentation/assets/checkout-page-collection.jpg)
+
+</details>
+
+<details >
+
+  <summary>Order Success</summary>
+
+![checkout page of website collection status](documentation/assets/checkout-page-order-complete.jpg)
+
+</details>
+
+<details >
+
+  <summary>Order Failure</summary>
+
+![checkout page of website collection status](documentation/assets/checkout-page-order-failed.jpg)
+
+</details>
+
+<details >
+
+  <summary>Form Validation</summary>
+
+![form validation phone number error](documentation/assets/form-validation-phone.jpg)
+![form validation eircode error](documentation/assets/form-validation-eircode.jpg)
+
+</details>
+
+<details >
+
+  <summary>Signup</summary>
+
+![Sign-up page](documentation/assets/sign-up-page.jpg)
+![Verify Email Page](documentation/assets/verify-email.jpg)
+![Verify Email Received](documentation/assets/verify-email-received.jpg)
+![Verify Email Site ID](documentation/assets/email-site-id.jpg)
+
+</details>
+
+<details >
+
+  <summary>Sign In</summary>
+
+![Sign in page](documentation/assets/sign-in-page.jpg)
+
+</details>
+
+<details >
+
+  <summary>Profile Page</summary>
+Where "Prefilled" is the email address used to sign up (hidden for screenshots)
+![Profile Page](documentation/assets/update-profile-page.jpg)
+![Profile Page success](documentation/assets/profile-updated.jpg)
+
+</details>
+
+<details >
+
+  <summary>Logout Page</summary>
+
+![logout Page](documentation/assets/logout-page.jpg)
 
 </details>
