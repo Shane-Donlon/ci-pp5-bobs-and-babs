@@ -27,6 +27,7 @@
                                                                         <data value="{{ item.quantity }}"
                                                                               aria-labelledby="quantity-{{ forloop.counter }}">{{ item.quantity }}</data>
                                                                 </div>
+                                                                <!--flex-->
                                                         </li>
                                                         <li>
                                                                 <div class="flex">
@@ -34,6 +35,7 @@
                                                                         <data value="{{ item.total_price | floatformat:2 }}"
                                                                               aria-labelledby="price-{{ forloop.counter }}">€{{ item.total_price | floatformat:2 }}</data>
                                                                 </div>
+                                                                <!--flex-->
                                                         </li>
                                                 </ul>
                                         </details>
@@ -45,6 +47,7 @@
                         {% endif %}
                 </fieldset>
         </section>
+        <!--content-grid-->
 {% endblock content %}
 {% block extra_js_files %}
         <script src="{% static 'customer_orders/javascript/order/order.js' %}"></script>
