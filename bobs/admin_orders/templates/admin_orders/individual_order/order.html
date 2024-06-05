@@ -20,8 +20,9 @@
                                name="{{ field.html_name }}"
                                id="{{ field.auto_id }}"
                                value="{{ field.value|stringformat:'s' }}"
-                               disabled>
+                               disabled="">
                     </div>
+                    <!--form-group-->
                 {% endfor %}
                 <div class="btn-div">
                     {% if order.complete and not order.fulfilled %}
@@ -34,6 +35,7 @@
                         {% endif %}
                     {% endif %}
                 </div>
+                <!--btn-div-->
             </form>
             {% for item in items %}
                 <h2>Product</h2>
@@ -66,7 +68,9 @@
                 <span>{{ shipping_information.eircode }}</span>
             {% endif %}
         </div>
+        <!--breakout-->
     </section>
+    <!--content-grid-->
 {% endblock content %}
 {% block extra_js_files %}
 {% endblock extra_js_files %}
