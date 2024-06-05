@@ -35,8 +35,8 @@ allBtns.forEach((btn, index) => {
 
             let cartTotal = JSON.parse(data.order)[0].fields.cart_total;
             total.innerHTML = `<data value="${cartTotal}">€${cartTotal}</data>`;
-
-            if (!+cartTotal) {
+            cartTotal = +cartTotal;
+            if (!cartTotal) {
               let checkoutBtn = document.querySelector(".btn-checkout");
               checkoutBtn.style.transition = "opacity 250ms linear";
               checkoutBtn.style.opacity = "0";
