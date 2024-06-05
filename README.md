@@ -231,4 +231,5 @@ Please note this feature will not work in incognito mode as this clears the sess
 ### Improvements:
 
 I would like to add the GDPR Banner for cookies,
-While all cookies are purely fucntional it is still a requirement to add this.
+While all cookies are purely functional it is still a requirement to add this.
+Also the fact that the site allows of authentication is another reason to include this banner as Django uses session keys to track authenticated users
