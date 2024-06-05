@@ -227,3 +227,8 @@ if a current order exists the items are added to the current order and the un-au
 The use of session keys also works along with closing browser or navigating away from the page
 
 Please note this feature will not work in incognito mode as this clears the session key on exit
+
+### Improvements:
+
+I would like to add the GDPR Banner for cookies,
+While all cookies are purely fucntional it is still a requirement to add this.
