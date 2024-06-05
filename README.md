@@ -334,3 +334,42 @@ I opted to use container queries in this project in order to gain a better under
 ![CSS validation error](documentation/assets/css-error-4.jpg)
 
 All other css files are clear of errors
+
+### HTML Validation:
+
+#### home.html
+
+This error is from Adobe In-design product
+
+![HTML validation error](documentation/assets/html-error-1.jpg)
+
+Under accessibility guidelines decorative images can either have a blank alt attribute or role presentation, this is for the grey svg on the homepage and is not an error, it's more that the context isn't checked
+
+![HTML validation error](documentation/assets/html-error-2.jpg)
+
+#### sign up page
+
+Error is from allauth templates
+this happened for Project 4 and I was unable to resolve this
+
+![HTML validation error](documentation/assets/html-error-3.jpg)
+
+#### sign in page
+
+Error is from allauth templates
+this happened for Project 4 and I was unable to resolve this
+
+![HTML validation error](documentation/assets/html-error-4.jpg)
+
+#### profile update page
+
+empty option is coming from Django loop
+street address autocomplete is valid for this context of using "Town"
+
+![HTML validation error](documentation/assets/html-error-5.jpg)
+
+#### admin view order page
+
+These are all disabled from users are read-only, but is down to the forms.py automated rendering in Django.
+
+![HTML validation error](documentation/assets/html-error-6.jpg)
