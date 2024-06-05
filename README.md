@@ -312,3 +312,25 @@ The regex is to allow 1231234 and 123 1234 to be accepted as eircode.
 ```python
 'pattern': '[A-Za-z0-9]{3}\s*[A-Za-z0-9]{4}'
 ```
+
+### CSS Validation:
+
+I opted to use container queries in this project in order to gain a better understanding of them, this has led to some css validation issues with the validator the CSS used is valid, but the validator has not yet been upated to inspect this level 3 CSS
+
+#### base.css file
+
+![CSS validation error](documentation/assets/css-error.jpg)
+
+#### home.css file
+
+![CSS validation error](documentation/assets/css-error-2.jpg)
+
+#### checkout.css file
+
+![CSS validation error](documentation/assets/css-error-3.jpg)
+
+#### cart.css file
+
+![CSS validation error](documentation/assets/css-error-4.jpg)
+
+All other css files are clear of errors
