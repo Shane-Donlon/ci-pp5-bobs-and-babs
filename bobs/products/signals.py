@@ -51,21 +51,31 @@ def user_signed_in(sender, user, request, **kwargs):
         customer_order_exists = Order.objects.filter(customer=customer,
                                                      complete=False).exists()
         if customer_order_exists and order_exists:
-            customer_order = Order.objects.get(customer=customer,
-                                               complete=False)
+            customer_order = (
+                             Order.objects.get(customer=customer,
+                                               complete=False))
             for item in order.orderitems_set.all():
-                existing_item = customer_order.orderitems_set.filter(
-                    product=item.product)
+                print(item)
+                existing_item = (
+                    customer_order.orderitems_set
+                    .filter(product=item.product)
+                )
                 if existing_item.exists():
                     # If the item exists, increment the quantity
+                    print("exists")
                     existing_item.update(
-                        quantity=F('quantity') + item.quantity)
-                    updated_item = existing_item.first()
+                                        quantity=F('quantity') + item.quantity
+                                        )
 
-                if updated_item.quantity > updated_item.product.max_quantity:
-                    updated_item.quantity = \
-                        updated_item.product.max_quantity
+                    updated_item = existing_item.first()
                     updated_item.save()
+                    if (
+                     updated_item.quantity > updated_item.product.max_quantity
+                    ):
+                        updated_item.quantity = (
+                            updated_item.product.max_quantity
+                        )
+                        updated_item.save()
                 else:
                     item.order = customer_order
                     item.save()
