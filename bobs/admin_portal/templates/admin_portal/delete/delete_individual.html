@@ -8,8 +8,7 @@
         <section class="content-grid">
                 <div class="breakout">
                         <h2>Delete Product</h2>
-                        <form action="{% url 'products_delete_pk' product_form.instance.id %}"
-                              method="">
+                        <form action="{% url 'products_delete_pk' product_form.instance.id %}">
                                 {% csrf_token %}
                                 {% for field in product_form %}
                                         <div class="form-group">
