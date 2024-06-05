@@ -15,6 +15,7 @@
                 Order Number <span class="transaction-id">{{ order.transaction_id }}</span>
             </h3>
             <div class="cart-area-container breakout">{% include "includes/cart_area.html" %}</div>
+            <!--cart-area-container breakout-->
             <div class="grid links-div breakout font-bold">
                 <a href="{% url 'checkout' %}"
                    class="btn btn-checkout"
@@ -23,7 +24,9 @@
                    class="btn btn-continue"
                    aria-label="Continue Shopping">Continue Shopping</a>
             </div>
+            <!--grid links-div breakout font-bold-->
         </div>
+        <!--content-grid-->
     {% else %}
         <div class="content-grid">
             <h2>Your cart is empty</h2>
@@ -31,6 +34,7 @@
                class="btn btn-continue"
                aria-label="Continue Shopping">Continue Shopping</a>
         </div>
+        <!--content-grid-->
     {% endif %}
 {% endblock content %}
 {% block extra_js_files %}

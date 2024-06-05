@@ -4,13 +4,17 @@
         <div class="col-1">
             <h3 class="font-bold">Items</h3>
         </div>
+        <!--col-1-->
         <div class="col-2">
             <h3 class="font-bold">Quantity</h3>
         </div>
+        <!--col-2-->
         <div class="col-3">
             <h3 class="font-bold">Total</h3>
         </div>
+        <!--col-3-->
     </div>
+    <!--cart-header cart-grid-->
     <div class="cart-main cart-grid">
         {% for item in items %}
             <div class="cart-main-col-1 {{ item.product.slug }}">
@@ -18,12 +22,15 @@
                     <img src="{{ item.product.image.url }}"
                          alt="{{ item.product.image_description }}">
                 </div>
+                <!--col-1-->
                 <div class="col-2"
                      data-slug="{{ item.product.slug }}"
                      data-product-id="{{ item.product.pk }}">
                     <p>{{ item.product.name }}</p>
                 </div>
+                <!--col-2-->
             </div>
+            <!--cart-main-col-1 {{ item.product.slug }}-->
             <div class="cart-main-col-2 {{ item.product.slug }}">
                 <div class="wrapper">
                     <label for="quantity">Quantity</label>
@@ -31,17 +38,22 @@
                            name="quantity"
                            id="quantity"
                            value="{{ item.quantity }}"
-                           disabled>
+                           disabled="">
                 </div>
+                <!--wrapper-->
                 {% if not is_checkout_page %}<button class="col-2 del-btn">Remove X</button>{% endif %}
             </div>
+            <!--cart-main-col-2 {{ item.product.slug }}-->
             <div class="cart-main-col-3 subtotal  {{ item.product.slug }}">
                 <div class="col-2">
                     <span><data value="{{ item.get_sub_total | floatformat:2 }}">€{{ item.get_sub_total | floatformat:2 }}</data></span>
                 </div>
+                <!--col-2-->
             </div>
+            <!--cart-main-col-3 subtotal  {{ item.product.slug }}-->
         {% endfor %}
     </div>
+    <!--cart-main cart-grid-->
     <div class="cart-footer cart-grid">
         <footer>
             <h4 class="font-bold ">
@@ -49,4 +61,6 @@
             </h4>
         </footer>
     </div>
+    <!--cart-footer cart-grid-->
 </div>
+<!--cart-area -->
