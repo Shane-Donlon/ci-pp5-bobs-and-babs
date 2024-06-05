@@ -111,9 +111,6 @@ class AdminPageEditIndividual(View):
             request.POST, request.FILES, instance=product)
 
         if product_form.is_valid():
-            if Product.objects.filter(name=request.POST['name']).exists():
-                return JsonResponse({"error": "A product with this name"
-                                    "already exists"})
             product_form.save()
             name = product.name
             message = f'Product {name} Updated successfully'
