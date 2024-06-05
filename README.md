@@ -13,17 +13,51 @@ AdobeXD was also used for the low-fidelity wireframes, and Photoshop for the ass
 - Provide a user-friendly experience
 - Provide a secure payment system
 
-## Technologies Used:
+## Technologies used
 
-### Languages:
+- ### Languages:
 
-- HTML
-- CSS
-- JavaScript
-- Python
-- Django
-- Node.JS
-- Powershell
+  - [Python 3.11](https://www.python.org/downloads/release/python-3110/): the primary language used to develop the server-side of the website.
+  - [JS](https://www.javascript.com/): the primary language used to develop interactive components of the website.
+  - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML): the markup language used to create the website.
+  - [CSS](https://developer.mozilla.org/en-US/docs/Web/css): the styling language used to style the website.
+
+  - ### Frameworks and libraries:
+
+  - [Django](https://www.djangoproject.com/): python framework used to create all the logic.
+
+- ### Databases:
+
+  - [SQLite](https://www.sqlite.org/): was used as a development database.
+  - [PostgreSQL](https://www.postgresql.org/): the database used to store all the data.
+
+- ### Other tools:
+  - [Git](https://git-scm.com/): the version control system used to manage the code.
+  - [Pip3](https://pypi.org/project/pip/): the package manager used to install the dependencies.
+  - [Gunicorn](https://gunicorn.org/): the webserver used to run the website.
+  - [Spycopg2](https://www.python.org/dev/peps/pep-0249/): the database driver used to connect to the database.
+  - [Django-allauth](https://django-allauth.readthedocs.io/en/latest/): the authentication library used to create the user accounts.
+  - [ElephantSQL](https://www.elephantsql.com/): the cloud database used to store all the data.
+  - [GitHub](https://github.com/): used to host the website's source code.
+  - [VSCode](https://code.visualstudio.com/): the IDE used to develop the website.
+  - [Chrome DevTools](https://developer.chrome.com/docs/devtools/open/): was used to debug the website.
+  - [W3C Validator](https://validator.w3.org/): was used to validate HTML5 code for the website.
+  - [W3C CSS validator](https://jigsaw.w3.org/css-validator/): was used to validate CSS code for the website.
+  - [JShint](https://jshint.com/): was used to validate JS code for the website.
+  - [PEP8](https://pep8.org/): was used to validate Python code for the website.
+  - [Cloudinary](https://cloudinary.com/): used to store images uploaded to site.
+  - [django-tables2](https://django-tables2.readthedocs.io/en/latest/): used to provide responsive tables.
+  - [whitenoise](https://whitenoise.readthedocs.io/en/latest/): used to serve the static files
+  - [bootstrap css](https://getbootstrap.com/): used for table responsiveness
+  - [stripe](https://stripe.com/ie): used to handle payments
+  - [AdobeXD](https://www.adobe.com/ie/products/xd.html): used to create wireframes
+  - [Photoshop](https://www.adobe.com/ie/products/photoshop.html): used to create assets
+  - [Heroku](https://www.heroku.com/): used to host the website.
+  - [Page Speed Insights](https://pagespeed.web.dev/): used to check the website's performance.
+  - [Wave](https://wave.webaim.org/): used to check the website's accessibility.
+  - [Web Aim](https://webaim.org/): used to check the website's accessibility.
+  - [Node.JS](https://nodejs.org/en/): used to create bespoke VSCode Extensions
+  - [Powershell](https://docs.microsoft.com/en-us/powershell/): used to create githooks
 
 Node.JS was used to create bespoke VSCode Extensions to improve my Developer Experience with Django.
 Django Custom Commands Extension was created to allow me to run Django Custom Commands from within VSCode.
@@ -64,20 +98,6 @@ Powershell was used to create the hooks, and the hooks were stored in the hooks 
 
 - Github
 - Githooks
-
-### Libraries:
-
-- allauth
-- django_browser_reload
-- cloudinary
-- django-tables2
-- stripe
-- sendgrid
-- typing_extensions
-- gunicorn
-- whitenoise
-- dj-database-url
-- psycopg2-binary
 
 ### Hosting:
 
@@ -384,3 +404,5 @@ But when I manually check it in web aim everything passes.
 ![Contrast Ratio Web Aim ](documentation/assets/webaim-a11y-pass.jpg)
 
 Wave accessibility is also incorrectly reporting that labels are missing from the newsletter form.
+
+[Deployment markdown](DEPLOYMENT.md)
