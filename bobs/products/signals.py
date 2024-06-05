@@ -55,14 +55,12 @@ def user_signed_in(sender, user, request, **kwargs):
                              Order.objects.get(customer=customer,
                                                complete=False))
             for item in order.orderitems_set.all():
-                print(item)
                 existing_item = (
                     customer_order.orderitems_set
                     .filter(product=item.product)
                 )
                 if existing_item.exists():
                     # If the item exists, increment the quantity
-                    print("exists")
                     existing_item.update(
                                         quantity=F('quantity') + item.quantity
                                         )
