@@ -45,16 +45,19 @@ class AdminOrdersIndividualOrder(View):
     def get(self, request, pk):
 
         order = get_object_or_404(Order, id=pk)
+
         items = order.orderitems_set.all()
+
         form = AdminOrderUpdateForm(instance=order)
+        print(form)
         context = {
             'order': order,
             'items': items,
             'form': form
         }
         if order.delivery:
-            shipping_information = ShippingInformation.objects.get(
-                order=order.id)
+            shipping_information = get_object_or_404(ShippingInformation,
+                                                     order=order.id)
             context["shipping_information"] = shipping_information
 
         return render(request, "admin_orders/individual_order/order.html",
