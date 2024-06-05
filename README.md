@@ -157,6 +157,7 @@ It was important to route to this page as part of the add to cart option to ensu
   <summary>Form Validation</summary>
 
 ![form validation phone number error](documentation/assets/form-validation-phone.jpg)
+
 ![form validation eircode error](documentation/assets/form-validation-eircode.jpg)
 
 </details>
@@ -166,8 +167,11 @@ It was important to route to this page as part of the add to cart option to ensu
   <summary>Signup</summary>
 
 ![Sign-up page](documentation/assets/sign-up-page.jpg)
+
 ![Verify Email Page](documentation/assets/verify-email.jpg)
+
 ![Verify Email Received](documentation/assets/verify-email-received.jpg)
+
 ![Verify Email Site ID](documentation/assets/email-site-id.jpg)
 
 </details>
@@ -186,6 +190,7 @@ It was important to route to this page as part of the add to cart option to ensu
 Where "Prefilled" is the email address used to sign up (hidden for screenshots)
 
 ![Profile Page](documentation/assets/update-profile-page.jpg)
+
 ![Profile Page success](documentation/assets/profile-updated.jpg)
 
 </details>
@@ -194,6 +199,10 @@ Where "Prefilled" is the email address used to sign up (hidden for screenshots)
 
   <summary>Logout Page</summary>
 
-![logout Page](documentation/assets/logout-page.jpg)
-
 </details>
+
+### Wireframes & Styling
+
+![Adobe XD Wireframes](documentation/assets/adobe-xd-wireframes.jpg)
+
+![Adobe XD Styles](documentation/assets/adobe-xd-styles.jpg)
